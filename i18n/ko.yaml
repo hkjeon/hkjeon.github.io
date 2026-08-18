@@ -1,0 +1,101 @@
+# 사이트 자체 한국어 번역 오버라이드
+# 테마(HugoBlox/kit) 기본 ko.yaml에 없는 키를 보완한다.
+# 동일 id가 있으면 이 파일이 우선한다.
+
+# ── 네비게이션 / 공통 ──────────────────────────────
+- id: toggle_navigation
+  translation: 메뉴 열기
+- id: table_of_contents
+  translation: 목차
+- id: on_this_page
+  translation: 이 페이지에서
+- id: back_to_top
+  translation: 맨 위로
+- id: related
+  translation: 관련 항목
+- id: previous
+  translation: 이전
+- id: next
+  translation: 다음
+- id: minute_read
+  translation: 분 소요
+- id: all
+  translation: 전체
+- id: read_more
+  translation: 더 읽기
+- id: copy_link
+  translation: 링크 복사
+
+# ── 연락처 블록 ────────────────────────────────────
+- id: block_contact_title
+  translation: 연락처
+- id: block_contact_connect_title
+  translation: 연락하기
+- id: block_contact_follow_me
+  translation: 채널
+- id: block_contact_follow_us
+  translation: 채널
+- id: block_contact_visit_title
+  translation: 오시는 길
+- id: block_contact_office_hours
+  translation: 응답 가능 시간
+- id: block_contact_view_on_map
+  translation: 지도에서 보기
+- id: block_contact_form_title
+  translation: 메시지 보내기
+- id: block_contact_form_name
+  translation: 이름
+- id: block_contact_form_email
+  translation: 이메일
+- id: block_contact_form_subject
+  translation: 제목
+- id: block_contact_form_message
+  translation: 내용
+- id: block_contact_form_submit
+  translation: 보내기
+
+# ── 포트폴리오 블록 ────────────────────────────────
+- id: portfolio_view_all
+  translation: 전체 프로젝트 보기
+- id: portfolio_link_code
+  translation: 코드
+- id: portfolio_link_live
+  translation: 사이트
+- id: portfolio_link_demo
+  translation: 데모
+- id: portfolio_link_default
+  translation: 링크
+
+# ── 콜아웃 ────────────────────────────────────────
+- id: callout_note
+  translation: 참고
+- id: callout_abstract
+  translation: 개요
+- id: callout_summary
+  translation: 요약
+- id: callout_info
+  translation: 정보
+- id: callout_todo
+  translation: 할 일
+- id: callout_tip
+  translation: 팁
+- id: callout_success
+  translation: 성공
+- id: callout_question
+  translation: 질문
+- id: callout_warning
+  translation: 주의
+- id: callout_failure
+  translation: 실패
+- id: callout_danger
+  translation: 위험
+- id: callout_bug
+  translation: 버그
+- id: callout_example
+  translation: 예시
+- id: callout_quote
+  translation: 인용
+- id: callout_important
+  translation: 중요
+- id: callout_caution
+  translation: 경고

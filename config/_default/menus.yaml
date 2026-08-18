@@ -3,18 +3,18 @@
 #   The weight parameter defines the order that the links appear.
 
 main:
-  - name: Projects
+  - name: 프로젝트
     url: /#projects
     weight: 10
-  - name: Skills
+  - name: 기술 스택
     url: /#skills
     weight: 20
-  - name: Experience
+  - name: 경력
     url: /#experience
     weight: 30
-  - name: Blog
+  - name: 블로그
     url: /#blog
     weight: 40
-  - name: Contact
+  - name: 연락처
     url: /#contact
     weight: 50
