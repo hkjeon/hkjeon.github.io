@@ -22,10 +22,6 @@ hugoblox:
     tagline: "OpenStack & Solution Engineer"
     # Site meta description for search engines and social sharing
     description: "OpenStack 설계 및 구축, 기술지원에서 유지보수까지"
-    # Social accounts (used for meta tags like Twitter Cards)
-    social:
-      twitter: "yourusername"              # Twitter/X handle for Twitter Cards (without @)
-
   # ────────────────────────────────────────────────────────────────────────────
   # THEME
   # Color and visual design system

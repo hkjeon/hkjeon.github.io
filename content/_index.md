@@ -11,25 +11,25 @@ sections:
     id: hero
     content:
       username: me
-      greeting: "Hi, I'm"
-      show_status: true
+      greeting: "안녕하세요,"
+      show_status: false
       show_scroll_indicator: true
       typewriter:
         enable: true
-        prefix: "I build"
+        prefix: "제가 만드는 것은"
         strings:
-          - "full-stack web apps"
-          - "scalable APIs"
-          - "beautiful UIs"
-          - "open source tools"
+          - "OpenStack 기반 프라이빗 클라우드"
+          - "통신사급 NFV 플랫폼"
+          - "Infrastructure as Code"
+          - "장애 없는 인프라"
         type_speed: 70
         delete_speed: 40
         pause_time: 2500
       cta_buttons:
-        - text: View My Work
+        - text: 프로젝트 보기
           url: "#projects"
           icon: arrow-down
-        - text: Get In Touch
+        - text: 연락하기
           url: "#contact"
           icon: envelope
     design:
@@ -47,8 +47,8 @@ sections:
   - block: portfolio
     id: projects
     content:
-      title: "Featured Projects"
-      subtitle: "A selection of my recent work"
+      title: "주요 프로젝트"
+      subtitle: "실제 수행한 인프라 구축 사례"
       count: 0
       filters:
         folders:
@@ -81,49 +81,61 @@ sections:
   - block: tech-stack
     id: skills
     content:
-      title: "Tech Stack"
-      subtitle: "Technologies I use to build things"
+      title: "기술 스택"
+      subtitle: "현장에서 사용하는 기술"
       categories:
-        - name: Languages
+        - name: IaaS Platform
           items:
-            - name: TypeScript
-              icon: devicon/typescript
-            - name: JavaScript
-              icon: devicon/javascript
-            - name: Python
-              icon: devicon/python
-            - name: Go
-              icon: devicon/go
-        - name: Frontend
+            - name: OpenStack
+              icon: custom/openstack
+            - name: RHOSP
+              icon: devicon/redhat
+            - name: OpenStack-Ansible
+              icon: custom/openstack
+            - name: Kolla-Ansible
+              icon: custom/openstack
+        - name: PaaS Platform
           items:
-            - name: React
-              icon: devicon/react
-            - name: Next.js
-              icon: devicon/nextjs
-            - name: Tailwind CSS
-              icon: devicon/tailwindcss
-            - name: Alpine.js
-              icon: devicon/alpinejs
-        - name: Backend
-          items:
-            - name: Node.js
-              icon: devicon/nodejs
-            - name: Express
-              icon: devicon/express
-            - name: PostgreSQL
-              icon: devicon/postgresql
-            - name: Redis
-              icon: devicon/redis
-        - name: DevOps
-          items:
+            - name: Kubernetes
+              icon: devicon/kubernetes
+            - name: RHOCP (OpenShift)
+              icon: custom/openshift
             - name: Docker
               icon: devicon/docker
-            - name: AWS
-              icon: devicon/amazonwebservices
-            - name: GitHub Actions
-              icon: brands/github
-            - name: Vercel
-              icon: devicon/vercel
+        - name: OS & Automation
+          items:
+            - name: Linux (RHEL / Ubuntu)
+              icon: devicon/linux
+            - name: Ansible
+              icon: devicon/ansible
+            - name: Bash
+              icon: devicon/bash
+        - name: Storage
+          items:
+            - name: Ceph
+              icon: custom/ceph
+            - name: Dell PowerStore
+              icon: circle-stack
+            - name: NetApp
+              icon: circle-stack
+            - name: Pure Storage
+              icon: circle-stack
+            - name: iSCSI / NFS / SAN
+              icon: server-stack
+        - name: NFV & Performance
+          items:
+            - name: NFV / VNF
+              icon: cpu-chip
+            - name: OVS-DPDK
+              icon: bolt
+            - name: SR-IOV
+              icon: arrows-right-left
+            - name: NUMA Topology
+              icon: squares-2x2
+            - name: HugePages
+              icon: rectangle-stack
+            - name: CPU Pinning
+              icon: adjustments-horizontal
     design:
       style: grid
       show_levels: false
@@ -138,7 +150,7 @@ sections:
   - block: resume-experience
     id: experience
     content:
-      title: Experience
+      title: 경력
       date_format: Jan 2006
       items:
         - title: Senior Software Engineer
@@ -190,8 +202,8 @@ sections:
   - block: collection
     id: blog
     content:
-      title: Recent Posts
-      subtitle: 'Thoughts on web development, tech, and more'
+      title: 최근 글
+      subtitle: '구축·운영 과정에서 정리한 기술 기록'
       text: ''
       filters:
         folders:
@@ -213,12 +225,12 @@ sections:
   - block: contact-info
     id: contact
     content:
-      title: Get In Touch
-      subtitle: "Let's build something amazing together"
+      title: 연락처
+      subtitle: "인프라에 관한 이야기라면 언제든 환영합니다"
       text: |-
-        I'm always interested in hearing about new projects and opportunities.
-        Whether you're looking to hire, collaborate, or just want to say hi, feel free to reach out!
-      email: alex@example.com
+        OpenStack 기반 프라이빗 클라우드 구축과 운영에 관한 문의,
+        기술 논의, 협업 제안 모두 편하게 연락 주세요.
+      email: nosmile0412@hanmail.net
       autolink: true
     design:
       columns: '1'
@@ -229,27 +241,5 @@ sections:
       spacing:
         padding: ["4rem", "0", "4rem", "0"]
   
-  # CTA Card
-  - block: cta-card
-    content:
-      title: "Open to Opportunities"
-      text: |-
-        I'm currently looking for **senior engineering** or **tech lead** roles.
-        
-        Let's connect and discuss how I can help your team.
-      button:
-        text: 'Download Resume'
-        url: uploads/resume.pdf
-        new_tab: true
-    design:
-      card:
-        # Light mode: soft pastel theme gradient | Dark mode: rich deep gradient
-        css_class: 'bg-gradient-to-br from-primary-200 via-primary-100 to-secondary-200 dark:from-primary-600 dark:via-primary-700 dark:to-secondary-700'
-        text_color: dark
-      background:
-        color:
-          light: "#f5f5f5"
-          dark: "#08080c"
-      spacing:
-        padding: ["4rem", "0", "6rem", "0"]
 ---
+

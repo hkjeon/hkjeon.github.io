@@ -3,98 +3,106 @@ slug: me
 is_owner: true
 name:
   display: HK Jeon
-  given: Hyunkwon
-  family: Jeon
 postnominals: []
-status:
-  icon: "💻"  # Emoji shown on avatar badge: 💻 developer, 🎨 designer, 🚀 startup, 🔬 researcher, 🎓 student
-role: IaaS Engineer & Solution Engineer
+role: OpenStack Engineer & IaaS Solution Developer
 email: nosmile0412@hanmail.net
 bio: |
-  Full-stack developer with 5+ years of experience building scalable web applications.
-  Passionate about modern JavaScript, cloud architecture, and creating delightful user experiences.
-
-affiliations:
-  - name: Tech Corp
-    url: https://techcorp.example.com
+  17년 경력의 인프라 엔지니어. 통신망 구축에서 출발해 NFV를 거쳐
+  OpenStack 기반 프라이빗 클라우드의 설계·구축·운영을 담당하고 있습니다.
+  공공기관·통신사 환경에서 27개 프로젝트를 수행했으며,
+  현재는 구축 경험을 자사 IaaS 솔루션에 반영하는 배포 패키지 개발과
+  고도화를 함께 맡고 있습니다. OpenStack-Ansible 업스트림에도 기여하고 있습니다.
 
 links:
   - icon: at-symbol
-    url: mailto:alex@example.com
-    label: E-mail Me
+    url: mailto:nosmile0412@hanmail.net
+    label: E-mail
   - icon: brands/github
-    url: https://github.com/alexjohnson
-  - icon: brands/linkedin
-    url: https://www.linkedin.com/in/alexjohnson/
-  - icon: brands/x
-    url: https://x.com/alexjohnson
+    url: https://github.com/hkjeon
+    label: GitHub
+  - icon: book-open
+    url: https://hkjeon2.tistory.com/
+    label: Tech Blog
 
 interests:
-  - Web Development
-  - Cloud Architecture
-  - Open Source
-  - Developer Experience
+  - Private Cloud (OpenStack)
+  - Infrastructure as Code
+  - NFV / Cloud Networking
+  - Open Source Contribution
 
 education:
-  - degree: B.S. Computer Science
-    institution: State University
-    start: 2015-09-01
-    end: 2019-05-31
-    summary: |
-      Focus on software engineering and distributed systems.
-      Senior project on distributed caching systems.
-    button:
-      text: View Project
-      url: https://github.com/alexjohnson/senior-project
-      icon: brands/github
+  - degree: 전문학사 · 정보통신과
+    institution: 두원공과대학교
+    start: 2006-03-01
+    end: 2009-02-28
 
 experience:
-  - role: Senior Software Engineer
-    org: Tech Corp
-    start: 2023-01-01
+  - role: IaaS Solution Developer
+    org: 자사 OpenStack 배포 솔루션 개발·고도화
+    start: 2025-01-01
     summary: |
-      Lead development of microservices architecture serving 1M+ users.
-      Improved API response time by 40% through optimization.
-      Mentored team of 5 junior developers.
-  - role: Full-Stack Developer
-    org: Startup Inc
-    start: 2021-06-01
-    end: 2022-12-31
+      OpenStack-Ansible(OSA) 기반 배포 패키지 구조 재설계 및 오프라인 설치 체계 구축.
+      Caracal 릴리스 템플릿 구조 개선, Epoxy 릴리스 오프라인 패키지 제작(2026.1Q 완료, Horizon 기준 기능 검증).
+      미지원 컴포넌트를 직접 배포·검증해 오프라인 패키지화하고 OSA 템플릿으로 정리.
+      Cinder Multi-Backend, 컨트롤러 DB 자동 백업 등 구축 요구사항의 제품 내재화 수행.
+  - role: Senior Infrastructure Engineer
+    org: 프라이빗 클라우드 설계·구축
+    start: 2018-10-01
     summary: |
-      Built and deployed 3 production applications from scratch.
-      Implemented CI/CD pipeline reducing deployment time by 60%.
-      Led migration from monolith to microservices architecture.
-  - role: Junior Developer
-    org: Web Agency
-    start: 2020-01-01
-    end: 2021-05-31
+      국가 보안기술 연구기관, 국가 시험인증기관, 공공 인프라 공기업 등
+      OpenStack 기반 프라이빗 클라우드 설계·구축 및 유지보수 수행.
+  - role: Cloud Platform Engineer
+    org: 통신사 5G 가상화·컨테이너 플랫폼
+    start: 2020-04-01
+    end: 2024-10-31
     summary: |
-      Developed client websites using React and modern web technologies.
-      Participated in code reviews and agile ceremonies.
+      국내 통신사 5G NSA/SA 환경의 RHOSP 가상화 플랫폼 및
+      컨테이너 플랫폼 구축·운영.
+  - role: NFV Platform Engineer
+    org: 통신·공공 NFV 플랫폼
+    start: 2015-12-01
+    end: 2018-12-31
+    summary: |
+      국내 통신사 NFV 플랫폼 및 재난안전망 시범사업 구축·검증.
+  - role: Network Systems Engineer
+    org: 이동통신망 구축 및 기술지원
+    start: 2009-04-01
+    end: 2015-06-30
+    summary: |
+      LTE/EPC/IMS 등 이동통신망 구축 및 시험장비 기술지원.
 
 skills:
-  - name: Development
+  - name: Cloud Platform
     items:
-      - label: TypeScript
+      - label: OpenStack (OSA / Kolla / RHOSP)
         level: 5
-      - label: React
-        level: 5
-      - label: Node.js
-        level: 5
-      - label: Python
+      - label: Cloud Architecture Design
         level: 4
-  - name: DevOps
+      - label: Kubernetes / RHOCP
+        level: 3
+  - name: Solution Development
     items:
-      - label: Docker
+      - label: OpenStack 배포 패키지 개발 (OSA)
         level: 4
-      - label: AWS
+      - label: Offline Repository / 설치 자동화
         level: 4
-      - label: CI/CD
+      - label: Upstream Contribution
+        level: 3
+  - name: Infrastructure
+    items:
+      - label: Linux (RHEL / Ubuntu)
         level: 5
+      - label: Ansible
+        level: 4
+      - label: Storage (Ceph / iSCSI / NFS)
+        level: 4
+      - label: Network (VLAN / VXLAN / L4)
+        level: 4
 
-languages:
-  - name: English
-    level: 5
-    label: Native
-
-awards: []
+awards:
+  - title: RHCSA (Red Hat Certified System Administrator)
+    date: '2024-03-01'
+  - title: 리눅스마스터 2급
+    date: '2011-03-01'
+  - title: PC Master (정비사)
+    date: '2004-01-01'
