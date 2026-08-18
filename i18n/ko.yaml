@@ -32,9 +32,9 @@
 - id: block_contact_connect_title
   translation: 연락하기
 - id: block_contact_follow_me
-  translation: 채널
+  translation: 바로가기
 - id: block_contact_follow_us
-  translation: 채널
+  translation: 바로가기
 - id: block_contact_visit_title
   translation: 오시는 길
 - id: block_contact_office_hours

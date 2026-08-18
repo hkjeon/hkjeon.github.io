@@ -16,12 +16,12 @@ sections:
       show_scroll_indicator: true
       typewriter:
         enable: true
-        prefix: "제가 만드는 것은"
+        prefix: "제가 다뤄온 것은"
         strings:
           - "OpenStack 기반 프라이빗 클라우드"
-          - "통신사급 NFV 플랫폼"
-          - "Infrastructure as Code"
-          - "장애 없는 인프라"
+          - "CPU Pinning까지 적용한 통신사급 VNF 인프라"
+          - "노드 네트워크까지 자동화한 배포 체계"
+          - "장애 없는 인프라를 위한 설계와 검증"
         type_speed: 70
         delete_speed: 40
         pause_time: 2500
@@ -82,7 +82,7 @@ sections:
     id: skills
     content:
       title: "기술 스택"
-      subtitle: "현장에서 사용하는 기술"
+      subtitle: "구축·운영해 온 기술"
       categories:
         - name: IaaS Platform
           items:

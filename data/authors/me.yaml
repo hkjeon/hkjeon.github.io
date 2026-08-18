@@ -19,10 +19,10 @@ links:
     label: E-mail
   - icon: brands/github
     url: https://github.com/hkjeon
-    label: GitHub
+    label: GitHub 바로가기
   - icon: book-open
     url: https://hkjeon2.tistory.com/
-    label: Tech Blog
+    label: 티스토리 바로가기
 
 interests:
   - Private Cloud (OpenStack)
