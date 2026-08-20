@@ -37,39 +37,37 @@ education:
     end: 2009-02-28
 
 experience:
-  - role: IaaS Solution Developer
-    org: 자사 OpenStack 배포 솔루션 개발·고도화
-    start: 2025-01-01
-    summary: |
-      OpenStack-Ansible(OSA) 기반 배포 패키지 구조 재설계 및 오프라인 설치 체계 구축.
-      Caracal 릴리스 템플릿 구조 개선, Epoxy 릴리스 오프라인 패키지 제작(2026.1Q 완료, Horizon 기준 기능 검증).
-      미지원 컴포넌트를 직접 배포·검증해 오프라인 패키지화하고 OSA 템플릿으로 정리.
-      Cinder Multi-Backend, 컨트롤러 DB 자동 백업 등 구축 요구사항의 제품 내재화 수행.
-  - role: Senior Infrastructure Engineer
-    org: 프라이빗 클라우드 설계·구축
+  - role: Senior Infrastructure Engineer / IaaS Solution Developer
+    org: 프라이빗 클라우드 구축 · 자사 IaaS 솔루션 개발
     start: 2018-10-01
     summary: |
-      국가 보안기술 연구기관, 국가 시험인증기관, 공공 인프라 공기업 등
-      OpenStack 기반 프라이빗 클라우드 설계·구축 및 유지보수 수행.
-  - role: Cloud Platform Engineer
-    org: 통신사 5G 가상화·컨테이너 플랫폼
-    start: 2020-04-01
-    end: 2024-10-31
-    summary: |
-      국내 통신사 5G NSA/SA 환경의 RHOSP 가상화 플랫폼 및
-      컨테이너 플랫폼 구축·운영.
+      OpenStack 기반 프라이빗 클라우드 설계·구축·운영 및 자사 IaaS 솔루션 개발.
+
+      - 국가 보안기술 연구기관, 국가 시험인증기관, 공공 인프라 공기업 등 프라이빗 클라우드 구축
+      - 국내 통신사 5G NSA/SA 가상화(RHOSP) 및 컨테이너 플랫폼 구축·운영
+      - OpenStack-Ansible 기반 배포 패키지 구조 재설계, 폐쇄망 오프라인 설치 체계 구축 (2025~)
+      - Caracal 템플릿 구조 개선, Epoxy 오프라인 패키지 제작(2026.1Q 완료, Horizon 기준 기능 검증)
+      - systemd-networkd 기반 타깃 노드 네트워크 구성 자동화, Cinder Multi-Backend, 컨트롤러 DB 백업 자동화
+      - OpenStack-Ansible 업스트림 기여 (openstack-ansible-os_swift)
   - role: NFV Platform Engineer
-    org: 통신·공공 NFV 플랫폼
+    org: 통신·공공 NFV 플랫폼 구축
     start: 2015-12-01
-    end: 2018-12-31
+    end: 2018-09-30
     summary: |
-      국내 통신사 NFV 플랫폼 및 재난안전망 시범사업 구축·검증.
+      통신사 및 공공기관 NFV 플랫폼 구축·검증.
+
+      - 국내 통신사 C-SGN 등 VNF 플랫폼 구축
+      - 재난안전망 시범사업 구축 및 검증
+      - 지자체 기능형 초연결망 선도사업 (NFV / OpenStack / Ceph)
   - role: Network Systems Engineer
     org: 이동통신망 구축 및 기술지원
     start: 2009-04-01
     end: 2015-06-30
     summary: |
-      LTE/EPC/IMS 등 이동통신망 구축 및 시험장비 기술지원.
+      LTE/EPC/IMS 등 이동통신 코어망 구축 및 시험장비 기술지원.
+
+      - PS-LTE, LTE-A, TD-SCDMA, PicoCell 등 이동통신망 구축
+      - LTE UE/EPC 시뮬레이터 장비 공급 및 기술지원
 
 skills:
   - name: Cloud Platform
@@ -101,8 +99,28 @@ skills:
 
 awards:
   - title: RHCSA (Red Hat Certified System Administrator)
+    awarder: Red Hat
     date: '2024-03-01'
+    icon: academic-cap
+  - title: 도커(Docker) 기초 과정
+    awarder: 에티버스러닝 평생교육원
+    date: '2023-03-16'
+    summary: 24시간 과정 수료
+    icon: academic-cap
+  - title: 클라우드 환경구축 및 서비스 운영관리 자동화
+    awarder: HPE Education Services
+    date: '2020-06-19'
+    summary: 지역산업맞춤형 클라우드 운영관리 과정 수료
+    icon: academic-cap
+  - title: 프라이빗 클라우드 아키텍처 설계 및 구축 2차
+    awarder: 한국클라우드컴퓨팅연구조합
+    date: '2018-10-18'
+    summary: 과학기술정보통신부·정보통신산업진흥원 주관 클라우드 전문인력 양성사업 수료
+    icon: academic-cap
   - title: 리눅스마스터 2급
+    awarder: 한국정보통신인력개발원
     date: '2011-03-01'
+    icon: academic-cap
   - title: PC Master (정비사)
     date: '2004-01-01'
+    icon: academic-cap

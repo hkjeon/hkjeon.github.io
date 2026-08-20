@@ -26,6 +26,16 @@
 - id: copy_link
   translation: 링크 복사
 
+# ── 이력 블록 ─────────────────────────────────────
+- id: education
+  translation: 학력
+- id: experience
+  translation: 경력
+- id: awards
+  translation: 자격 및 교육
+- id: see_certificate
+  translation: 수료증 보기
+
 # ── 연락처 블록 ────────────────────────────────────
 - id: block_contact_title
   translation: 연락처
