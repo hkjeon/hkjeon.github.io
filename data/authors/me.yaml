@@ -59,15 +59,17 @@ experience:
       - 국내 통신사 C-SGN 등 VNF 플랫폼 구축
       - 재난안전망 시범사업 구축 및 검증
       - 지자체 기능형 초연결망 선도사업 (NFV / OpenStack / Ceph)
-  - role: Network Systems Engineer
-    org: 이동통신망 구축 및 기술지원
+  - role: Telecom Test & Deployment Engineer
+    org: 이동통신 시험장비 공급 · 코어망 구축
     start: 2009-04-01
     end: 2015-06-30
     summary: |
-      LTE/EPC/IMS 등 이동통신 코어망 구축 및 시험장비 기술지원.
+      이동통신 프로토콜 시험장비 공급·기술지원 및 코어망 장비 구축.
 
-      - PS-LTE, LTE-A, TD-SCDMA, PicoCell 등 이동통신망 구축
-      - LTE UE/EPC 시뮬레이터 장비 공급 및 기술지원
+      - IxCatapult(이후 IXIA) 프로토콜 시험장비 공급 및 기술지원 — 국내 통신 3사, 단말 제조사 대상
+      - LTE UE / EPC 시뮬레이터 기반 시험 환경 구성 및 검증 지원
+      - 국책 연구기관 시험센터 대상 이동통신 장비 납품 및 망 구축
+        (LTE-A, TD-SCDMA, PS-LTE, IMS/MBMS, PicoCell, Roaming GW 등)
 
 skills:
   - name: Cloud Platform
@@ -118,7 +120,7 @@ awards:
     summary: 과학기술정보통신부·정보통신산업진흥원 주관 클라우드 전문인력 양성사업 수료
     icon: academic-cap
   - title: 리눅스마스터 2급
-    awarder: 한국정보통신인력개발원
+    awarder: 한국정보통신진흥협회 (KAIT)
     date: '2011-03-01'
     icon: academic-cap
   - title: PC Master (정비사)
