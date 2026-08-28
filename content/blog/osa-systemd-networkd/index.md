@@ -123,7 +123,7 @@ Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이�
 
 ### 논리 네트워크 구성
 
-![OpenStack 논리 네트워크 구성도](network-topology.svg)
+[![OpenStack 논리 네트워크 구성도](network-topology.svg)](network-topology.svg "클릭하면 원본 크기로 열립니다")
 
 관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. 배포 노드는 이 망에만 물리면 됩니다.
 
@@ -133,7 +133,7 @@ Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이�
 
 논리 네트워크가 물리 NIC 위에 어떻게 쌓이는지가 실제 설정의 핵심입니다.
 
-![물리 인터페이스 계층 구조](interface-stack.svg)
+[![물리 인터페이스 계층 구조](interface-stack.svg)](interface-stack.svg "클릭하면 원본 크기로 열립니다")
 
 **bond1은 관리, bond2는 VLAN으로 나눠 쓰는 서비스 계열, bond3은 Ceph 복제 전용**입니다. 복제 트래픽에 물리 NIC를 통째로 할당한 이유는 앞서 말한 대로 클라이언트 I/O와 경로를 분리하기 위해서입니다.
 
@@ -238,7 +238,7 @@ ansible-playbook -i /opt/openstack-ansible/inventory/dynamic_inventory.py \
 
 정리하면 전체 흐름은 이렇게 됩니다.
 
-![노드 준비부터 OpenStack 배포까지의 흐름](deploy-flow.svg)
+[![노드 준비부터 OpenStack 배포까지의 흐름](deploy-flow.svg)](deploy-flow.svg "클릭하면 원본 크기로 열립니다")
 
 **손으로 하는 건 OS 설치와 임시 IP 부여, 이 둘뿐입니다.** 나머지 세 단계는 배포 노드에서 플레이북으로 진행됩니다.
 
