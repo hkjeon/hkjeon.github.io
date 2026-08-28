@@ -1,5 +1,5 @@
 ---
-title: "netplan 대신 systemd-networkd + Ansible로 타깃 노드 네트워크 일괄 설정하기"
+title: "systemd-networkd를 활용한 OpenStack 노드 네트워크 설정 자동화"
 date: 2026-08-27
 summary: "OSA 배포 전 단계인 타깃 노드의 bond·VLAN·bridge 구성을 openstack_hosts 롤의 systemd-networkd 변수로 코드화한 방법과, netplan을 쓰지 않은 이유를 정리했습니다."
 tags:
@@ -17,7 +17,7 @@ OpenStack-Ansible(OSA) 공식 가이드는 타깃 노드의 브리지 네트워�
 
 문제는 이 작업이 **배포 자동화의 바깥에 있다는 점**입니다. 컨트롤러 3대에 컴퓨트 9대라면 노드마다 bond 3개, VLAN 5개, 브리지 5개를 손으로 잡아야 하고, 오타 하나가 배포 실패로 이어집니다. 그리고 재구축할 때마다 처음부터 반복됩니다.
 
-## 시작은 오프라인 패키지 작업이었다
+## 1. 시작은 오프라인 패키지 작업이었다
 
 Caracal 릴리스를 다루면서 `openstack_hosts` 롤에 systemd-networkd 관련 변수가 있다는 걸 알게 됐습니다. 당시엔 그냥 알아만 두고 넘어갔습니다.
 
@@ -42,7 +42,7 @@ Caracal 릴리스를 다루면서 `openstack_hosts` 롤에 systemd-networkd 관�
 
 수동 구간이 "OS 설치 + IP 한 줄"로 줄어듭니다.
 
-## netplan을 굳이 쓰지 않은 이유
+## 2. netplan을 굳이 쓰지 않은 이유
 
 netplan으로도 자동화는 가능합니다. Jinja2 템플릿을 만들어 뿌리면 됩니다. 그럼에도 systemd-networkd를 택한 이유는 이렇습니다.
 
@@ -55,7 +55,7 @@ netplan으로도 자동화는 가능합니다. Jinja2 템플릿을 만들어 뿌
 
 **netplan도 결국 백엔드로 systemd-networkd나 NetworkManager를 씁니다.** 어차피 중간 계층이라면, OSA가 이미 지원하는 경로를 쓰는 편이 단계가 하나 줄어듭니다. 무엇보다 직접 만든 롤을 유지보수할 필요가 없습니다.
 
-## 변수 구조
+## 3. 변수 구조
 
 `openstack_hosts` 롤의 기본값을 보면 이렇게 정의돼 있습니다.
 
@@ -82,7 +82,7 @@ openstack_hosts_systemd_slice: "openstack-hosts"
 
 주석에 적힌 대로 이 롤은 **베어메탈 호스트에서만 동작합니다.** LXC 컨테이너 안에서는 실행되지 않습니다. 노드 준비 단계 전용이라고 보면 됩니다.
 
-## 그룹별로 나눠서 정의하기
+## 4. 그룹별로 나눠서 정의하기
 
 컨트롤러와 컴퓨트는 NIC 구성도 다르고 필요한 네트워크도 다릅니다. 그래서 `/etc/openstack_deploy/group_vars/` 아래에 그룹별 파일을 만듭니다.
 
@@ -94,7 +94,7 @@ openstack_hosts_systemd_slice: "openstack-hosts"
 
 Ansible의 group_vars 규칙을 그대로 쓰는 것이라, OSA 인벤토리에 정의된 그룹명과 파일명만 맞춰주면 됩니다.
 
-## 컨트롤러 노드 설정
+## 5. 컨트롤러 노드 설정
 
 먼저 가상 장치를 정의합니다. bond 3개, VLAN 5개, bridge 5개입니다.
 
@@ -183,30 +183,37 @@ openstack_hosts_systemd_networkd_networks:
           - "{{ node_fixed_ips[inventory_hostname]['ext_gw'] }}"
 ```
 
-## 노드별 IP를 한 곳에서 관리하기
+## 6. 노드별 IP를 한 곳에서 관리하기
 
 위 설정에서 IP는 하드코딩하지 않고 `node_fixed_ips` 변수를 참조했습니다. `inventory_hostname`으로 자기 노드의 값을 꺼내오는 구조입니다.
 
 ```yaml
 ## user_variables.yml
+# Fix IP Configuration for each nodes.
 node_fixed_ips:
   mix01:
     hostname: "tb-node01"
-    mgmt: "10.10.11.11/24"
-    vxlan: "10.10.12.11/24"
-    ext: "192.168.100.11/24"
+    mgmt: "10.10.11.111/24"
+    vxlan: "10.10.12.111/24"
+    ext: "192.168.100.111/24"
     ext_gw: "192.168.100.1"
   mix02:
     hostname: "tb-node02"
-    mgmt: "10.10.11.12/24"
-    vxlan: "10.10.12.12/24"
-    ext: "192.168.100.12/24"
+    mgmt: "10.10.11.112/24"
+    vxlan: "10.10.12.112/24"
+    ext: "192.168.100.112/24"
+    ext_gw: "192.168.100.1"
+  mix03:
+    hostname: "tb-node03"
+    mgmt: "10.10.11.113/24"
+    vxlan: "10.10.12.113/24"
+    ext: "192.168.100.113/24"
     ext_gw: "192.168.100.1"
   compute01:
     hostname: "tb-comp01"
-    mgmt: "10.10.11.21/24"
-    vxlan: "10.10.12.21/24"
-    ext: "192.168.100.21/24"
+    mgmt: "10.10.11.114/24"
+    vxlan: "10.10.12.114/24"
+    ext: "192.168.100.114/24"
     ext_gw: "192.168.100.1"
 ```
 
@@ -218,7 +225,7 @@ node_fixed_ips:
 
 `config_overrides`는 롤이 기본 제공하지 않는 systemd 옵션을 끼워넣는 통로입니다. 위 예시에서는 `[Network]` 섹션에 `Gateway`를 추가했습니다. **롤이 감싸지 못한 옵션도 이 경로로 대부분 해결됩니다.**
 
-## 컴퓨트 노드 설정
+## 7. 컴퓨트 노드 설정
 
 컴퓨트는 NIC 이름과 필요한 bridge가 다를 뿐 구조는 같습니다.
 
@@ -254,7 +261,7 @@ openstack_hosts_systemd_networkd_networks:
 
 컨트롤러는 스토리지 계열 네트워크(`br-stcl`, `br-stsvc`)가 더 필요하고, 컴퓨트는 그렇지 않습니다. 그룹을 나눠둔 이유가 여기에 있습니다.
 
-## 적용
+## 8. 적용
 
 배포 서버에서 평소대로 실행하면 됩니다.
 
@@ -271,13 +278,13 @@ ls /etc/systemd/network/
 networkctl status br-mgmt
 ```
 
-## 걸렸던 부분
+## 9. 걸렸던 부분
 
 **적용 순서에 주의해야 합니다.** bond → VLAN → bridge 순으로 의존 관계가 있어서, 정의가 빠지면 상위 장치가 올라오지 않습니다. systemd-networkd는 조용히 실패하는 편이라 `networkctl` 로 개별 확인이 필요합니다.
 
 **노드 그룹화 방식은 직접 정해야 합니다.** OSA가 이 변수들을 노드 역할별로 나눠 쓰는 표준 형태를 제공하는지 확인하지 못했습니다. 그래서 `group_vars/`에 컨트롤러와 컴퓨트 파일을 따로 두는 방식으로 나눴습니다. 같은 그룹 안에 NIC 구성이 다른 노드가 섞이면 `host_vars`로 내려야 합니다.
 
-## 정리
+## 10. 정리
 
 | 항목 | 수동 구성 (netplan) | systemd-networkd 자동화 |
 |---|---|---|
