@@ -117,7 +117,190 @@ Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이�
 
 그래서 HCI 노드는 브리지 5개, 컴퓨트 노드는 3개입니다. 그룹을 나눈 이유가 여기에 있습니다.
 
-## 6. HCI 노드 설정
+### 논리 네트워크 구성
+
+```mermaid
+graph TD
+    subgraph HCI["HCI 노드 (mix01~03)"]
+        MGMT1[br-mgmt<br/>10.10.11.111~113]
+        VXLAN1[br-vxlan<br/>10.10.12.111~113]
+        EXT1[br-ext<br/>192.168.100.111~113]
+        STSVC[br-stsvc<br/>Ceph public]
+        STCL[br-stcl<br/>Ceph cluster]
+    end
+
+    subgraph COMP["컴퓨트 노드 (compute01)"]
+        MGMT2[br-mgmt<br/>10.10.11.114]
+        VXLAN2[br-vxlan<br/>10.10.12.114]
+        EXT2[br-ext<br/>192.168.100.114]
+    end
+
+    DEPLOY[배포 노드<br/>10.10.11.90]
+
+    DEPLOY -->|Ansible SSH| MGMT1
+    DEPLOY -->|Ansible SSH| MGMT2
+    MGMT1 <-->|OpenStack API| MGMT2
+    VXLAN1 <-->|테넌트 오버레이| VXLAN2
+    STSVC <-->|OSD·MON 접근| VXLAN2
+    STCL <-->|복제·리밸런싱| STCL
+    EXT1 --> GW[외부 게이트웨이<br/>192.168.100.1]
+    EXT2 --> GW
+```
+
+관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. VXLAN은 테넌트 오버레이, External은 외부 연결입니다. **Ceph 네트워크 두 개는 HCI 노드끼리만 오갑니다.**
+
+### 물리 인터페이스 구성
+
+논리 네트워크가 물리 NIC 위에 어떻게 쌓이는지가 실제 설정의 핵심입니다.
+
+```mermaid
+graph LR
+    subgraph PHY["물리 NIC"]
+        E1[eno1]
+        E2[eno2]
+        E3[eno3]
+    end
+
+    subgraph BOND["Bond (active-backup)"]
+        B1[bond1]
+        B2[bond2]
+        B3[bond3]
+    end
+
+    subgraph VLAN["VLAN"]
+        V21[bond2.21]
+        V22[bond2.22]
+        V24[bond2.24]
+    end
+
+    subgraph BR["Bridge"]
+        BM[br-mgmt]
+        BS[br-stcl]
+        BE[br-ext]
+        BV[br-vxlan]
+        BT[br-stsvc]
+    end
+
+    E1 --> B1 --> BM
+    E2 --> B2
+    B2 --> V21 --> BS
+    B2 --> V22 --> BE
+    B2 --> V24 --> BV
+    E3 --> B3 --> BT
+```
+
+**bond1은 관리, bond2는 VLAN으로 나눠 쓰는 서비스 계열, bond3은 Ceph 복제 전용**입니다. 복제 트래픽에 물리 NIC를 통째로 할당한 이유는 앞서 말한 대로 클라이언트 I/O와 경로를 분리하기 위해서입니다.
+
+아래 설정 코드는 이 그림을 그대로 YAML로 옮긴 것입니다.
+
+
+## 6. 그 앞 단계 — 노드 부트스트랩 플레이북
+
+systemd-networkd 설정은 `setup-hosts.yml`이 돌아야 적용됩니다. 그런데 폐쇄망에서는 그 전에 노드가 갖춰야 할 것들이 있습니다. 외부 저장소를 못 쓰니 apt 소스를 내부 미러로 바꿔야 하고, `bridge-utils`나 `vlan` 같은 패키지도 미리 깔려 있어야 합니다.
+
+이 부분을 별도 플레이북으로 묶었습니다.
+
+```yaml
+---
+- name: Initial bootstrap before openstack-ansible setup-hosts.yml
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars_files:
+    - /etc/openstack_deploy/user_variables.yml
+
+  vars:
+    bootstrap_timezone: "Asia/Seoul"
+
+    # 오프라인 저장소 (deb822 형식)
+    apt_deb822_source_content: |
+      Types: deb
+      URIs: http://{{ deploy_repo_ip }}/repo/epoxy/main/
+      Suites: ./
+      Trusted: yes
+
+    bootstrap_packages:
+      - bridge-utils
+      - debootstrap
+      - ifenslave
+      - openssh-server
+      - tcpdump
+      - vlan
+      - python3
+      - traceroute
+      - chrony
+```
+
+주요 태스크는 이렇습니다.
+
+| 단계 | 내용 |
+|---|---|
+| SSH | root 로그인 허용, 배포 노드 공개키 배포 |
+| 시간 | `timedatectl`로 타임존 설정, chrony 설치 |
+| 호스트명 | `node_fixed_ips`의 `hostname` 값으로 설정 |
+| apt | 기본 Ubuntu 소스 비활성화 → 내부 미러로 교체 |
+| 패키지 | bond·VLAN·bridge에 필요한 패키지 설치 |
+| pip | 내부 PyPI 미러 지정 |
+| 재시작 | 커널 업데이트 반영을 위한 재부팅 |
+
+호스트명 설정에서 앞서 만든 `node_fixed_ips`를 그대로 재사용합니다.
+
+```yaml
+    - name: Set hostname
+      ansible.builtin.hostname:
+        name: "{{ node_fixed_ips.get(inventory_hostname, {}).get('hostname', inventory_hostname) }}"
+```
+
+**IP와 호스트명이 한 파일에 모여 있으니, 부트스트랩과 네트워크 설정이 같은 값을 바라봅니다.** 노드를 추가할 때 `user_variables.yml`에 항목 하나만 넣으면 양쪽이 함께 따라옵니다.
+
+패키지 설치 항목 중 `bridge-utils`, `ifenslave`, `vlan`은 그 자체로 이 글의 주제와 직결됩니다. **이게 빠지면 뒤에서 정의한 bond와 VLAN이 올라오지 않습니다.**
+
+재부팅은 실수로 돌리면 곤란하므로 2단계 확인을 넣었습니다.
+
+```yaml
+  post_tasks:
+    - name: Confirm reboot Check Step 1
+      ansible.builtin.pause:
+        prompt: "Reboot target host(s) now? Type 'yes' to continue"
+      register: reboot_confirm_1
+      run_once: true
+
+    - name: Confirm reboot Check Step 2
+      ansible.builtin.pause:
+        prompt: "Final confirmation. Type 'yes' again to reboot"
+      register: reboot_confirm_2
+      run_once: true
+      when: reboot_confirm_1.user_input | lower == 'yes'
+```
+
+실행은 OSA의 동적 인벤토리를 그대로 씁니다.
+
+```bash
+# 전체 노드
+ansible-playbook -i /opt/openstack-ansible/inventory/dynamic_inventory.py \
+  initial-setup.yml -u ubuntu --ask-pass --ask-become-pass
+
+# 특정 노드만
+ansible-playbook -i /opt/openstack-ansible/inventory/dynamic_inventory.py \
+  initial-setup.yml -u ubuntu -l compute01 --ask-pass --ask-become-pass
+```
+
+이 시점에 노드에 있는 건 **OS와 `ip addr`로 붙인 임시 IP 하나뿐**입니다. 배포 노드에서 SSH만 닿으면 나머지는 플레이북이 채웁니다.
+
+정리하면 전체 흐름은 이렇게 됩니다.
+
+```mermaid
+graph LR
+    A[OS 설치] --> B["임시 IP 부여<br/>ip addr"]
+    B --> C["initial-setup.yml<br/>패키지·시간·호스트명·저장소"]
+    C --> D["setup-hosts.yml<br/>bond·VLAN·bridge"]
+    D --> E[OpenStack 배포]
+```
+
+**수동 구간은 A와 B뿐입니다.**
+
+## 7. HCI 노드 설정
 
 먼저 가상 장치를 정의합니다. bond 3개, VLAN 3개, bridge 5개입니다.
 
@@ -206,7 +389,7 @@ openstack_hosts_systemd_networkd_networks:
           - "{{ node_fixed_ips[inventory_hostname]['ext_gw'] }}"
 ```
 
-## 7. 노드별 IP를 한 곳에서 관리하기
+## 8. 노드별 IP를 한 곳에서 관리하기
 
 위 설정에서 IP는 하드코딩하지 않고 `node_fixed_ips` 변수를 참조했습니다. `inventory_hostname`으로 자기 노드의 값을 꺼내오는 구조입니다.
 
@@ -248,7 +431,7 @@ node_fixed_ips:
 
 `config_overrides`는 롤이 기본 제공하지 않는 systemd 옵션을 끼워넣는 통로입니다. 위 예시에서는 `[Network]` 섹션에 `Gateway`를 추가했습니다. **롤이 감싸지 못한 옵션도 이 경로로 대부분 해결됩니다.**
 
-## 8. 컴퓨트 노드 설정
+## 9. 컴퓨트 노드 설정
 
 컴퓨트는 NIC 이름과 필요한 bridge가 다를 뿐 구조는 같습니다.
 
@@ -284,7 +467,7 @@ openstack_hosts_systemd_networkd_networks:
 
 컴퓨트 전용 노드에는 Ceph가 올라가지 않으므로 `br-stcl`, `br-stsvc`가 필요 없습니다. 브리지 3개로 끝납니다.
 
-## 9. 적용
+## 10. 적용
 
 배포 서버에서 평소대로 실행하면 됩니다.
 
@@ -301,13 +484,13 @@ ls /etc/systemd/network/
 networkctl status br-mgmt
 ```
 
-## 10. 걸렸던 부분
+## 11. 걸렸던 부분
 
 **적용 순서에 주의해야 합니다.** bond → VLAN → bridge 순으로 의존 관계가 있어서, 정의가 빠지면 상위 장치가 올라오지 않습니다. systemd-networkd는 조용히 실패하는 편이라 `networkctl` 로 개별 확인이 필요합니다.
 
 **노드 그룹화 방식은 직접 정해야 합니다.** OSA가 이 변수들을 노드 역할별로 나눠 쓰는 표준 형태를 제공하는지 확인하지 못했습니다. 그래서 `group_vars/`에 컨트롤러와 컴퓨트 파일을 따로 두는 방식으로 나눴습니다. 같은 그룹 안에 NIC 구성이 다른 노드가 섞이면 `host_vars`로 내려야 합니다.
 
-## 11. 정리
+## 12. 정리
 
 | 항목 | 수동 구성 (netplan) | systemd-networkd 자동화 |
 |---|---|---|
