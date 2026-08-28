@@ -53,6 +53,7 @@
     <div class="absolute left-4 sm:left-6 top-0 bottom-0 w-0.5" style="background:linear-gradient(to bottom,#94a3b8,#cbd5e1,rgba(100,116,139,.4));"></div>
 
     <div class="space-y-8">
+      {{ $prev_category := "" }}
       {{ range $idx, $item := $awards }}
       {{ if reflect.IsMap $item }}
       {{/* 카테고리별 색상: 자격증=앰버, 교육=스카이 */}}
@@ -68,6 +69,14 @@
         {{ $c_soft = "rgba(14,165,233,.3)" }}
         {{ $c_chip = "rgba(14,165,233,.12)" }}
       {{ end }}
+      {{/* 카테고리가 바뀌면 소제목 표시 */}}
+      {{ if ne $category $prev_category }}
+      <div class="pl-12 sm:pl-16 pt-2">
+        <h3 class="text-sm font-bold tracking-wide uppercase" style="color:{{ $c_main }};">{{ $category }}</h3>
+      </div>
+      {{ $prev_category = $category }}
+      {{ end }}
+
       <div class="group relative pl-12 sm:pl-16">
 
         {{/* Timeline marker */}}
@@ -91,15 +100,9 @@
 
           <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
             <div>
-              <div class="flex items-center gap-2 flex-wrap">
-                {{ with $category }}
-                <span class="px-2 py-0.5 text-xs font-semibold rounded-full shrink-0"
-                      style="background:{{ $c_chip }};color:{{ $c_main }};border:1px solid {{ $c_main }};">{{ . }}</span>
-                {{ end }}
-                <h3 class="text-xl font-bold text-gray-900 dark:text-white transition-colors">
-                  {{ index $item "title" }}
-                </h3>
-              </div>
+              <h4 class="text-xl font-bold text-gray-900 dark:text-white transition-colors">
+                {{ index $item "title" }}
+              </h4>
               {{ with index $item "awarder" }}
               <p class="font-medium mt-1" style="color:{{ $c_deep }};">{{ . }}</p>
               {{ end }}

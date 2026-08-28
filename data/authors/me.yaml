@@ -102,11 +102,18 @@ skills:
 # 홈 화면에는 markdown 블록의 표로 표시된다 (content/_index.md).
 # 아래 데이터는 resume-awards 블록을 다시 쓸 경우를 위해 보존.
 awards:
+  # 자격증 (최신순)
   - title: RHCSA (Red Hat Certified System Administrator)
     category: 자격증
     awarder: Red Hat
     date: '2024-03-01'
     icon: academic-cap
+  - title: 리눅스마스터 2급
+    category: 자격증
+    awarder: 한국정보통신진흥협회 (KAIT)
+    date: '2011-03-01'
+    icon: academic-cap
+  # 교육 이수 (최신순)
   - title: 도커(Docker) 기초 과정
     category: 교육
     awarder: 에티버스러닝 평생교육원
@@ -124,13 +131,4 @@ awards:
     awarder: 한국클라우드컴퓨팅연구조합
     date: '2018-10-18'
     summary: 과학기술정보통신부·정보통신산업진흥원 주관 클라우드 전문인력 양성사업 수료
-    icon: academic-cap
-  - title: 리눅스마스터 2급
-    category: 자격증
-    awarder: 한국정보통신진흥협회 (KAIT)
-    date: '2011-03-01'
-    icon: academic-cap
-  - title: PC Master (정비사)
-    category: 자격증
-    date: '2004-01-01'
     icon: academic-cap
