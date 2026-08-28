@@ -153,7 +153,9 @@ sections:
     content:
       title: 연대기
       text: |-
-        ![커리어 연대기](career-timeline.svg)
+        <div style="position:relative;left:50%;transform:translateX(-50%);width:92vw;max-width:1100px;">
+          <img src="/media/career-timeline.svg" alt="커리어 연대기" style="width:100%;height:auto;display:block;" />
+        </div>
     design:
       columns: '1'
       background:
