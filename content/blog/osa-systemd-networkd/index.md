@@ -110,12 +110,12 @@ Ansible의 group_vars 규칙을 그대로 쓰는 것이라, OSA 인벤토리에 
 | `br-mgmt` | OpenStack 관리 네트워크 | ✅ | ✅ |
 | `br-vxlan` | 테넌트 오버레이 | ✅ | ✅ |
 | `br-ext` | 외부 연결 | ✅ | ✅ |
-| `br-stsvc` | **Ceph 서비스(public) 네트워크** — 클라이언트가 OSD·MON에 접근 | ✅ | — |
+| `br-stsvc` | **Ceph 서비스(public) 네트워크** — 클라이언트가 OSD·MON에 접근 | ✅ | ✅ |
 | `br-stcl` | **Ceph 클러스터 네트워크** — OSD 간 복제·리밸런싱 트래픽 | ✅ | — |
 
 Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이유는, **복제 트래픽이 클라이언트 I/O를 밀어내지 않게 하기 위해서**입니다. 복구나 리밸런싱이 돌면 OSD 간 트래픽이 순간적으로 크게 늘어나는데, 이게 서비스 네트워크와 같은 경로를 타면 VM의 디스크 응답이 함께 느려집니다.
 
-그래서 HCI 노드는 브리지 5개, 컴퓨트 노드는 3개입니다. 그룹을 나눈 이유가 여기에 있습니다.
+그래서 HCI 노드는 브리지 5개, 컴퓨트 노드는 4개입니다. **차이는 `br-stcl` 하나뿐인데**, OSD가 없는 노드에는 복제 트래픽이 흐르지 않기 때문입니다. 그룹을 나눈 이유가 여기에 있습니다.
 
 ### 논리 네트워크 구성
 
@@ -133,6 +133,7 @@ graph TD
         MGMT2[br-mgmt<br/>10.10.11.114]
         VXLAN2[br-vxlan<br/>10.10.12.114]
         EXT2[br-ext<br/>192.168.100.114]
+        STSVC2[br-stsvc<br/>Ceph public]
     end
 
     DEPLOY[배포 노드<br/>10.10.11.90]
@@ -141,13 +142,15 @@ graph TD
     DEPLOY -->|Ansible SSH| MGMT2
     MGMT1 <-->|OpenStack API| MGMT2
     VXLAN1 <-->|테넌트 오버레이| VXLAN2
-    STSVC <-->|OSD·MON 접근| VXLAN2
-    STCL <-->|복제·리밸런싱| STCL
+    STSVC <-->|볼륨 I/O| STSVC2
+    STCL -.->|OSD 간 복제·리밸런싱| STCL
     EXT1 --> GW[외부 게이트웨이<br/>192.168.100.1]
     EXT2 --> GW
 ```
 
-관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. VXLAN은 테넌트 오버레이, External은 외부 연결입니다. **Ceph 네트워크 두 개는 HCI 노드끼리만 오갑니다.**
+관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. VXLAN은 테넌트 오버레이, External은 외부 연결입니다.
+
+**Ceph 네트워크 두 개는 성격이 다릅니다.** `br-stsvc`는 컴퓨트 노드의 VM도 볼륨을 붙이려면 타야 하는 경로지만, `br-stcl`은 OSD가 올라간 HCI 노드끼리만 오갑니다.
 
 ### 물리 인터페이스 구성
 
@@ -190,6 +193,8 @@ graph LR
 ```
 
 **bond1은 관리, bond2는 VLAN으로 나눠 쓰는 서비스 계열, bond3은 Ceph 복제 전용**입니다. 복제 트래픽에 물리 NIC를 통째로 할당한 이유는 앞서 말한 대로 클라이언트 I/O와 경로를 분리하기 위해서입니다.
+
+위 그림은 HCI 노드 기준입니다. 컴퓨트 노드는 `bond2.21`과 `br-stcl`만 빠지고 나머지는 동일합니다.
 
 아래 설정 코드는 이 그림을 그대로 YAML로 옮긴 것입니다.
 
@@ -433,39 +438,85 @@ node_fixed_ips:
 
 ## 9. 컴퓨트 노드 설정
 
-컴퓨트는 NIC 이름과 필요한 bridge가 다를 뿐 구조는 같습니다.
+컴퓨트 전용 노드는 **HCI 노드에서 Ceph 클러스터망만 빠진 구조**입니다. OSD가 올라가지 않으니 복제 트래픽이 없고, 따라서 `br-stcl`과 그에 쓰이던 `bond2.21`이 필요 없습니다.
+
+반대로 `br-stsvc`는 그대로 필요합니다. **컴퓨트에서 뜨는 VM이 Ceph 볼륨을 붙이려면 OSD·MON에 접근해야 하기 때문입니다.**
 
 ```yaml
 # group_vars/compute_hosts.yml
 openstack_hosts_systemd_networkd_devices:
-  - NetDev: { Name: bond0, Kind: bond }
+  - NetDev: { Name: bond1, Kind: bond }
     Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
-  - NetDev: { Name: bond0.11, Kind: vlan }
-    VLAN: { Id: 11 }
-  - NetDev: { Name: bond0.12, Kind: vlan }
-    VLAN: { Id: 12 }
+  - NetDev: { Name: bond2, Kind: bond }
+    Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
+  - NetDev: { Name: bond3, Kind: bond }
+    Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
+
+  - NetDev: { Name: bond2.22, Kind: vlan }
+    VLAN: { Id: 22 }
+  - NetDev: { Name: bond2.24, Kind: vlan }
+    VLAN: { Id: 24 }
+
   - NetDev: { Name: br-mgmt, Kind: bridge }
-  - NetDev: { Name: br-vxlan, Kind: bridge }
   - NetDev: { Name: br-ext, Kind: bridge }
+  - NetDev: { Name: br-vxlan, Kind: bridge }
+  - NetDev: { Name: br-stsvc, Kind: bridge }
 
 openstack_hosts_systemd_networkd_networks:
-  - interface: enp1s0
-    match: { name: enp1s0 }
-    bond: bond0
-  - interface: bond0
-    match: { name: bond0 }
+  - interface: eno1
+    match: { name: eno1 }
+    bond: bond1
+  - interface: eno2
+    match: { name: eno2 }
+    bond: bond2
+  - interface: eno3
+    match: { name: eno3 }
+    bond: bond3
+
+  - interface: bond2
+    match: { name: bond2 }
     vlan:
-      - bond0.11
-      - bond0.12
-  - interface: bond0.11
-    match: { name: bond0.11 }
+      - bond2.22
+      - bond2.24
+
+  - interface: bond1
+    match: { name: bond1 }
     bridge: br-mgmt
-  - interface: bond0.12
-    match: { name: bond0.12 }
+  - interface: bond2.22
+    match: { name: bond2.22 }
+    bridge: br-ext
+  - interface: bond2.24
+    match: { name: bond2.24 }
     bridge: br-vxlan
+  - interface: bond3
+    match: { name: bond3 }
+    bridge: br-stsvc
+
+  - interface: br-mgmt
+    match: { name: br-mgmt }
+    address:
+      - "{{ node_fixed_ips[inventory_hostname]['mgmt'] }}"
+
+  - interface: br-ext
+    match: { name: br-ext }
+    address:
+      - "{{ node_fixed_ips[inventory_hostname]['ext'] }}"
+    config_overrides:
+      Network:
+        Gateway:
+          - "{{ node_fixed_ips[inventory_hostname]['ext_gw'] }}"
 ```
 
-컴퓨트 전용 노드에는 Ceph가 올라가지 않으므로 `br-stcl`, `br-stsvc`가 필요 없습니다. 브리지 3개로 끝납니다.
+HCI 설정과 나란히 놓고 보면 차이가 명확합니다.
+
+| 항목 | HCI 노드 | 컴퓨트 노드 |
+|---|---|---|
+| bond | 3개 | 3개 |
+| VLAN | `bond2.21`, `bond2.22`, `bond2.24` | `bond2.22`, `bond2.24` |
+| 브리지 | 5개 | 4개 (`br-stcl` 제외) |
+| Ceph 역할 | MON + OSD | 클라이언트 |
+
+**차이가 VLAN 하나와 브리지 하나뿐입니다.** 구조를 통일해두면 노드 역할이 바뀌어도 정의를 크게 손대지 않아도 됩니다. 컴퓨트로 쓰던 노드에 OSD를 얹어 HCI로 전환한다면 `bond2.21`과 `br-stcl`만 추가하면 됩니다.
 
 ## 10. 적용
 
