@@ -152,7 +152,7 @@ sections:
     content:
       title: 주요 경력
       username: me
-      date_format: 2006.01
+      date_format: "2006.01"
     design:
       columns: '1'
       is_education_first: false
@@ -169,7 +169,7 @@ sections:
     content:
       title: 자격 및 교육
       username: me
-      date_format: 2006.01
+      date_format: "2006.01"
     design:
       columns: '1'
       background:

@@ -37,6 +37,7 @@
 {{ end }}
 
 {{ if gt (len $awards) 0 }}
+<div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
 <div class="w-full">
   {{ with $title }}
   <h2 class="mb-10 text-3xl font-bold text-gray-900 dark:text-white text-center">{{ . }}</h2>
@@ -121,5 +122,6 @@
       {{ end }}
     </div>
   </div>
+</div>
 </div>
 {{ end }}
