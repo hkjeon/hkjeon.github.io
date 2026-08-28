@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 430" width="980" height="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="980" height="430" fill="#ffffff"/>
+<rect x="30" y="30" width="250" height="114" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="44" y="55" font-size="14" font-weight="700" fill="#2563eb">1. Compute</text>
+<text x="266" y="55" text-anchor="end" font-size="10" fill="#64748b">순차 진행</text>
+<rect x="44" y="67" width="222" height="21" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="155.0" y="82" text-anchor="middle" font-size="11" fill="#0f172a">kolla-comp01</text>
+<rect x="44" y="93" width="222" height="21" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="155.0" y="108" text-anchor="middle" font-size="11" fill="#0f172a">kolla-comp02</text>
+<rect x="350" y="30" width="250" height="140" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.8"/>
+<text x="364" y="55" font-size="14" font-weight="700" fill="#7c3aed">2. Controller</text>
+<text x="586" y="55" text-anchor="end" font-size="10" fill="#64748b">1대씩 진행</text>
+<rect x="364" y="67" width="222" height="21" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="475.0" y="82" text-anchor="middle" font-size="11" fill="#0f172a">kolla-osc03</text>
+<rect x="364" y="93" width="222" height="21" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="475.0" y="108" text-anchor="middle" font-size="11" fill="#0f172a">kolla-osc01</text>
+<rect x="364" y="119" width="222" height="21" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="475.0" y="134" text-anchor="middle" font-size="11" fill="#0f172a">kolla-osc02</text>
+<rect x="700" y="30" width="250" height="88" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
+<text x="714" y="55" font-size="14" font-weight="700" fill="#059669">3. Deploy</text>
+<text x="936" y="55" text-anchor="end" font-size="10" fill="#64748b">마지막</text>
+<rect x="714" y="67" width="222" height="21" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="825.0" y="82" text-anchor="middle" font-size="11" fill="#0f172a">kolla-deploy</text>
+<polygon points="292,88 322,98 292,108" fill="#94a3b8"/>
+<polygon points="642,88 672,98 642,108" fill="#94a3b8"/>
+<text x="30" y="215" font-size="13" font-weight="700" fill="#0f172a">각 노드 공통 절차</text>
+<rect x="30" y="235" width="172" height="62" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<circle cx="45" cy="250" r="9" fill="#475569"/>
+<text x="45" y="254" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">1</text>
+<text x="116.0" y="277" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">컨테이너 정지</text>
+<text x="116.0" y="291" text-anchor="middle" font-size="8.5" fill="#64748b">kolla-ansible stop --limit</text>
+<polygon points="205,261 218,266 205,271" fill="#94a3b8"/>
+<rect x="224" y="235" width="172" height="62" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<circle cx="239" cy="250" r="9" fill="#475569"/>
+<text x="239" y="254" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">2</text>
+<text x="310.0" y="277" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">Rocky 10 전환</text>
+<text x="310.0" y="291" text-anchor="middle" font-size="8.5" fill="#64748b">distro-sync → reboot</text>
+<polygon points="399,261 412,266 399,271" fill="#94a3b8"/>
+<rect x="418" y="235" width="172" height="62" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<circle cx="433" cy="250" r="9" fill="#475569"/>
+<text x="433" y="254" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">3</text>
+<text x="504.0" y="277" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">el9 잔여 정리</text>
+<text x="504.0" y="291" text-anchor="middle" font-size="8.5" fill="#64748b">rpm -e 반복</text>
+<polygon points="593,261 606,266 593,271" fill="#94a3b8"/>
+<rect x="612" y="235" width="172" height="62" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<circle cx="627" cy="250" r="9" fill="#475569"/>
+<text x="627" y="254" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">4</text>
+<text x="698.0" y="277" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">Docker 재설치</text>
+<text x="698.0" y="291" text-anchor="middle" font-size="8.5" fill="#64748b">Deploy 노드 제외</text>
+<polygon points="787,261 800,266 787,271" fill="#94a3b8"/>
+<rect x="806" y="235" width="172" height="62" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+<circle cx="821" cy="250" r="9" fill="#475569"/>
+<text x="821" y="254" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">5</text>
+<text x="892.0" y="277" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">bootstrap · deploy</text>
+<text x="892.0" y="291" text-anchor="middle" font-size="8.5" fill="#64748b">kolla-ansible</text>
+<text x="30" y="345" font-size="13" font-weight="700" fill="#0f172a">전체 노드 완료 후</text>
+<rect x="30" y="362" width="222" height="52" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+<text x="141.0" y="386" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">kolla-ansible 22.0.1</text>
+<text x="141.0" y="401" text-anchor="middle" font-size="8.5" fill="#64748b">git clone stable/2026.1</text>
+<polygon points="255,383 268,388 255,393" fill="#059669"/>
+<rect x="274" y="362" width="222" height="52" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+<text x="385.0" y="386" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">inventory 그룹 추가</text>
+<text x="385.0" y="401" text-anchor="middle" font-size="8.5" fill="#64748b">neutron-rpc-server 등 7개</text>
+<polygon points="499,383 512,388 499,393" fill="#059669"/>
+<rect x="518" y="362" width="222" height="52" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+<text x="629.0" y="386" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">globals.yml</text>
+<text x="629.0" y="401" text-anchor="middle" font-size="8.5" fill="#64748b">openstack_release 2026.1</text>
+<polygon points="743,383 756,388 743,393" fill="#059669"/>
+<rect x="762" y="362" width="222" height="52" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.4"/>
+<text x="873.0" y="386" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">pull → upgrade</text>
+<text x="873.0" y="401" text-anchor="middle" font-size="8.5" fill="#64748b">이미지 선행 pull 필수</text>
+</svg>
