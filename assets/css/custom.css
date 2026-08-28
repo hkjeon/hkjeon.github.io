@@ -1,0 +1,8 @@
+/* 본문 읽기 폭 확대
+   테마 기본값(prose / prose-xl)은 산문 기준으로 좁게 잡혀 있어
+   코드블록과 표가 많은 기술 문서에서는 답답하다. */
+@media (min-width: 1024px) {
+  .prose {
+    max-width: 90ch;
+  }
+}
