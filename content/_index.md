@@ -33,8 +33,8 @@ sections:
           url: "#contact"
           icon: envelope
     design:
-      style: centered
-      avatar_shape: circle
+      style: split
+      avatar_shape: rounded
       animations: true
       background:
         color:
@@ -44,28 +44,6 @@ sections:
         padding: ["6rem", "0", "4rem", "0"]
   
   # Filterable Portfolio - Alpine.js powered project filtering
-  # 소개
-  - block: markdown
-    id: about
-    content:
-      title: 소개
-      text: |-
-        <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;justify-content:center;">
-          <img src="/media/profile-illustration.png" alt="HK Jeon 프로필 일러스트" style="width:100%;max-width:340px;height:auto;border-radius:10px;display:block;" />
-          <div style="flex:1;min-width:260px;max-width:420px;">
-            <p>OpenStack 기반 프라이빗 클라우드를 설계하고 구축합니다. 공공기관과 통신사 환경에서 인프라를 세우고, 그 경험을 자사 IaaS 솔루션의 배포 패키지에 반영하는 일을 함께 하고 있습니다.</p>
-            <p>반복되는 구축 작업을 코드로 옮기는 데 관심이 많습니다. 노드 네트워크 구성부터 폐쇄망 오프라인 설치까지 자동화 범위를 넓혀가고 있습니다.</p>
-          </div>
-        </div>
-    design:
-      columns: '1'
-      background:
-        color:
-          light: "#ffffff"
-          dark: "#0d0d12"
-      spacing:
-        padding: ["4rem", "0", "2rem", "0"]
-
   - block: portfolio
     id: projects
     content:
