@@ -133,41 +133,7 @@ Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이�
 
 논리 네트워크가 물리 NIC 위에 어떻게 쌓이는지가 실제 설정의 핵심입니다.
 
-```mermaid
-graph LR
-    subgraph PHY["물리 NIC"]
-        E1[eno1]
-        E2[eno2]
-        E3[eno3]
-    end
-
-    subgraph BOND["Bond (active-backup)"]
-        B1[bond1]
-        B2[bond2]
-        B3[bond3]
-    end
-
-    subgraph VLAN["VLAN"]
-        V21[bond2.21]
-        V22[bond2.22]
-        V24[bond2.24]
-    end
-
-    subgraph BR["Bridge"]
-        BM[br-mgmt]
-        BS[br-stcl]
-        BE[br-ext]
-        BV[br-vxlan]
-        BT[br-stsvc]
-    end
-
-    E1 --> B1 --> BM
-    E2 --> B2
-    B2 --> V21 --> BS
-    B2 --> V22 --> BE
-    B2 --> V24 --> BV
-    E3 --> B3 --> BT
-```
+![물리 인터페이스 계층 구조](interface-stack.svg)
 
 **bond1은 관리, bond2는 VLAN으로 나눠 쓰는 서비스 계열, bond3은 Ceph 복제 전용**입니다. 복제 트래픽에 물리 NIC를 통째로 할당한 이유는 앞서 말한 대로 클라이언트 I/O와 경로를 분리하기 위해서입니다.
 
@@ -272,13 +238,7 @@ ansible-playbook -i /opt/openstack-ansible/inventory/dynamic_inventory.py \
 
 정리하면 전체 흐름은 이렇게 됩니다.
 
-```mermaid
-graph LR
-    A[OS 설치] --> B["임시 IP 부여<br/>ip addr"]
-    B --> C["initial-setup.yml<br/>패키지·시간·호스트명·저장소"]
-    C --> D["setup-hosts.yml<br/>bond·VLAN·bridge"]
-    D --> E[OpenStack 배포]
-```
+![노드 준비부터 OpenStack 배포까지의 흐름](deploy-flow.svg)
 
 **손으로 하는 건 OS 설치와 임시 IP 부여, 이 둘뿐입니다.** 나머지 세 단계는 배포 노드에서 플레이북으로 진행됩니다.
 
