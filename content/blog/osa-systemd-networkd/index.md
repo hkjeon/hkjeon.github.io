@@ -35,16 +35,18 @@ Caracal 릴리스를 다루면서 `openstack_hosts` 롤에 systemd-networkd 관�
 | 단계 | 이전 | 이후 |
 |---|---|---|
 | OS 설치 | 수동 | 수동 |
-| 임시 IP 설정 | 수동 | 수동 (`ip addr` 한 줄) |
+| IP 설정 방식 | netplan으로 bond·VLAN·브리지·IP 전체 수동 구성 | `ip addr`로 임시 IP만 설정 |
 | 패키지 설치 | 플레이북 | 플레이북 |
 | 시간 설정 | 플레이북 | 플레이북 |
 | 네트워크·브리지 | **수동 (netplan)** | **플레이북** |
 
 수동 구간이 "OS 설치 + IP 한 줄"로 줄어듭니다.
 
-## 2. netplan을 굳이 쓰지 않은 이유
+## 2. systemd-networkd를 검토한 이유
 
-netplan으로도 자동화는 가능합니다. Jinja2 템플릿을 만들어 뿌리면 됩니다. 그럼에도 systemd-networkd를 택한 이유는 이렇습니다.
+netplan은 Ubuntu의 표준 네트워크 설정 방식이고, OSA 가이드도 이 방식을 안내합니다. 자동화가 불가능한 것도 아닙니다. Jinja2 템플릿을 만들어 뿌리면 됩니다.
+
+그럼에도 systemd-networkd를 들여다본 이유는 이렇습니다.
 
 | 항목 | netplan | systemd-networkd |
 |---|---|---|
@@ -53,7 +55,9 @@ netplan으로도 자동화는 가능합니다. Jinja2 템플릿을 만들어 뿌
 | 배포 시점 | 별도 단계 | `setup-hosts.yml` 실행 시 함께 |
 | 파일 관리 | 기존 netplan 설정과 충돌 가능 | prefix로 OSA 생성분 격리 |
 
-**netplan도 결국 백엔드로 systemd-networkd나 NetworkManager를 씁니다.** 어차피 중간 계층이라면, OSA가 이미 지원하는 경로를 쓰는 편이 단계가 하나 줄어듭니다. 무엇보다 직접 만든 롤을 유지보수할 필요가 없습니다.
+**Ubuntu Server에서 netplan의 기본 renderer는 systemd-networkd입니다.** netplan YAML을 쓰면 그것이 `.netdev`, `.network` 파일로 변환되어 systemd-networkd가 실제로 처리합니다. 즉 netplan은 그 위에 얹힌 변환 계층입니다.
+
+어차피 최종적으로 systemd-networkd가 동작한다면, OSA가 이미 지원하는 경로로 직접 정의하는 편이 단계가 하나 줄어듭니다. 무엇보다 직접 만든 롤을 유지보수할 필요가 없습니다.
 
 ## 3. 변수 구조
 
@@ -119,38 +123,11 @@ Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이�
 
 ### 논리 네트워크 구성
 
-```mermaid
-graph TD
-    subgraph HCI["HCI 노드 (mix01~03)"]
-        MGMT1[br-mgmt<br/>10.10.11.111~113]
-        VXLAN1[br-vxlan<br/>10.10.12.111~113]
-        EXT1[br-ext<br/>192.168.100.111~113]
-        STSVC[br-stsvc<br/>Ceph public]
-        STCL[br-stcl<br/>Ceph cluster]
-    end
+![OpenStack 논리 네트워크 구성도](network-topology.svg)
 
-    subgraph COMP["컴퓨트 노드 (compute01)"]
-        MGMT2[br-mgmt<br/>10.10.11.114]
-        VXLAN2[br-vxlan<br/>10.10.12.114]
-        EXT2[br-ext<br/>192.168.100.114]
-        STSVC2[br-stsvc<br/>Ceph public]
-    end
+관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. 배포 노드는 이 망에만 물리면 됩니다.
 
-    DEPLOY[배포 노드<br/>10.10.11.90]
-
-    DEPLOY -->|Ansible SSH| MGMT1
-    DEPLOY -->|Ansible SSH| MGMT2
-    MGMT1 <-->|OpenStack API| MGMT2
-    VXLAN1 <-->|테넌트 오버레이| VXLAN2
-    STSVC <-->|볼륨 I/O| STSVC2
-    STCL -.->|OSD 간 복제·리밸런싱| STCL
-    EXT1 --> GW[외부 게이트웨이<br/>192.168.100.1]
-    EXT2 --> GW
-```
-
-관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. VXLAN은 테넌트 오버레이, External은 외부 연결입니다.
-
-**Ceph 네트워크 두 개는 성격이 다릅니다.** `br-stsvc`는 컴퓨트 노드의 VM도 볼륨을 붙이려면 타야 하는 경로지만, `br-stcl`은 OSD가 올라간 HCI 노드끼리만 오갑니다.
+**Ceph 네트워크 두 개는 성격이 다릅니다.** `br-stsvc`는 컴퓨트 노드의 VM도 볼륨을 붙이려면 타야 하는 경로입니다. 반면 `br-stcl`은 OSD 간 복제·리밸런싱 전용이라 OSD가 올라간 HCI 노드끼리만 오갑니다. compute01이 이 망에 연결되지 않는 이유입니다.
 
 ### 물리 인터페이스 구성
 
@@ -303,7 +280,7 @@ graph LR
     D --> E[OpenStack 배포]
 ```
 
-**수동 구간은 A와 B뿐입니다.**
+**손으로 하는 건 OS 설치와 임시 IP 부여, 이 둘뿐입니다.** 나머지 세 단계는 배포 노드에서 플레이북으로 진행됩니다.
 
 ## 7. HCI 노드 설정
 
@@ -549,7 +526,6 @@ networkctl status br-mgmt
 | 네트워크 셋업 소요 | 노드 수에 비례 | 전체 노드 1~2분 |
 | 재구축 시 | 처음부터 반복 | 정의 파일 재사용 |
 | 오타 위험 | 노드마다 존재 | 정의가 한 곳에 모임 |
-| 구성 이력 | 남지 않음 | Git으로 관리 |
 
 배포 자동화를 이야기할 때 보통 OpenStack 설치만 떠올리지만, **노드가 준비되는 지점부터 코드로 관리하면 재현성이 확실히 달라집니다.** 특히 폐쇄망 사업처럼 같은 구성을 여러 번 다시 세워야 하는 환경에서 차이가 큽니다.
 
