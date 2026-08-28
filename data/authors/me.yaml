@@ -99,6 +99,8 @@ skills:
       - label: Network (VLAN / VXLAN / L4)
         level: 4
 
+# 홈 화면에는 markdown 블록의 표로 표시된다 (content/_index.md).
+# 아래 데이터는 resume-awards 블록을 다시 쓸 경우를 위해 보존.
 awards:
   - title: RHCSA (Red Hat Certified System Administrator)
     awarder: Red Hat

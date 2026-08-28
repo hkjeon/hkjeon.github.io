@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="300" fill="#ffffff"/>
+<defs><linearGradient id="axis" gradientUnits="userSpaceOnUse" x1="60" y1="0" x2="866" y2="0"><stop offset="0%" stop-color="#94a3b8"/><stop offset="35%" stop-color="#0891b2"/><stop offset="60%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#059669"/></linearGradient></defs>
+<line x1="60" y1="150" x2="850" y2="150" stroke="url(#axis)" stroke-width="3.5" stroke-linecap="round"/>
+<polygon points="850,143 866,150 850,157" fill="#059669"/>
+<circle cx="110" cy="150" r="8" fill="#ffffff" stroke="#64748b" stroke-width="3"/>
+<line x1="110" y1="142" x2="110" y2="116" stroke="#64748b" stroke-width="1.5"/>
+<rect x="34.0" y="58" width="152" height="58" rx="6" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+<text x="110.0" y="74" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">통신 시험장비</text>
+<text x="110.0" y="88" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">· 코어망 구축</text>
+<text x="110.0" y="103" text-anchor="middle" font-size="8.5" fill="#64748b">IxCatapult / IXIA</text>
+<text x="110.0" y="114" text-anchor="middle" font-size="8.5" fill="#64748b">LTE · EPC · IMS</text>
+<text x="110" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#64748b">2009</text>
+<circle cx="285" cy="150" r="8" fill="#ffffff" stroke="#0891b2" stroke-width="3"/>
+<line x1="285" y1="158" x2="285" y2="184" stroke="#0891b2" stroke-width="1.5"/>
+<rect x="209.0" y="184" width="152" height="58" rx="6" fill="#ecfeff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="285.0" y="203" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">NFV 플랫폼</text>
+<text x="285.0" y="222" text-anchor="middle" font-size="8.5" fill="#64748b">통신사 VNF</text>
+<text x="285.0" y="233" text-anchor="middle" font-size="8.5" fill="#64748b">재난안전망</text>
+<text x="285" y="136" text-anchor="middle" font-size="12" font-weight="700" fill="#0891b2">2015</text>
+<circle cx="460" cy="150" r="8" fill="#ffffff" stroke="#7c3aed" stroke-width="3"/>
+<line x1="460" y1="142" x2="460" y2="116" stroke="#7c3aed" stroke-width="1.5"/>
+<rect x="384.0" y="58" width="152" height="58" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="460.0" y="77" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">프라이빗 클라우드</text>
+<text x="460.0" y="96" text-anchor="middle" font-size="8.5" fill="#64748b">OpenStack · Ceph</text>
+<text x="460.0" y="107" text-anchor="middle" font-size="8.5" fill="#64748b">공공 · 지자체</text>
+<text x="460" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#7c3aed">2018</text>
+<circle cx="620" cy="150" r="8" fill="#ffffff" stroke="#2563eb" stroke-width="3"/>
+<line x1="620" y1="158" x2="620" y2="184" stroke="#2563eb" stroke-width="1.5"/>
+<rect x="544.0" y="184" width="152" height="58" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="620.0" y="203" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">5G 가상화 · 컨테이너</text>
+<text x="620.0" y="222" text-anchor="middle" font-size="8.5" fill="#64748b">RHOSP 13 / 16</text>
+<text x="620.0" y="233" text-anchor="middle" font-size="8.5" fill="#64748b">RHOCP</text>
+<text x="620" y="136" text-anchor="middle" font-size="12" font-weight="700" fill="#2563eb">2020</text>
+<circle cx="790" cy="150" r="8" fill="#ffffff" stroke="#059669" stroke-width="3"/>
+<line x1="790" y1="142" x2="790" y2="116" stroke="#059669" stroke-width="1.5"/>
+<rect x="714.0" y="58" width="152" height="58" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+<text x="790.0" y="77" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">IaaS 솔루션 개발</text>
+<text x="790.0" y="96" text-anchor="middle" font-size="8.5" fill="#64748b">OSA 배포 패키지</text>
+<text x="790.0" y="107" text-anchor="middle" font-size="8.5" fill="#64748b">오프라인 설치 체계</text>
+<text x="790" y="172" text-anchor="middle" font-size="12" font-weight="700" fill="#059669">2025</text>
+<text x="866" y="172" text-anchor="end" font-size="11" font-weight="700" fill="#059669">현재</text>
+<text x="60" y="286" font-size="9.5" fill="#94a3b8">통신망 구축에서 출발해 가상화 · 클라우드를 거쳐 IaaS 솔루션 개발까지</text>
+</svg>

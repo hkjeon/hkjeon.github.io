@@ -147,6 +147,22 @@ sections:
         padding: ["4rem", "0", "4rem", "0"]
   
   # Experience Timeline
+  # 커리어 연대기
+  - block: markdown
+    id: timeline
+    content:
+      title: 연대기
+      text: |-
+        ![커리어 연대기](career-timeline.svg)
+    design:
+      columns: '1'
+      background:
+        color:
+          light: "#ffffff"
+          dark: "#0d0d12"
+      spacing:
+        padding: ["4rem", "0", "1rem", "0"]
+
   - block: resume-experience
     id: experience
     content:
@@ -164,12 +180,25 @@ sections:
         padding: ["4rem", "0", "4rem", "0"]
 
   # 자격 및 교육
-  - block: resume-awards
+  - block: markdown
     id: awards
     content:
       title: 자격 및 교육
-      username: me
-      date_format: 2006.01
+      text: |-
+        **자격증**
+
+        | 항목 | 발급 | 취득 |
+        |---|---|---|
+        | RHCSA (Red Hat Certified System Administrator) | Red Hat | 2024.03 |
+        | 리눅스마스터 2급 | 한국정보통신진흥협회 (KAIT) | 2011.03 |
+
+        **교육 이수**
+
+        | 과정 | 기관 | 수료 |
+        |---|---|---|
+        | 도커(Docker) 기초 과정 | 에티버스러닝 | 2023.03 |
+        | 클라우드 환경구축 및 서비스 운영관리 자동화 | HPE Education Services | 2020.06 |
+        | 프라이빗 클라우드 아키텍처 설계 및 구축 2차 | 한국클라우드컴퓨팅연구조합 | 2018.10 |
     design:
       columns: '1'
       background:
@@ -177,7 +206,7 @@ sections:
           light: "#fafafa"
           dark: "#0a0a0f"
       spacing:
-        padding: ["4rem", "0", "4rem", "0"]
+        padding: ["3rem", "0", "4rem", "0"]
 
   # Recent Blog Posts
   - block: collection
