@@ -15,7 +15,7 @@ featured: true
 
 OpenStack-Ansible(OSA) 공식 가이드는 타깃 노드의 브리지 네트워크를 Ubuntu netplan으로 구성하도록 안내합니다. 저도 그동안 그렇게 해왔습니다. 노드마다 netplan YAML을 작성해 bond, VLAN, 그리고 `br-mgmt`·`br-vxlan` 같은 브리지를 잡는 방식입니다.
 
-문제는 이 작업이 **배포 자동화의 바깥에 있다는 점**입니다. 컨트롤러 3대에 컴퓨트 9대라면 노드마다 bond 3개, VLAN 5개, 브리지 5개를 손으로 잡아야 하고, 오타 하나가 배포 실패로 이어집니다. 그리고 재구축할 때마다 처음부터 반복됩니다.
+문제는 이 작업이 **배포 자동화의 바깥에 있다는 점**입니다. Ceph까지 얹은 HCI 노드라면 한 대에 bond 3개, VLAN 3개, 브리지 5개를 손으로 잡아야 합니다. 노드가 열 대를 넘어가면 이 작업만으로 반나절이 지나가고, 오타 하나가 배포 실패로 이어집니다. 그리고 재구축할 때마다 처음부터 반복됩니다.
 
 ## 1. 시작은 오프라인 패키지 작업이었다
 
@@ -84,19 +84,42 @@ openstack_hosts_systemd_slice: "openstack-hosts"
 
 ## 4. 그룹별로 나눠서 정의하기
 
-컨트롤러와 컴퓨트는 NIC 구성도 다르고 필요한 네트워크도 다릅니다. 그래서 `/etc/openstack_deploy/group_vars/` 아래에 그룹별 파일을 만듭니다.
+노드 역할에 따라 NIC 구성도 다르고 필요한 네트워크도 다릅니다. 그래서 `/etc/openstack_deploy/group_vars/` 아래에 그룹별 파일을 만듭니다.
 
 ```
 /etc/openstack_deploy/group_vars/
-├── shared-infra_hosts.yml   # 컨트롤러 그룹
-└── compute_hosts.yml        # 컴퓨트 그룹
+├── shared-infra_hosts.yml   # HCI 노드 그룹
+└── compute_hosts.yml        # 컴퓨트 노드 그룹
 ```
 
 Ansible의 group_vars 규칙을 그대로 쓰는 것이라, OSA 인벤토리에 정의된 그룹명과 파일명만 맞춰주면 됩니다.
 
-## 5. 컨트롤러 노드 설정
+## 5. 예시 환경
 
-먼저 가상 장치를 정의합니다. bond 3개, VLAN 5개, bridge 5개입니다.
+아래 설정은 **HCI 구조의 테스트베드**를 기준으로 합니다.
+
+| 노드 | 대수 | 역할 |
+|---|---|---|
+| `mix01` ~ `mix03` | 3 | 컨트롤러 + 컴퓨트 + Ceph 통합 (HCI) |
+| `compute01` | 1 | 컴퓨트 전용 |
+
+`mix`라는 이름은 컨트롤러·컴퓨트·스토리지 역할이 한 노드에 섞여 있다는 뜻입니다. Ceph가 노드 안에 함께 들어가기 때문에, HCI 노드에는 **스토리지 네트워크가 두 개** 필요합니다.
+
+| 브리지 | 용도 | HCI 노드 | 컴퓨트 노드 |
+|---|---|---|---|
+| `br-mgmt` | OpenStack 관리 네트워크 | ✅ | ✅ |
+| `br-vxlan` | 테넌트 오버레이 | ✅ | ✅ |
+| `br-ext` | 외부 연결 | ✅ | ✅ |
+| `br-stsvc` | **Ceph 서비스(public) 네트워크** — 클라이언트가 OSD·MON에 접근 | ✅ | — |
+| `br-stcl` | **Ceph 클러스터 네트워크** — OSD 간 복제·리밸런싱 트래픽 | ✅ | — |
+
+Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이유는, **복제 트래픽이 클라이언트 I/O를 밀어내지 않게 하기 위해서**입니다. 복구나 리밸런싱이 돌면 OSD 간 트래픽이 순간적으로 크게 늘어나는데, 이게 서비스 네트워크와 같은 경로를 타면 VM의 디스크 응답이 함께 느려집니다.
+
+그래서 HCI 노드는 브리지 5개, 컴퓨트 노드는 3개입니다. 그룹을 나눈 이유가 여기에 있습니다.
+
+## 6. HCI 노드 설정
+
+먼저 가상 장치를 정의합니다. bond 3개, VLAN 3개, bridge 5개입니다.
 
 ```yaml
 # group_vars/shared-infra_hosts.yml
@@ -183,7 +206,7 @@ openstack_hosts_systemd_networkd_networks:
           - "{{ node_fixed_ips[inventory_hostname]['ext_gw'] }}"
 ```
 
-## 6. 노드별 IP를 한 곳에서 관리하기
+## 7. 노드별 IP를 한 곳에서 관리하기
 
 위 설정에서 IP는 하드코딩하지 않고 `node_fixed_ips` 변수를 참조했습니다. `inventory_hostname`으로 자기 노드의 값을 꺼내오는 구조입니다.
 
@@ -225,7 +248,7 @@ node_fixed_ips:
 
 `config_overrides`는 롤이 기본 제공하지 않는 systemd 옵션을 끼워넣는 통로입니다. 위 예시에서는 `[Network]` 섹션에 `Gateway`를 추가했습니다. **롤이 감싸지 못한 옵션도 이 경로로 대부분 해결됩니다.**
 
-## 7. 컴퓨트 노드 설정
+## 8. 컴퓨트 노드 설정
 
 컴퓨트는 NIC 이름과 필요한 bridge가 다를 뿐 구조는 같습니다.
 
@@ -259,9 +282,9 @@ openstack_hosts_systemd_networkd_networks:
     bridge: br-vxlan
 ```
 
-컨트롤러는 스토리지 계열 네트워크(`br-stcl`, `br-stsvc`)가 더 필요하고, 컴퓨트는 그렇지 않습니다. 그룹을 나눠둔 이유가 여기에 있습니다.
+컴퓨트 전용 노드에는 Ceph가 올라가지 않으므로 `br-stcl`, `br-stsvc`가 필요 없습니다. 브리지 3개로 끝납니다.
 
-## 8. 적용
+## 9. 적용
 
 배포 서버에서 평소대로 실행하면 됩니다.
 
@@ -278,13 +301,13 @@ ls /etc/systemd/network/
 networkctl status br-mgmt
 ```
 
-## 9. 걸렸던 부분
+## 10. 걸렸던 부분
 
 **적용 순서에 주의해야 합니다.** bond → VLAN → bridge 순으로 의존 관계가 있어서, 정의가 빠지면 상위 장치가 올라오지 않습니다. systemd-networkd는 조용히 실패하는 편이라 `networkctl` 로 개별 확인이 필요합니다.
 
 **노드 그룹화 방식은 직접 정해야 합니다.** OSA가 이 변수들을 노드 역할별로 나눠 쓰는 표준 형태를 제공하는지 확인하지 못했습니다. 그래서 `group_vars/`에 컨트롤러와 컴퓨트 파일을 따로 두는 방식으로 나눴습니다. 같은 그룹 안에 NIC 구성이 다른 노드가 섞이면 `host_vars`로 내려야 합니다.
 
-## 10. 정리
+## 11. 정리
 
 | 항목 | 수동 구성 (netplan) | systemd-networkd 자동화 |
 |---|---|---|
