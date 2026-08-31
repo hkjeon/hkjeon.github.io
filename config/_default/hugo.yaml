@@ -33,7 +33,8 @@ footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 disableAliases: true
 outputs:
-  home: [HTML, RSS, headers, redirects, backlinks]
+  # sitemap 을 빼면 /sitemap.xml 이 생성되지 않는다 (Hugo 0.125+ 부터 output format)
+  home: [HTML, RSS, sitemap, headers, redirects, backlinks]
   section: [HTML, RSS]
 imaging:
   resampleFilter: lanczos
