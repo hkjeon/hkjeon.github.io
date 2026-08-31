@@ -3,8 +3,8 @@ title: "kolla-ansible OpenStack 업그레이드 가이드 — Epoxy(2025.1) → 
 date: 2026-08-28
 summary: "kolla-ansible로 구축한 OpenStack을 2025.1 Epoxy에서 2026.1 Gazpacho로 업그레이드하면서 OS도 Rocky Linux 9.7에서 10.2로 전환하는 전체 절차입니다. 노드 구성과 IP 설계부터 명령어, 확인 방법, 발생 가능한 오류까지 순서대로 따라갈 수 있도록 정리했습니다."
 tags:
-  - OpenStack
   - Kolla-Ansible
+  - OpenStack
   - Gazpacho
   - Rocky Linux
   - 업그레이드

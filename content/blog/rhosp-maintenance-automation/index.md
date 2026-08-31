@@ -3,9 +3,9 @@ title: "200대 넘는 OpenStack 노드 정기점검을 Ansible로 자동화하�
 date: 2026-08-29
 summary: "RHOSP 기반 통신사 클라우드에서 노드가 200대를 넘어가면 정기점검은 사람이 감당할 수 있는 일이 아니게 됩니다. 점검 스크립트를 Ansible로 배포·실행하고 결과 CSV를 중앙에 모으는 구조를 만들면서 고민했던 것들을 정리했습니다."
 tags:
+  - Ansible
   - OpenStack
   - RHOSP
-  - Ansible
   - 운영자동화
 authors:
   - me

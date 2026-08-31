@@ -3,8 +3,8 @@ title: "systemd-networkd를 활용한 OpenStack 노드 네트워크 설정 자�
 date: 2026-08-27
 summary: "OSA 배포 전 단계인 타깃 노드의 bond·VLAN·bridge 구성을 openstack_hosts 롤의 systemd-networkd 변수로 코드화한 방법과, netplan을 쓰지 않은 이유를 정리했습니다."
 tags:
-  - OpenStack
   - OpenStack-Ansible
+  - OpenStack
   - systemd-networkd
   - Ansible
   - 자동화
