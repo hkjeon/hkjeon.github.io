@@ -19,9 +19,9 @@ featured: true
 국내 통신사 5G 코어 인프라를 운영하면서 이 문제를 Ansible로 풀었던 기록입니다.
 
 > **표기에 관하여**
-> 이 글의 계정명, 비밀번호, IP, 호스트명, 스크립트 파일명은 모두 예시 값으로 바꾼 것입니다.
-> `test1` / `test1234` / `192.168.100.x` / `rhosp-cluster1-comp-node01` / `linux-security-check.sh` 처럼
-> 실제 운영 환경과 무관한 값을 썼습니다. 구조와 접근 방식만 참고해 주세요.
+> 이 글의 IP, 호스트명, 경로는 모두 예시 값으로 바꾼 것입니다.
+> `192.168.100.x` / `rhosp-cluster1-comp-node01` 처럼 실제 운영 환경과 무관한 값을 썼고,
+> 고객사 보안 구성에 해당하는 부분은 코드를 싣지 않았습니다. 구조와 접근 방식만 참고해 주세요.
 
 ## 1. 문제 정의
 
@@ -245,196 +245,52 @@ check_command wide > `hostname`-maintenance-$(date +%Y%m%d%H).csv
 
 ## 6. 같은 구조를 보안조치에도
 
-정기점검이 자리를 잡고 나서, **OS 보안취약점 조치도 같은 틀로 옮겼습니다.**
+정기점검이 자리를 잡은 뒤, **OS 보안취약점 조치도 같은 틀로 옮겼습니다.**
 
 신규 구축이나 재구축한 노드에는 보안 조치 절차를 적용해야 하는데, 이것도 노드마다 손으로 하던 일이었습니다. 조치 항목이 열 가지가 넘고 마지막에 결과를 증빙으로 제출해야 해서 실수가 나기 쉬웠습니다.
 
-플레이북을 다섯 단계로 나누고 각 단계를 별도 파일로 분리했습니다.
+> 이 부분의 플레이북과 조치 항목은 고객사 보안 구성에 해당해 공개하지 않습니다.
+> 아래는 코드 없이 설계 관점만 정리한 것입니다.
 
-```yaml
----
-- name: Main playbook for RHOSP node hardening
-  hosts: target
-  gather_facts: yes
+### 다섯 단계로 나눈 이유
 
-  tasks:
-    - name: Step.1 Change for compute node settings
-      include_tasks: ./tasks/01-rhosp-setting.yaml
-    - name: Step.2 Configuration for the security step
-      include_tasks: ./tasks/02-security.yaml
-    - name: Step.3 Create users and config sudoers
-      include_tasks: ./tasks/03-create-user.yaml
-    - name: Step.4 Get result files
-      include_tasks: ./tasks/04-get-result-file.yaml
-    - name: Step.5 Check settings and users
-      include_tasks: ./tasks/05-setting-result-check.yaml
-```
+플레이북을 단일 파일이 아니라 다섯 단계로 쪼개고 `include_tasks`로 묶었습니다.
 
-`include_tasks`로 나눈 이유는 단순합니다. **한 파일에 다 넣으면 특정 단계만 다시 돌릴 수가 없습니다.** 조치 중 3단계에서 실패하면 1~2단계를 건너뛰고 재실행해야 하는데, 파일이 나뉘어 있으면 메인에서 해당 줄만 남기면 됩니다.
+| 단계 | 성격 |
+|---|---|
+| 1 | 노드 기본 설정 |
+| 2 | 조치 절차 실행 |
+| 3 | 운영 계정 및 권한 구성 |
+| 4 | 결과 파일 수집 |
+| 5 | 조치 결과 검증 및 요약 |
 
-### 1단계 — 노드 기본 설정
+단일 파일로 만들면 **특정 단계만 다시 돌릴 수가 없습니다.** 3단계에서 실패했을 때 1~2단계를 건너뛰고 재실행해야 하는데, 파일이 나뉘어 있으면 메인 플레이북에서 해당 줄만 남기면 됩니다. 200대 규모에서는 "일부 노드만 특정 단계 재실행"이 수시로 발생합니다.
 
-```yaml
-- name: Change 15 to 15d in containers-tmpwatch
-  replace:
-    dest: /etc/cron.daily/containers-tmpwatch
-    regexp: "^  15 "
-    replace: "  15d "
+### 조치와 검증을 분리한 것
 
-- name: Change owner for instances directory
-  file:
-    path: /var/lib/nova/instances
-    state: directory
-    recurse: yes
-    owner: 42436
-    group: 42436
+5단계가 정기점검에서 배운 것입니다. **조치를 실행했다는 것과 조치가 적용됐다는 것은 다릅니다.**
 
-- name: Copy rpm files to remote server
-  copy:
-    src: /home/stack/rpms/{{ item }}
-    dest: /home/heat-admin/{{ item }}
-  with_items:
-    - sudo-1.8.23-10.el7_9.1.x86_64.rpm
-    - polkit-0.112-26.el7_9.1.x86_64.rpm
+플레이북이 성공으로 끝나도 실제 값이 안 바뀐 경우가 있습니다. 명령은 돌았는데 대상 파일이 없었다거나, 패키지가 이미 다른 버전이었다거나 하는 식입니다. 그래서 조치가 끝난 뒤 **실제 상태를 다시 읽어 요약 파일로 남기고, 그 파일까지 수집**하도록 했습니다.
 
-- name: Update rpm packages
-  yum:
-    name: /home/heat-admin/{{ item }}
-    state: present
-  with_items:
-    - sudo-1.8.23-10.el7_9.1.x86_64.rpm
-    - polkit-0.112-26.el7_9.1.x86_64.rpm
-```
+효과는 두 가지였습니다.
 
-`containers-tmpwatch`의 `15`를 `15d`로 바꾸는 건 사소해 보이지만 중요합니다. 단위가 없으면 **15시간**으로 해석돼서 컨테이너 임시 파일이 예상보다 빨리 지워집니다.
+| 항목 | 내용 |
+|---|---|
+| 누락 발견 | 200개 요약 파일을 훑으면 조치가 안 된 노드가 바로 드러남 |
+| 검수 대응 | "조치했습니다"가 아니라 "이 파일이 증거입니다"로 제출 |
 
-`42436`은 컨테이너 안의 nova 사용자 UID입니다. 호스트에는 그 이름의 계정이 없어서 숫자로 지정해야 합니다.
+두 번째가 실무에서 특히 컸습니다. 증빙 자료를 만드는 데 들던 시간이 사라졌습니다.
 
-### 2단계 — 조치 스크립트 실행
+### 정기점검과 공유한 구조
 
-폐쇄망이라 조치 스크립트를 아카이브로 배포하고 원격에서 풀어 실행합니다.
+| 요소 | 정기점검 | 보안조치 |
+|---|---|---|
+| 실행 단위 | 노드에서 스크립트 | 노드에서 단계별 태스크 |
+| 결과 형식 | CSV | 요약 텍스트 |
+| 수집 방식 | `find` + `fetch` | 동일 |
+| 저장 위치 | 호스트명별 디렉터리 | 동일 |
 
-```yaml
-- name: Copy security check archive to remote server
-  copy:
-    src: /home/stack/linux-security-check.tar
-    dest: /home/heat-admin/linux-security-check.tar
-
-- name: Unarchive security check file
-  unarchive:
-    remote_src: true
-    src: /home/heat-admin/linux-security-check.tar
-    dest: /root
-
-- name: Execute security check script
-  command: sudo /root/linux-security-check.sh
-```
-
-### 3단계 — 운영 계정 구성
-
-```yaml
-- name: Create operation accounts
-  user:
-    name: "{{ item }}"
-    password: "{{ 'test1234' | password_hash('sha256') }}"
-    state: present
-  with_items:
-    - test1
-    - test2
-
-- name: Create admin account
-  user:
-    name: test3
-    password: "{{ 'hello1234' | password_hash('sha256') }}"
-    state: present
-    groups: wheel
-
-- name: Create sudoers file for users
-  file:
-    path: "/etc/sudoers.d/{{ item }}"
-    state: touch
-    owner: root
-    group: root
-    mode: '0440'
-  with_items: [test1, test2, test3]
-
-- name: Add sudoers info
-  lineinfile:
-    path: "/etc/sudoers.d/{{ item }}"
-    line: "{{ item }} ALL=(root) NOPASSWD:ALL"
-  with_items: [test1, test2, test3]
-
-- name: Disable password expiry
-  shell: "sudo chage -E -1 -I -1 -m 0 -M 99999 {{ item }}"
-  with_items: [test1, test2, test3]
-
-- name: Lock root account
-  shell: sudo passwd -l root
-```
-
-계정명과 비밀번호는 예시 값으로 바꿨습니다. **실제로는 `ansible-vault`나 변수 파일로 빼는 게 맞습니다.** 위처럼 플레이북에 평문으로 두면 안 됩니다.
-
-`chage -M 99999`로 만료를 사실상 없애는 건 운영 계정이 점검일에 잠기는 사고를 막기 위한 것인데, 보안 정책과 충돌할 수 있어 고객사 기준에 맞춰야 합니다.
-
-### 4단계 — 결과 파일 수집
-
-```yaml
-- name: Change permission for result files
-  shell: sudo chown -R stack:stack /root/linux-security-check/*
-  become: yes
-
-- name: Create directory for result files
-  file:
-    path: /home/stack/security-result/{{ ansible_hostname }}/
-    state: directory
-
-- name: Find result files
-  find:
-    paths: "/root/linux-security-check"
-    recurse: yes
-    patterns: "*.xml"
-  register: files_to_copy
-
-- name: Fetch result files
-  fetch:
-    src: "{{ item.path }}"
-    dest: /home/stack/security-result/{{ ansible_hostname }}/
-    flat: yes
-  with_items: "{{ files_to_copy.files }}"
-```
-
-정기점검과 완전히 같은 패턴입니다. `find`로 찾고 `fetch`로 호스트명 디렉터리에 모읍니다.
-
-### 5단계 — 조치 결과 검증
-
-이 단계가 정기점검에서 배운 것입니다. **조치를 실행했다는 것과 조치가 적용됐다는 것은 다릅니다.**
-
-```yaml
-- name: Check rpm version for sudo
-  shell: sudo rpm -qa | grep sudo-1.8
-  register: sudo_ver
-- debug:
-    var: sudo_ver.stdout_lines
-
-- name: Check permission for pkexec
-  shell: ls -al /usr/bin/pkexec | awk '{print $1}'
-  register: pkexec_perm
-- debug:
-    var: pkexec_perm.stdout_lines
-
-- name: Save result to summary file
-  shell:
-    cmd: |
-      SUMMARY=/root/{{ ansible_hostname }}-security-result-$(date "+%Y%m%d").txt
-      echo "#### sudo package version ####" >> $SUMMARY
-      sudo rpm -qa | grep sudo-1.8 >> $SUMMARY
-      echo "#### pkexec permission ####" >> $SUMMARY
-      sudo ls -al /usr/bin/pkexec | awk '{print $1}' >> $SUMMARY
-```
-
-조치 후 상태를 다시 읽어 호스트명이 붙은 요약 파일로 남기고, 그 파일까지 수집합니다. **누락된 노드가 파일에서 바로 드러납니다.**
-
-"조치했습니다"라고 말하는 것과 "이 파일이 증거입니다"라고 내미는 것은 다릅니다. 검수 대응 시간이 크게 줄었습니다.
+**수집 구조를 그대로 재사용한 것이 핵심입니다.** 결과를 어디에 어떤 이름으로 모을지 한 번 정해두면, 다른 반복 작업을 자동화할 때 그 부분은 다시 고민하지 않아도 됩니다.
 
 ## 7. 걸렸던 부분
 
