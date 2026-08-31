@@ -9,7 +9,7 @@ email: nosmile0412@hanmail.net
 bio: |
   17년 경력의 인프라 엔지니어. 통신망 구축에서 출발해 NFV를 거쳐
   OpenStack 기반 프라이빗 클라우드의 설계·구축·운영을 담당하고 있습니다.
-  공공기관·통신사 환경에서 27개 프로젝트를 수행했으며,
+  공공기관·통신사 환경에서 30여 개 프로젝트를 수행했으며,
   현재는 구축 경험을 자사 IaaS 솔루션에 반영하는 배포 패키지 개발과
   고도화를 함께 맡고 있습니다. OpenStack-Ansible 업스트림에도 기여했습니다.
 
@@ -37,39 +37,53 @@ education:
     end: 2009-02-28
 
 experience:
-  - role: Senior Infrastructure Engineer / IaaS Solution Developer
-    org: 프라이빗 클라우드 구축 · 자사 IaaS 솔루션 개발
-    start: 2018-10-01
+  - role: IaaS Solution Developer
+    org: 자사 IaaS 솔루션 개발 · 프라이빗 클라우드 구축
+    start: 2024-11-01
     summary: |
-      OpenStack 기반 프라이빗 클라우드 설계·구축·운영 및 자사 IaaS 솔루션 개발.
+      OpenStack-Ansible(OSA) 기반 IaaS 솔루션 개발과 공공 부문 프라이빗 클라우드 구축을 병행.
 
-      - 국가 보안기술 연구기관, 국가 시험인증기관, 공공 인프라 공기업 등 프라이빗 클라우드 구축
-      - 국내 통신사 5G NSA/SA 가상화(RHOSP) 및 컨테이너 플랫폼 구축·운영
-      - OpenStack-Ansible 기반 배포 패키지 구조 재설계, 폐쇄망 오프라인 설치 체계 구축 (2025~)
-      - Caracal 템플릿 구조 개선, Epoxy 오프라인 패키지 제작(2026.1Q 완료, Horizon 기준 기능 검증)
+      - OSA 기반 배포 패키지 구조 재설계 및 폐쇄망 오프라인 설치 체계 구축 (Caracal, Epoxy)
       - systemd-networkd 기반 타깃 노드 네트워크 구성 자동화, Cinder Multi-Backend, 컨트롤러 DB 백업 자동화
+      - 국가 보안기술 연구기관 N2SF Test-Bed 클라우드 구축
+      - 국가 시험인증기관 프라이빗 클라우드 구축
+      - 공공 인프라 공기업 정보인프라 도입·증설 및 OpenStack 3개 클러스터 유지보수
       - OpenStack-Ansible 업스트림 기여 (openstack-ansible-os_swift)
-  - role: NFV Platform Engineer
-    org: 통신·공공 NFV 플랫폼 구축
-    start: 2015-12-01
-    end: 2018-09-30
+  - role: Cloud Platform Engineer
+    org: 통신사 5G 가상화 · 컨테이너 플랫폼
+    start: 2020-04-01
+    end: 2024-10-31
     summary: |
-      통신사 및 공공기관 NFV 플랫폼 구축·검증.
+      국내 통신사 5G 코어 인프라의 가상화·컨테이너 플랫폼 구축 및 운영. 구축 파트 리딩(파트장) 수행.
 
-      - 국내 통신사 C-SGN 등 VNF 플랫폼 구축
-      - 재난안전망 시범사업 구축 및 검증
-      - 지자체 기능형 초연결망 선도사업 (NFV / OpenStack / Ceph)
+      - 5G NSA 가상화 플랫폼 구축 — RHOSP13 (DCN 구성 포함), 7개 리전
+      - RHOSP13 → RHOSP16 업그레이드 수행
+      - VMware → OpenStack 마이그레이션 (메시징군 장비)
+      - 통신사급 성능 요구 대응 — OVS-DPDK, SR-IOV, PCI Passthrough 적용
+      - Ansible 플레이북으로 200대 이상 노드의 보안취약점 조치·정기점검 자동화 및 결과 중앙 수집 체계 구축
+      - RHOCP 4.9 / 4.10 기반 5G SA Core CNF, IMS 컨테이너 플랫폼 구축
+  - role: Private Cloud / NFV Engineer
+    org: 공공 · 기업 프라이빗 클라우드 및 NFV 구축
+    start: 2016-09-01
+    end: 2020-03-31
+    summary: |
+      공공기관·지자체·기업 대상 OpenStack 기반 프라이빗 클라우드와 NFV 플랫폼 구축.
+
+      - OpenStack · Ceph 기반 클라우드 구축 10여 건 (지자체, 공공기관, 기업)
+      - 공공 에너지 공기업 클라우드PC 업무환경 구축 — Octavia(LBaaS), GPU 가상화 적용
+      - 통신사 NFV 플랫폼 구축 및 SDN 연계, 초연결망 선도사업 유지보수
+      - 글로벌 통신사 NB-IoT 대규모 Trial 플랫폼 구축 지원
   - role: Telecom Test & Deployment Engineer
     org: 이동통신 시험장비 공급 · 코어망 구축
-    start: 2009-04-01
-    end: 2015-06-30
+    start: 2009-03-01
+    end: 2016-06-30
     summary: |
-      이동통신 프로토콜 시험장비 공급·기술지원 및 코어망 장비 구축.
+      이동통신 프로토콜 시험장비 공급·기술지원 및 코어망 장비 구축·검증.
 
-      - IxCatapult(이후 IXIA) 프로토콜 시험장비 공급 및 기술지원 — 국내 통신 3사, 단말 제조사 대상
-      - LTE UE / EPC 시뮬레이터 기반 시험 환경 구성 및 검증 지원
-      - 국책 연구기관 시험센터 대상 이동통신 장비 납품 및 망 구축
-        (LTE-A, TD-SCDMA, PS-LTE, IMS/MBMS, PicoCell, Roaming GW 등)
+      - IxCatapult(이후 IXIA) 프로토콜 시험장비 공급 및 기술지원 — 국내 통신 3사, 단말 제조사
+      - LTE UE / EPC 시뮬레이터 기반 시험 환경 구성 및 호처리 검증
+      - 국책 연구기관 시험센터 코어망 장비 납품·구축 (LTE-A, TD-SCDMA, PS-LTE, IMS/MBMS, PicoCell, Roaming GW)
+      - 재난안전망 시범사업 호처리 검증
 
 skills:
   - name: Cloud Platform

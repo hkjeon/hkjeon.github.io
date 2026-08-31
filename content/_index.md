@@ -88,17 +88,19 @@ sections:
           items:
             - name: OpenStack
               icon: custom/openstack
-            - name: RHOSP
+            - name: RHOSP 13 / 16
               icon: devicon/redhat
             - name: OpenStack-Ansible
               icon: custom/openstack
             - name: Kolla-Ansible
               icon: custom/openstack
+            - name: VMware → OpenStack Migration
+              icon: arrow-path
         - name: PaaS Platform
           items:
             - name: Kubernetes
               icon: devicon/kubernetes
-            - name: RHOCP (OpenShift)
+            - name: RHOCP 4.9 / 4.10
               icon: custom/openshift
             - name: Docker
               icon: devicon/docker
