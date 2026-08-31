@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="960" height="420" fill="#ffffff"/>
+<rect x="30" y="140" width="170" height="120" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.8"/>
+<text x="115" y="172" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">Director</text>
+<text x="115" y="194" text-anchor="middle" font-size="10" fill="#64748b">ansible-playbook</text>
+<text x="115" y="212" text-anchor="middle" font-size="10" fill="#64748b">점검 스크립트 보관</text>
+<text x="115" y="236" text-anchor="middle" font-size="10" fill="#1d4ed8">serial: 10 배치 실행</text>
+<rect x="300" y="60" width="250" height="86" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.6"/>
+<text x="425" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Controller</text>
+<text x="425" y="112" text-anchor="middle" font-size="9.5" fill="#64748b">pcs · Galera · RabbitMQ</text>
+<text x="425" y="130" text-anchor="middle" font-size="9" fill="#7c3aed">점검 스크립트 실행 → CSV 생성</text>
+<path d="M 200 200 C 250 200, 250 103, 294 103" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<polygon points="292,98 302,103 292,108" fill="#94a3b8"/>
+<rect x="300" y="175" width="250" height="86" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="1.6"/>
+<text x="425" y="207" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Compute</text>
+<text x="425" y="227" text-anchor="middle" font-size="9.5" fill="#64748b">OVS-DPDK · 인스턴스 · 로그</text>
+<text x="425" y="245" text-anchor="middle" font-size="9" fill="#059669">점검 스크립트 실행 → CSV 생성</text>
+<path d="M 200 200 C 250 200, 250 218, 294 218" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<polygon points="292,213 302,218 292,223" fill="#94a3b8"/>
+<rect x="300" y="290" width="250" height="86" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.6"/>
+<text x="425" y="322" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Director (self)</text>
+<text x="425" y="342" text-anchor="middle" font-size="9.5" fill="#64748b">Heat stack · Endpoint · Baremetal</text>
+<text x="425" y="360" text-anchor="middle" font-size="9" fill="#f59e0b">점검 스크립트 실행 → CSV 생성</text>
+<path d="M 200 200 C 250 200, 250 333, 294 333" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<polygon points="292,328 302,333 292,338" fill="#94a3b8"/>
+<text x="425" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">대상 노드 200+ (역할별 분기)</text>
+<rect x="660" y="140" width="270" height="120" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.8"/>
+<text x="795" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">결과 중앙 수집</text>
+<text x="795" y="194" text-anchor="middle" font-size="10" fill="#64748b">fetch → 호스트명별 디렉터리</text>
+<text x="700" y="218" font-size="9.5" font-family="monospace" fill="#334155">result/&lt;hostname&gt;/*.csv</text>
+<text x="795" y="242" text-anchor="middle" font-size="9.5" fill="#1d4ed8">스프레드시트로 일괄 확인</text>
+<path d="M 550 103 C 610 103, 610 200, 654 200" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<path d="M 550 218 C 610 218, 610 200, 654 200" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<path d="M 550 333 C 610 333, 610 200, 654 200" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+<polygon points="652,195 662,200 652,205" fill="#94a3b8"/>
+<text x="600" y="392" text-anchor="middle" font-size="10" fill="#94a3b8">수작업 점검 → 플레이북 한 번으로 대체</text>
+</svg>
