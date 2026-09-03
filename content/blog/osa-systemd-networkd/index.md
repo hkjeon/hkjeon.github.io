@@ -491,6 +491,12 @@ networkctl status br-mgmt
 
 ---
 
+**저장소**
+
+이 글의 `group_vars` 구성과 `node_fixed_ips` 구조를 일반 환경 기준으로 정리해 올려두었습니다.
+
+- [hkjeon/openstack-ops — node-network](https://github.com/hkjeon/openstack-ops/tree/main/node-network)
+
 **참고**
 
 - [OpenStack-Ansible openstack_hosts 롤 문서](https://docs.openstack.org/openstack-ansible-openstack_hosts/latest/)

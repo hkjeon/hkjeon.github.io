@@ -315,3 +315,12 @@ check_command wide > `hostname`-maintenance-$(date +%Y%m%d%H).csv
 자동화의 실익은 시간 절약보다 **점검의 품질이 일정해진다는 데 있습니다.** 누가 하든 같은 항목을 같은 방식으로 보고, 결과가 같은 형식으로 남습니다. 200대 규모에서는 이게 훨씬 중요합니다.
 
 그리고 결과가 CSV로 쌓이면 **회차 간 비교**가 가능해집니다. 이번 달에 로그 에러 수가 갑자기 늘어난 노드를 찾는 식의 분석은 수작업 점검으로는 애초에 불가능한 일입니다.
+
+---
+
+**저장소**
+
+이 글의 플레이북과 점검 스크립트를 일반 OpenStack 환경에서 동작하도록 정리해 올려두었습니다.
+호스트명 규칙에 의존하던 역할 판별을 자동 판별로 바꾸고, 경로와 인증 정보를 변수로 뺐습니다.
+
+- [hkjeon/openstack-ops — maintenance](https://github.com/hkjeon/openstack-ops/tree/main/maintenance)
