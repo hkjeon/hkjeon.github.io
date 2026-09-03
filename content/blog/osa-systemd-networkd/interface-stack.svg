@@ -1,73 +1,112 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="900" height="420" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
-<rect x="0" y="0" width="900" height="420" fill="#ffffff"/>
-<rect x="22" y="22" width="136" height="368" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
-<text x="90.0" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">물리 NIC</text>
-<rect x="222" y="22" width="136" height="368" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
-<text x="290.0" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">Bond (active-backup)</text>
-<rect x="422" y="22" width="146" height="368" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
-<text x="495.0" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">VLAN</text>
-<rect x="652" y="22" width="196" height="368" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
-<text x="750.0" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">Bridge</text>
-<rect x="30" y="61" width="120" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.8"/>
-<text x="90.0" y="82.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">eno1</text>
-<rect x="30" y="191" width="120" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.8"/>
-<text x="90.0" y="212.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">eno2</text>
-<rect x="30" y="331" width="120" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.8"/>
-<text x="90.0" y="352.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">eno3</text>
-<rect x="230" y="61" width="120" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.8"/>
-<text x="290.0" y="77.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">bond1</text>
-<text x="290.0" y="91.0" text-anchor="middle" font-size="8.5" fill="#64748b">관리 계열</text>
-<rect x="230" y="191" width="120" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.8"/>
-<text x="290.0" y="207.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">bond2</text>
-<text x="290.0" y="221.0" text-anchor="middle" font-size="8.5" fill="#64748b">서비스 계열</text>
-<rect x="230" y="331" width="120" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.8"/>
-<text x="290.0" y="347.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">bond3</text>
-<text x="290.0" y="361.0" text-anchor="middle" font-size="8.5" fill="#64748b">Ceph 복제 전용</text>
-<rect x="430" y="131" width="130" height="34" rx="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.8"/>
-<text x="495.0" y="147.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">bond2.21</text>
-<text x="495.0" y="161.0" text-anchor="middle" font-size="8.5" fill="#64748b">VLAN 21</text>
-<rect x="430" y="191" width="130" height="34" rx="5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.8"/>
-<text x="495.0" y="207.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">bond2.22</text>
-<text x="495.0" y="221.0" text-anchor="middle" font-size="8.5" fill="#64748b">VLAN 22</text>
-<rect x="430" y="251" width="130" height="34" rx="5" fill="#ffffff" stroke="#2563eb" stroke-width="1.8"/>
-<text x="495.0" y="267.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">bond2.24</text>
-<text x="495.0" y="281.0" text-anchor="middle" font-size="8.5" fill="#64748b">VLAN 24</text>
-<rect x="660" y="61" width="180" height="34" rx="5" fill="#ffffff" stroke="#e11d48" stroke-width="1.8"/>
-<text x="750.0" y="77.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">br-mgmt</text>
-<text x="750.0" y="91.0" text-anchor="middle" font-size="8.5" fill="#64748b">Internal API</text>
-<rect x="660" y="131" width="180" height="34" rx="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.8"/>
-<text x="750.0" y="147.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">br-stcl</text>
-<text x="750.0" y="161.0" text-anchor="middle" font-size="8.5" fill="#64748b">Ceph Cluster</text>
-<rect x="660" y="191" width="180" height="34" rx="5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.8"/>
-<text x="750.0" y="207.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">br-ext</text>
-<text x="750.0" y="221.0" text-anchor="middle" font-size="8.5" fill="#64748b">External API</text>
-<rect x="660" y="251" width="180" height="34" rx="5" fill="#ffffff" stroke="#2563eb" stroke-width="1.8"/>
-<text x="750.0" y="267.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">br-vxlan</text>
-<text x="750.0" y="281.0" text-anchor="middle" font-size="8.5" fill="#64748b">Tenant (VXLAN)</text>
-<rect x="660" y="331" width="180" height="34" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.8"/>
-<text x="750.0" y="347.0" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">br-stsvc</text>
-<text x="750.0" y="361.0" text-anchor="middle" font-size="8.5" fill="#64748b">Ceph Service</text>
-<path d="M 150 78 C 190.0 78, 190.0 78, 221 78" fill="none" stroke="#475569" stroke-width="1.6"/>
-<polygon points="221,73.5 230,78 221,82.5" fill="#475569"/>
-<path d="M 150 208 C 190.0 208, 190.0 208, 221 208" fill="none" stroke="#475569" stroke-width="1.6"/>
-<polygon points="221,203.5 230,208 221,212.5" fill="#475569"/>
-<path d="M 150 348 C 190.0 348, 190.0 348, 221 348" fill="none" stroke="#475569" stroke-width="1.6"/>
-<polygon points="221,343.5 230,348 221,352.5" fill="#475569"/>
-<path d="M 350 78 C 505.0 78, 505.0 78, 651 78" fill="none" stroke="#e11d48" stroke-width="1.6"/>
-<polygon points="651,73.5 660,78 651,82.5" fill="#e11d48"/>
-<path d="M 350 208 C 390.0 208, 390.0 148, 421 148" fill="none" stroke="#0891b2" stroke-width="1.6"/>
-<polygon points="421,143.5 430,148 421,152.5" fill="#0891b2"/>
-<path d="M 350 208 C 390.0 208, 390.0 208, 421 208" fill="none" stroke="#7c3aed" stroke-width="1.6"/>
-<polygon points="421,203.5 430,208 421,212.5" fill="#7c3aed"/>
-<path d="M 350 208 C 390.0 208, 390.0 268, 421 268" fill="none" stroke="#2563eb" stroke-width="1.6"/>
-<polygon points="421,263.5 430,268 421,272.5" fill="#2563eb"/>
-<path d="M 560 148 C 610.0 148, 610.0 148, 651 148" fill="none" stroke="#0891b2" stroke-width="1.6"/>
-<polygon points="651,143.5 660,148 651,152.5" fill="#0891b2"/>
-<path d="M 560 208 C 610.0 208, 610.0 208, 651 208" fill="none" stroke="#7c3aed" stroke-width="1.6"/>
-<polygon points="651,203.5 660,208 651,212.5" fill="#7c3aed"/>
-<path d="M 560 268 C 610.0 268, 610.0 268, 651 268" fill="none" stroke="#2563eb" stroke-width="1.6"/>
-<polygon points="651,263.5 660,268 651,272.5" fill="#2563eb"/>
-<path d="M 350 348 C 505.0 348, 505.0 348, 651 348" fill="none" stroke="#059669" stroke-width="1.6"/>
-<polygon points="651,343.5 660,348 651,352.5" fill="#059669"/>
-<text x="450" y="404" text-anchor="middle" font-size="9.5" fill="#94a3b8">컴퓨트 전용 노드는 bond2.21 · br-stcl 만 제외되고 나머지는 동일</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 520" width="940" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="940" height="520" fill="#ffffff"/>
+<rect x="14" y="14" width="912" height="252" rx="8" fill="#fef8f8" stroke="#fecaca"/>
+<text x="30" y="36" font-size="12" font-weight="700" fill="#b91c1c">HCI 노드 (mix01~03)</text>
+<text x="78.0" y="58" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">물리 NIC</text>
+<text x="238.0" y="58" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">Bond</text>
+<text x="418.0" y="58" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">VLAN</text>
+<text x="690.0" y="58" text-anchor="middle" font-size="10" font-weight="600" fill="#94a3b8">Bridge</text>
+<rect x="30" y="74" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="78.0" y="94.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">eno1</text>
+<rect x="30" y="144" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="78.0" y="164.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">eno2</text>
+<rect x="30" y="210" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="78.0" y="230.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">eno3</text>
+<rect x="190" y="74" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="238.0" y="94.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond1</text>
+<rect x="190" y="144" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="238.0" y="164.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond2</text>
+<rect x="190" y="210" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="238.0" y="230.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond3</text>
+<rect x="360" y="94" width="116" height="32" rx="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.7"/>
+<text x="418.0" y="114.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond2.21</text>
+<rect x="360" y="144" width="116" height="32" rx="5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.7"/>
+<text x="418.0" y="164.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond2.22</text>
+<rect x="360" y="194" width="116" height="32" rx="5" fill="#ffffff" stroke="#2563eb" stroke-width="1.7"/>
+<text x="418.0" y="214.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond2.24</text>
+<text x="418" y="248" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond2.25 / .26 예비</text>
+<rect x="600" y="66" width="180" height="32" rx="5" fill="#ffffff" stroke="#e11d48" stroke-width="1.7"/>
+<text x="690.0" y="81.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-mgmt</text>
+<text x="690.0" y="94.0" text-anchor="middle" font-size="8" fill="#64748b">Internal API</text>
+<rect x="600" y="110" width="180" height="32" rx="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.7"/>
+<text x="690.0" y="125.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-stcl</text>
+<text x="690.0" y="138.0" text-anchor="middle" font-size="8" fill="#64748b">Ceph Cluster</text>
+<rect x="600" y="154" width="180" height="32" rx="5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.7"/>
+<text x="690.0" y="169.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-ext</text>
+<text x="690.0" y="182.0" text-anchor="middle" font-size="8" fill="#64748b">External API</text>
+<rect x="600" y="198" width="180" height="32" rx="5" fill="#ffffff" stroke="#2563eb" stroke-width="1.7"/>
+<text x="690.0" y="213.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-vxlan</text>
+<text x="690.0" y="226.0" text-anchor="middle" font-size="8" fill="#64748b">Tenant</text>
+<rect x="600" y="234" width="180" height="32" rx="5" fill="#ffffff" stroke="#059669" stroke-width="1.7"/>
+<text x="690.0" y="249.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-stsvc</text>
+<text x="690.0" y="262.0" text-anchor="middle" font-size="8" fill="#64748b">Ceph Service</text>
+<path d="M 126 90 C 158.0 90, 158.0 90, 181 90" fill="none" stroke="#475569" stroke-width="1.5"/>
+<polygon points="181,85.5 190,90 181,94.5" fill="#475569"/>
+<path d="M 126 160 C 158.0 160, 158.0 160, 181 160" fill="none" stroke="#475569" stroke-width="1.5"/>
+<polygon points="181,155.5 190,160 181,164.5" fill="#475569"/>
+<path d="M 126 226 C 158.0 226, 158.0 226, 181 226" fill="none" stroke="#475569" stroke-width="1.5"/>
+<polygon points="181,221.5 190,226 181,230.5" fill="#475569"/>
+<path d="M 286 90 C 443.0 90, 443.0 82, 591 82" fill="none" stroke="#e11d48" stroke-width="1.5"/>
+<polygon points="591,77.5 600,82 591,86.5" fill="#e11d48"/>
+<path d="M 286 160 C 323.0 160, 323.0 110, 351 110" fill="none" stroke="#0891b2" stroke-width="1.5"/>
+<polygon points="351,105.5 360,110 351,114.5" fill="#0891b2"/>
+<path d="M 286 160 C 323.0 160, 323.0 160, 351 160" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+<polygon points="351,155.5 360,160 351,164.5" fill="#7c3aed"/>
+<path d="M 286 160 C 323.0 160, 323.0 210, 351 210" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<polygon points="351,205.5 360,210 351,214.5" fill="#2563eb"/>
+<path d="M 476 110 C 538.0 110, 538.0 126, 591 126" fill="none" stroke="#0891b2" stroke-width="1.5"/>
+<polygon points="591,121.5 600,126 591,130.5" fill="#0891b2"/>
+<path d="M 476 160 C 538.0 160, 538.0 170, 591 170" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+<polygon points="591,165.5 600,170 591,174.5" fill="#7c3aed"/>
+<path d="M 476 210 C 538.0 210, 538.0 214, 591 214" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<polygon points="591,209.5 600,214 591,218.5" fill="#2563eb"/>
+<path d="M 286 226 C 443.0 226, 443.0 250, 591 250" fill="none" stroke="#059669" stroke-width="1.5"/>
+<polygon points="591,245.5 600,250 591,254.5" fill="#059669"/>
+<rect x="14" y="280" width="912" height="190" rx="8" fill="#f5f9ff" stroke="#bfdbfe"/>
+<text x="30" y="302" font-size="12" font-weight="700" fill="#1d4ed8">컴퓨트 전용 노드 (compute01)</text>
+<rect x="30" y="329" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="78.0" y="349.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">enp1s0</text>
+<rect x="30" y="379" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="78.0" y="399.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">enp2s0</text>
+<rect x="30" y="427" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="78.0" y="447.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">enp3s0</text>
+<rect x="190" y="329" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="238.0" y="349.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond0</text>
+<rect x="190" y="379" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="238.0" y="394.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond1</text>
+<text x="238.0" y="407.0" text-anchor="middle" font-size="8" fill="#64748b">미사용</text>
+<rect x="190" y="427" width="96" height="32" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
+<text x="238.0" y="447.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond2</text>
+<rect x="360" y="318" width="116" height="32" rx="5" fill="#ffffff" stroke="#e11d48" stroke-width="1.7"/>
+<text x="418.0" y="338.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond0.11</text>
+<rect x="360" y="366" width="116" height="32" rx="5" fill="#ffffff" stroke="#2563eb" stroke-width="1.7"/>
+<text x="418.0" y="386.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">bond0.12</text>
+<text x="418" y="420" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond0.13 ~ .15 예비</text>
+<rect x="600" y="318" width="180" height="32" rx="5" fill="#ffffff" stroke="#e11d48" stroke-width="1.7"/>
+<text x="690.0" y="333.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-mgmt</text>
+<text x="690.0" y="346.0" text-anchor="middle" font-size="8" fill="#64748b">Internal API</text>
+<rect x="600" y="366" width="180" height="32" rx="5" fill="#ffffff" stroke="#2563eb" stroke-width="1.7"/>
+<text x="690.0" y="381.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-vxlan</text>
+<text x="690.0" y="394.0" text-anchor="middle" font-size="8" fill="#64748b">Tenant</text>
+<rect x="600" y="427" width="180" height="32" rx="5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.7"/>
+<text x="690.0" y="442.0" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-ext</text>
+<text x="690.0" y="455.0" text-anchor="middle" font-size="8" fill="#64748b">External API</text>
+<path d="M 126 345 C 158.0 345, 158.0 345, 181 345" fill="none" stroke="#475569" stroke-width="1.5"/>
+<polygon points="181,340.5 190,345 181,349.5" fill="#475569"/>
+<path d="M 126 395 C 158.0 395, 158.0 395, 181 395" fill="none" stroke="#475569" stroke-width="1.5"/>
+<polygon points="181,390.5 190,395 181,399.5" fill="#475569"/>
+<path d="M 126 443 C 158.0 443, 158.0 443, 181 443" fill="none" stroke="#475569" stroke-width="1.5"/>
+<polygon points="181,438.5 190,443 181,447.5" fill="#475569"/>
+<path d="M 286 345 C 323.0 345, 323.0 334, 351 334" fill="none" stroke="#e11d48" stroke-width="1.5"/>
+<polygon points="351,329.5 360,334 351,338.5" fill="#e11d48"/>
+<path d="M 286 345 C 323.0 345, 323.0 382, 351 382" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<polygon points="351,377.5 360,382 351,386.5" fill="#2563eb"/>
+<path d="M 476 334 C 538.0 334, 538.0 334, 591 334" fill="none" stroke="#e11d48" stroke-width="1.5"/>
+<polygon points="591,329.5 600,334 591,338.5" fill="#e11d48"/>
+<path d="M 476 382 C 538.0 382, 538.0 382, 591 382" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+<polygon points="591,377.5 600,382 591,386.5" fill="#2563eb"/>
+<path d="M 286 443 C 443.0 443, 443.0 443, 591 443" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+<polygon points="591,438.5 600,443 591,447.5" fill="#7c3aed"/>
+<text x="800" y="466" text-anchor="middle" font-size="8.5" fill="#1d4ed8">br-ext 는 VLAN 없이 bond2 직결</text>
+<text x="470.0" y="498" text-anchor="middle" font-size="9.5" fill="#94a3b8">두 그룹은 NIC 명명과 bond 번호가 달라 group_vars 를 따로 정의한다</text>
 </svg>
