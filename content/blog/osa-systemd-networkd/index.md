@@ -585,7 +585,29 @@ neutron_provider_networks:
 | 컴퓨트 | amphora VM 포트가 OVS `br-lbaas`에 붙음 |
 | 공통 | 둘 다 `bond1.13`으로 나가므로 VLAN 13에서 연결 |
 
-**관리망을 별도 VLAN으로 격리하면서도 Neutron 설정은 단순하게 유지**하는 방법입니다. VLAN provider로 정의하면 `network_vlan_ranges`에 범위를 잡고 관리해야 하는데, 어차피 관리망 하나뿐이라면 물리 계층에서 나누는 편이 간단합니다.
+Octavia 쪽 설정은 이렇습니다.
+
+```yaml
+octavia_provider_network_name: "lbaas"
+octavia_provider_network_type: "flat"
+octavia_management_net_subnet_cidr: 10.10.13.0/24
+octavia_management_net_subnet_allocation_pools: "10.10.13.210-10.10.13.250"
+```
+
+`octavia_provider_network_type`이 `flat`인 게 보입니다. **Octavia도 VLAN을 알지 못합니다.** VLAN은 아래 계층에서 이미 붙여둔 것이고, OpenStack 위쪽은 flat 네트워크 하나만 봅니다.
+
+주목할 부분은 IP 대역 설계입니다.
+
+| 대상 | IP |
+|---|---|
+| 컨트롤러 `br-lbaas` (`node_fixed_ips`의 `lbaas`) | `10.10.13.111` ~ `113` |
+| amphora VM (할당 풀) | `10.10.13.210` ~ `250` |
+
+**같은 `/24` 안에서 앞쪽은 고정 IP, 뒤쪽은 동적 할당으로 나눴습니다.** 컨트롤러의 브리지 IP는 `user_variables.yml`의 `node_fixed_ips`로 직접 박고, amphora는 Neutron이 할당 풀에서 꺼내 씁니다. 범위가 겹치지 않으니 충돌이 없습니다.
+
+이래서 컨트롤러의 Octavia 서비스와 amphora VM이 **같은 서브넷, 같은 VLAN 13에서 직접 통신**합니다. 라우팅이 필요 없습니다.
+
+**관리망을 별도 VLAN으로 격리하면서도 OpenStack 설정은 단순하게 유지**하는 방법입니다. VLAN provider로 정의하면 `network_vlan_ranges`에 범위를 잡고 Neutron이 태깅까지 관리해야 하는데, 관리망 하나뿐이라면 물리 계층에서 나누는 편이 간단합니다.
 
 ### 역할 분담이 명확해집니다
 
