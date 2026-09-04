@@ -142,9 +142,7 @@ OpenStack-Ansible **Epoxy(2025.1)** 기준 테스트베드입니다. 컨트롤�
 | `bond1` | enp2s0 | 내부 서비스 네트워크. VLAN 11~15로 분리 |
 | `bond2` | enp3s0 | **Provider network 용.** Neutron이 OVS 브리지로 가져감 |
 
-**`bond2`에 Linux bridge가 없는 것은 쓰지 않아서가 아닙니다.** Provider network는 Neutron이 OVS 브리지를 만들어 물기 때문에, systemd-networkd 단계에서는 bond만 만들어두고 손대지 않습니다. 여기서 브리지를 만들어버리면 오히려 OVS와 충돌합니다.
-
-**어디까지가 systemd-networkd의 영역인지 구분하는 게 중요합니다.** OSA 배포 전에 준비해야 할 것은 bond와 VLAN, 그리고 OpenStack 서비스가 쓸 Linux bridge까지입니다. 테넌트 트래픽이 실제로 흐르는 OVS 계층은 Neutron이 알아서 만듭니다.
+**`bond2`에 Linux bridge가 없는 것은 쓰지 않아서가 아닙니다.** Provider network는 OVS 브리지를 씌워야 하므로, systemd-networkd 단계에서는 bond만 만들어두고 손대지 않습니다. 여기서 Linux bridge를 만들어버리면 OVS와 충돌합니다. 이 부분은 뒤의 10장에서 다룹니다.
 
 컴퓨트 노드도 이 그림과 같습니다. `br-lbaas`와 `br-stor-cluster` 두 개만 만들지 않습니다.
 
@@ -535,7 +533,49 @@ openstack_hosts_systemd_networkd_networks:
 
 주석으로 남겨둔 것도 둘 있습니다. `bond2`의 **LACP(802.3ad) 설정**과 VXLAN·스토리지망의 **MTU 9000**입니다. 환경에 따라 켜면 되도록 자리만 잡아둔 것입니다.
 
-## 10. 적용
+## 10. OVS까지 연결하기
+
+여기까지가 systemd-networkd의 영역입니다. bond와 VLAN을 만들고, OpenStack 서비스가 쓸 Linux bridge에 IP를 붙였습니다.
+
+그런데 **테넌트 트래픽이 실제로 흐르는 계층은 OVS**입니다. `bond2`를 만들어두기만 했지 아직 아무 데도 연결하지 않았죠. 이 부분은 `user_variables.yml`에서 Neutron 설정으로 이어집니다.
+
+```yaml
+neutron_provider_networks:
+  network_types: "geneve,flat"
+  network_geneve_ranges: "1:1000"
+  network_mappings: "provider:br-provider,lbaas:br-lbaas"
+  network_interface_mappings: "br-provider:bond2,br-lbaas:bond1.13"
+  # Flat provider network 를 사용할 경우
+  network_flat_networks: "provider,lbaas"
+  # VLAN provider network 를 사용할 경우
+  network_vlan_ranges: "provider:1030:1035,lbaas:1040:1045"
+```
+
+두 매핑이 짝을 이룹니다.
+
+| 항목 | 의미 |
+|---|---|
+| `network_mappings` | 물리 네트워크 이름 → OVS 브리지 이름 |
+| `network_interface_mappings` | OVS 브리지 이름 → 물리 인터페이스 |
+
+`provider:br-provider`와 `br-provider:bond2`를 이어보면, **`provider`라는 물리 네트워크가 `br-provider` OVS 브리지를 통해 `bond2`로 나간다**는 뜻이 됩니다.
+
+이렇게 정의해두면 **배포 시 OSA가 `br-provider` OVS 브리지를 만들고 `bond2`를 물린 뒤, `br-int`에 연결하는 것까지 자동으로 처리합니다.** 손으로 `ovs-vsctl add-br` 할 일이 없습니다.
+
+`br-lbaas`도 같은 방식으로 `bond1.13`에 매핑했습니다. Octavia amphora가 이 경로로 컨트롤러와 통신합니다.
+
+### 역할 분담이 명확해집니다
+
+| 계층 | 담당 | 대상 |
+|---|---|---|
+| bond, VLAN, Linux bridge | `openstack_hosts` (systemd-networkd) | `setup-hosts.yml` |
+| OVS 브리지, br-int 연결 | Neutron (OSA) | 배포 플레이북 |
+
+**처음 구성할 때 이 경계를 몰라서 헤매기 쉽습니다.** bond를 만들었으니 브리지도 만들어야 할 것 같아 `br-provider`를 group_vars에 넣으면, 나중에 OVS가 같은 이름으로 브리지를 만들면서 충돌합니다.
+
+`bond2`를 만들어만 두고 비워두는 게 맞습니다.
+
+## 11. 적용
 
 배포 서버에서 평소대로 실행하면 됩니다.
 
@@ -552,13 +592,13 @@ ls /etc/systemd/network/
 networkctl status br-mgmt
 ```
 
-## 11. 걸렸던 부분
+## 12. 걸렸던 부분
 
 **적용 순서에 주의해야 합니다.** bond → VLAN → bridge 순으로 의존 관계가 있어서, 정의가 빠지면 상위 장치가 올라오지 않습니다. systemd-networkd는 조용히 실패하는 편이라 `networkctl` 로 개별 확인이 필요합니다.
 
 **노드 그룹화 방식은 직접 정해야 합니다.** OSA가 이 변수들을 노드 역할별로 나눠 쓰는 표준 형태를 제공하는지 확인하지 못했습니다. 그래서 `group_vars/`에 컨트롤러와 컴퓨트 파일을 따로 두는 방식으로 나눴습니다. 같은 그룹 안에 NIC 구성이 다른 노드가 섞이면 `host_vars`로 내려야 합니다.
 
-## 12. 정리
+## 13. 정리
 
 | 항목 | 수동 구성 (netplan) | systemd-networkd 자동화 |
 |---|---|---|

@@ -87,7 +87,7 @@
 <path d="M 316 390 C 480 390, 480 420, 634 420" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 3"/>
 <polygon points="625,415.5 634,420 625,424.5" fill="#94a3b8"/>
 <rect x="636" y="403" width="200" height="34" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
-<text x="736" y="419" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">OVS provider bridge</text>
-<text x="736" y="432" text-anchor="middle" font-size="8.5" fill="#64748b">Neutron 이 생성 — systemd-networkd 영역 밖</text>
+<text x="736" y="419" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">br-provider (OVS) → br-int</text>
+<text x="736" y="432" text-anchor="middle" font-size="8.5" fill="#64748b">neutron_provider_networks 로 OSA 가 자동 구성</text>
 <text x="470.0" y="458" text-anchor="middle" font-size="9.5" fill="#94a3b8">컴퓨트 노드는 br-lbaas · br-stor-cluster 만 제외하고 동일하다</text>
 </svg>
