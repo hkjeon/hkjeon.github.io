@@ -562,7 +562,30 @@ neutron_provider_networks:
 
 이렇게 정의해두면 **배포 시 OSA가 `br-provider` OVS 브리지를 만들고 `bond2`를 물린 뒤, `br-int`에 연결하는 것까지 자동으로 처리합니다.** 손으로 `ovs-vsctl add-br` 할 일이 없습니다.
 
-`br-lbaas`도 같은 방식으로 `bond1.13`에 매핑했습니다. Octavia amphora가 이 경로로 컨트롤러와 통신합니다.
+### lb-mgmt-net은 flat인데 물리적으로는 VLAN
+
+`br-lbaas`도 같은 방식으로 `bond1.13`에 매핑했습니다. Octavia의 관리망(`lb-mgmt-net`)이 여기를 씁니다.
+
+이 구성이 처음 보면 헷갈립니다. `network_flat_networks`에 `lbaas`가 들어 있어 **Neutron 입장에서는 flat 네트워크**입니다. 태그를 붙이지 않습니다. 그런데 매핑된 인터페이스가 `bond1.13`, 즉 **이미 VLAN 13이 태깅된 장치**입니다.
+
+정리하면 이렇게 됩니다.
+
+| 계층 | 관점 |
+|---|---|
+| Neutron | flat 네트워크. VLAN ID를 다루지 않음 |
+| 물리 | `bond1.13`을 타므로 실제로는 VLAN 13 |
+
+태깅은 systemd-networkd가 만든 VLAN 장치에서 이미 끝나 있고, Neutron은 그 위에 태그 없는 네트워크를 얹는 셈입니다. **VLAN 분리는 물리 계층에서, 네트워크 정의는 Neutron에서** 각각 처리합니다.
+
+덕분에 컨트롤러의 Octavia 서비스와 컴퓨트에 뜬 amphora VM이 같은 VLAN 13에서 만납니다.
+
+| 노드 | 경로 |
+|---|---|
+| 컨트롤러 | Linux bridge `br-lbaas`의 IP로 Octavia 서비스가 통신 |
+| 컴퓨트 | amphora VM 포트가 OVS `br-lbaas`에 붙음 |
+| 공통 | 둘 다 `bond1.13`으로 나가므로 VLAN 13에서 연결 |
+
+**관리망을 별도 VLAN으로 격리하면서도 Neutron 설정은 단순하게 유지**하는 방법입니다. VLAN provider로 정의하면 `network_vlan_ranges`에 범위를 잡고 관리해야 하는데, 어차피 관리망 하나뿐이라면 물리 계층에서 나누는 편이 간단합니다.
 
 ### 역할 분담이 명확해집니다
 
