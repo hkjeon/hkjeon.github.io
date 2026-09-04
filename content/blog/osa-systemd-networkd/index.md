@@ -15,7 +15,7 @@ featured: true
 
 OpenStack-Ansible(OSA) 공식 가이드는 타깃 노드의 브리지 네트워크를 Ubuntu netplan으로 구성하도록 안내합니다. 저도 그동안 그렇게 해왔습니다. 노드마다 netplan YAML을 작성해 bond, VLAN, 그리고 `br-mgmt`·`br-vxlan` 같은 브리지를 잡는 방식입니다.
 
-문제는 이 작업이 **배포 자동화의 바깥에 있다는 점**입니다. Ceph까지 얹은 HCI 노드라면 한 대에 bond 3개, VLAN 3개, 브리지 5개를 손으로 잡아야 합니다. 노드가 열 대를 넘어가면 이 작업만으로 반나절이 지나가고, 오타 하나가 배포 실패로 이어집니다. 그리고 재구축할 때마다 처음부터 반복됩니다.
+문제는 이 작업이 **배포 자동화의 바깥에 있다는 점**입니다. 컨트롤러 한 대에 bond 3개, VLAN 5개, 브리지 6개를 손으로 잡아야 합니다. 노드가 열 대를 넘어가면 이 작업만으로 반나절이 지나가고, 오타 하나가 배포 실패로 이어집니다. 그리고 재구축할 때마다 처음부터 반복됩니다.
 
 ## 1. 시작은 오프라인 패키지 작업이었다
 
@@ -92,7 +92,7 @@ openstack_hosts_systemd_slice: "openstack-hosts"
 
 ```
 /etc/openstack_deploy/group_vars/
-├── shared-infra_hosts.yml   # HCI 노드 그룹
+├── shared-infra_hosts.yml   # 컨트롤러 그룹
 └── compute_hosts.yml        # 컴퓨트 노드 그룹
 ```
 
@@ -100,56 +100,47 @@ Ansible의 group_vars 규칙을 그대로 쓰는 것이라, OSA 인벤토리에 
 
 ## 5. 예시 환경
 
-아래 설정은 **HCI 구조의 테스트베드**를 기준으로 합니다.
+OpenStack-Ansible **Epoxy(2025.1)** 기준 테스트베드입니다. 컨트롤러 3대, 컴퓨트 4대입니다.
 
-| 노드 | 대수 | 역할 |
+| 노드 | 대수 | 그룹 |
 |---|---|---|
-| `mix01` ~ `mix03` | 3 | 컨트롤러 + 컴퓨트 + Ceph 통합 (HCI) |
-| `compute01` | 1 | 컴퓨트 전용 |
+| `epo-tb-osc01` ~ `03` | 3 | `shared-infra_hosts` |
+| `epo-tb-comp01` ~ `04` | 4 | `compute_hosts` |
 
-`mix`라는 이름은 컨트롤러·컴퓨트·스토리지 역할이 한 노드에 섞여 있다는 뜻입니다. Ceph가 노드 안에 함께 들어가기 때문에, HCI 노드에는 **스토리지 네트워크가 두 개** 필요합니다.
+네트워크는 여섯 개로 나눴습니다.
 
-| 브리지 | 용도 | HCI 노드 | 컴퓨트 노드 |
-|---|---|---|---|
-| `br-mgmt` | Internal API · 관리 | ✅ | ✅ |
-| `br-vxlan` | 테넌트 오버레이 | ✅ | ✅ |
-| `br-ext` | 외부 연결 | ✅ | ✅ |
-| `br-stsvc` | **Ceph 서비스(public) 네트워크** — 클라이언트가 OSD·MON에 접근 | ✅ | — |
-| `br-stcl` | **Ceph 클러스터 네트워크** — OSD 간 복제·리밸런싱 | ✅ | — |
+| 브리지 | VLAN | 용도 | 컨트롤러 | 컴퓨트 |
+|---|---|---|---|---|
+| `br-ext` | — (bond0 직결) | 외부 연결 | ✅ | ✅ |
+| `br-mgmt` | 11 | 관리 · Internal API | ✅ | ✅ |
+| `br-vxlan` | 12 | 테넌트 오버레이 | ✅ | ✅ |
+| `br-lbaas` | 13 | LBaaS (Octavia) | ✅ | — |
+| `br-storage` | 14 | 스토리지 서비스 | ✅ | ✅ |
+| `br-stor-cluster` | 15 | 스토리지 클러스터 (복제) | ✅ | — |
 
-Ceph에서 서비스 네트워크와 클러스터 네트워크를 나누는 이유는, **복제 트래픽이 클라이언트 I/O를 밀어내지 않게 하기 위해서**입니다. 복구나 리밸런싱이 돌면 OSD 간 트래픽이 순간적으로 크게 늘어나는데, 이게 서비스 네트워크와 같은 경로를 타면 VM의 디스크 응답이 함께 느려집니다.
+**스토리지 네트워크를 둘로 나눈 이유**는 복제 트래픽이 클라이언트 I/O를 밀어내지 않게 하기 위해서입니다. 복구나 리밸런싱이 돌면 노드 간 트래픽이 순간적으로 크게 늘어나는데, 서비스 네트워크와 같은 경로를 타면 VM의 디스크 응답이 함께 느려집니다.
 
-그래서 HCI 노드는 브리지 5개, 컴퓨트 노드는 3개입니다. 이 테스트베드의 컴퓨트는 로컬 디스크를 쓰기 때문에 스토리지 네트워크가 없습니다. 실제 사업에서 컴퓨트가 Ceph 볼륨을 붙여야 한다면 `br-stsvc`를 추가해야 합니다.
-
-**두 그룹은 NIC 명명과 bond 번호도 다릅니다.** 장비 세대가 달라 인터페이스 이름이 `eno*`와 `enp*`로 갈렸고, bond 번호도 별개로 매겼습니다. 그룹을 나눠 정의한 이유가 브리지 개수 차이만은 아닙니다.
-
-| 항목 | HCI (`shared-infra_hosts`) | 컴퓨트 (`compute_hosts`) |
-|---|---|---|
-| 물리 NIC | eno1, eno2, eno3 | enp1s0, enp2s0, enp3s0 |
-| bond | bond1, bond2, bond3 | bond0, bond1, bond2 |
-| VLAN | bond2.21 · .22 · .24 (+ .25 · .26 예비) | bond0.11 · .12 (+ .13 ~ .15 예비) |
-| bridge | br-mgmt, br-stcl, br-ext, br-vxlan, br-stsvc | br-mgmt, br-vxlan, br-ext |
+컴퓨트에는 `br-lbaas`와 `br-stor-cluster`가 없습니다. Octavia는 컨트롤러에 올라가고, 복제 트래픽은 컴퓨트를 거치지 않기 때문입니다. 다만 **VLAN 장치는 양쪽에 똑같이 선언**해뒀습니다. 나중에 필요하면 브리지만 추가하면 됩니다.
 
 ### 논리 네트워크 구성
 
-[![OpenStack 논리 네트워크 구성도](network-topology.svg)](network-topology.svg "클릭하면 원본 크기로 열립니다")
+![OpenStack 논리 네트워크 구성도](network-topology.svg)
 
 관리 네트워크는 배포 노드가 Ansible로 붙는 경로이자 OpenStack 서비스 간 통신 경로입니다. 배포 노드는 이 망에만 물리면 됩니다.
-
-**Ceph 네트워크 두 개는 HCI 노드 사이에서만 오갑니다.** 이 테스트베드의 컴퓨트는 로컬 디스크를 쓰기 때문에 스토리지 네트워크에 연결되지 않았습니다. 컴퓨트가 Ceph 볼륨을 붙여야 하는 구성이라면 `br-stsvc`를 추가해야 합니다.
 
 ### 물리 인터페이스 구성
 
 논리 네트워크가 물리 NIC 위에 어떻게 쌓이는지가 실제 설정의 핵심입니다.
 
-[![물리 인터페이스 계층 구조](interface-stack.svg)](interface-stack.svg "클릭하면 원본 크기로 열립니다")
+![물리 인터페이스 계층 구조](interface-stack.svg)
 
-**HCI 노드는 bond1이 관리, bond2가 VLAN으로 나눠 쓰는 서비스 계열, bond3이 Ceph 서비스 전용**입니다. 스토리지 트래픽에 물리 NIC를 통째로 할당한 이유는 앞서 말한 대로 클라이언트 I/O와 경로를 분리하기 위해서입니다.
+**NIC 세 개를 각각 bond로 묶고, 그중 `bond1`에만 VLAN을 태웁니다.** 외부 연결은 VLAN 없이 `bond0`을 브리지에 직접 붙였습니다. 외부망은 스위치에서 이미 분리되어 들어오는 경우가 많아 태깅이 불필요합니다.
 
-컴퓨트는 구조가 아예 다릅니다. NIC이 `enp*` 형식이고 bond 번호도 0부터이며, `br-ext`가 VLAN을 거치지 않고 bond2에 직접 붙습니다. 그래서 group_vars를 그룹별로 따로 씁니다.
+`bond2`(`enp3s0`)는 선언만 하고 어느 브리지에도 연결하지 않았습니다. 확장용으로 남겨둔 것입니다.
+
+컴퓨트 노드도 이 그림과 같습니다. 점선으로 표시한 `br-lbaas`와 `br-stor-cluster` 두 개만 만들지 않습니다.
 
 아래 설정 코드는 이 그림을 그대로 YAML로 옮긴 것입니다.
-
 
 ## 6. 그 앞 단계 — 노드 부트스트랩 플레이북
 
@@ -251,100 +242,92 @@ ansible-playbook -i /opt/openstack-ansible/inventory/dynamic_inventory.py \
 
 **손으로 하는 건 OS 설치와 임시 IP 부여, 이 둘뿐입니다.** 나머지 세 단계는 배포 노드에서 플레이북으로 진행됩니다.
 
-## 7. HCI 노드 설정
+## 7. 컨트롤러 노드 설정
 
-먼저 가상 장치를 정의합니다. bond 3개, VLAN 5개, bridge 5개입니다.
+먼저 가상 장치를 정의합니다. bond 3개, VLAN 5개, bridge 6개입니다.
 
 ```yaml
 # group_vars/shared-infra_hosts.yml
 openstack_hosts_systemd_networkd_devices:
+  - NetDev: { Name: bond0, Kind: bond }
+    Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
   - NetDev: { Name: bond1, Kind: bond }
     Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
   - NetDev: { Name: bond2, Kind: bond }
     Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
-  - NetDev: { Name: bond3, Kind: bond }
-    Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
 
-  - NetDev: { Name: bond2.21, Kind: vlan }
-    VLAN: { Id: 21 }
-  - NetDev: { Name: bond2.22, Kind: vlan }
-    VLAN: { Id: 22 }
-  - NetDev: { Name: bond2.24, Kind: vlan }
-    VLAN: { Id: 24 }
-  - NetDev: { Name: bond2.25, Kind: vlan }
-    VLAN: { Id: 25 }
-  - NetDev: { Name: bond2.26, Kind: vlan }
-    VLAN: { Id: 26 }
+  - NetDev: { Name: bond1.11, Kind: vlan }
+    VLAN: { Id: 11 }
+  - NetDev: { Name: bond1.12, Kind: vlan }
+    VLAN: { Id: 12 }
+  - NetDev: { Name: bond1.13, Kind: vlan }
+    VLAN: { Id: 13 }
+  - NetDev: { Name: bond1.14, Kind: vlan }
+    VLAN: { Id: 14 }
+  - NetDev: { Name: bond1.15, Kind: vlan }
+    VLAN: { Id: 15 }
 
-  - NetDev: { Name: br-mgmt, Kind: bridge }
-  - NetDev: { Name: br-stcl, Kind: bridge }
   - NetDev: { Name: br-ext, Kind: bridge }
+  - NetDev: { Name: br-mgmt, Kind: bridge }
   - NetDev: { Name: br-vxlan, Kind: bridge }
-  - NetDev: { Name: br-stsvc, Kind: bridge }
+  - NetDev: { Name: br-lbaas, Kind: bridge }
+  - NetDev: { Name: br-storage, Kind: bridge }
+  - NetDev: { Name: br-stor-cluster, Kind: bridge }
 ```
 
 `NetDev`, `Bond`, `VLAN` 키는 systemd의 `.netdev` 파일 섹션명을 그대로 따릅니다. 즉 **systemd 문서를 그대로 참조할 수 있습니다.** 롤이 별도 추상화를 만들지 않았다는 게 장점입니다.
 
-VLAN 25와 26은 장치만 선언해두고 브리지에는 연결하지 않았습니다. 확장을 대비한 것으로, 실제로 쓰려면 브리지를 만들어 연결하면 됩니다.
-
-다음은 연결 관계입니다. 물리 NIC를 bond에 넣고, bond에 VLAN을 태우고, 그 위에 bridge를 얹는 순서입니다.
+다음은 연결 관계입니다. 물리 NIC를 bond에 넣고, `bond1`에 VLAN을 태우고, 그 위에 bridge를 얹습니다.
 
 ```yaml
 openstack_hosts_systemd_networkd_networks:
   # 물리 NIC → bond
-  - interface: eno1
-    match: { name: eno1 }
+  - interface: enp1s0
+    match: { name: enp1s0 }
+    bond: bond0
+  - interface: enp2s0
+    match: { name: enp2s0 }
     bond: bond1
-  - interface: eno2
-    match: { name: eno2 }
+  - interface: enp3s0
+    match: { name: enp3s0 }
     bond: bond2
-  - interface: eno3
-    match: { name: eno3 }
-    bond: bond3
 
-  # bond → VLAN
-  - interface: bond2
-    match: { name: bond2 }
-    vlan:
-      - bond2.21
-      - bond2.22
-      - bond2.24
-      - bond2.25
-      - bond2.26
-
-  # bond / VLAN → bridge
+  # bond1 → VLAN
   - interface: bond1
     match: { name: bond1 }
-    bridge: br-mgmt
+    vlan:
+      - bond1.11
+      - bond1.12
+      - bond1.13
+      - bond1.14
+      - bond1.15
 
-  - interface: bond2.21
-    match: { name: bond2.21 }
-    bridge: br-stcl
-
-  - interface: bond2.22
-    match: { name: bond2.22 }
+  # bond / VLAN → bridge
+  - interface: bond0
+    match: { name: bond0 }
     bridge: br-ext
-
-  - interface: bond2.24
-    match: { name: bond2.24 }
+  - interface: bond1.11
+    match: { name: bond1.11 }
+    bridge: br-mgmt
+  - interface: bond1.12
+    match: { name: bond1.12 }
     bridge: br-vxlan
-
-  - interface: bond3
-    match: { name: bond3 }
-    bridge: br-stsvc
+  - interface: bond1.13
+    match: { name: bond1.13 }
+    bridge: br-lbaas
+  - interface: bond1.14
+    match: { name: bond1.14 }
+    bridge: br-storage
+  - interface: bond1.15
+    match: { name: bond1.15 }
+    bridge: br-stor-cluster
 ```
+
+**`br-ext`만 VLAN을 거치지 않습니다.** `bond0`을 브리지에 직접 붙였습니다.
 
 마지막으로 bridge에 IP를 붙입니다.
 
 ```yaml
-  - interface: br-mgmt
-    match: { name: br-mgmt }
-    address:
-      - "{{ node_fixed_ips[inventory_hostname]['mgmt'] }}"
-  - interface: br-stcl
-    match: { name: br-stcl }
-    address:
-      - "{{ node_fixed_ips[inventory_hostname]['stcl'] }}"
   - interface: br-ext
     match: { name: br-ext }
     address:
@@ -353,14 +336,26 @@ openstack_hosts_systemd_networkd_networks:
       Network:
         Gateway:
           - "{{ node_fixed_ips[inventory_hostname]['ext_gw'] }}"
+  - interface: br-mgmt
+    match: { name: br-mgmt }
+    address:
+      - "{{ node_fixed_ips[inventory_hostname]['mgmt'] }}"
   - interface: br-vxlan
     match: { name: br-vxlan }
     address:
       - "{{ node_fixed_ips[inventory_hostname]['vxlan'] }}"
-  - interface: br-stsvc
-    match: { name: br-stsvc }
+  - interface: br-lbaas
+    match: { name: br-lbaas }
     address:
-      - "{{ node_fixed_ips[inventory_hostname]['stsvc'] }}"
+      - "{{ node_fixed_ips[inventory_hostname]['lbaas'] }}"
+  - interface: br-storage
+    match: { name: br-storage }
+    address:
+      - "{{ node_fixed_ips[inventory_hostname]['storage'] }}"
+  - interface: br-stor-cluster
+    match: { name: br-stor-cluster }
+    address:
+      - "{{ node_fixed_ips[inventory_hostname]['stor_cl'] }}"
 ```
 
 `config_overrides`는 롤이 기본 제공하지 않는 systemd 옵션을 끼워넣는 통로입니다. 위 예시에서는 `[Network]` 섹션에 `Gateway`를 추가했습니다. **롤이 감싸지 못한 옵션도 이 경로로 대부분 해결됩니다.**
@@ -373,43 +368,61 @@ openstack_hosts_systemd_networkd_networks:
 ## user_variables.yml
 # Fix IP Configuration for each nodes.
 node_fixed_ips:
-  mix01:
-    hostname: "epo-tb-node01"
-    mgmt: "10.10.11.111/24"
-    vxlan: "10.10.12.111/24"
+  epo-tb-osc01:
+    hostname: "epo-tb-osc01"
     ext: "192.168.119.111/24"
     ext_gw: "192.168.119.1"
-  mix02:
-    hostname: "epo-tb-node02"
-    mgmt: "10.10.11.112/24"
-    vxlan: "10.10.12.112/24"
+    mgmt: "10.10.11.111/24"
+    vxlan: "10.10.12.111/24"
+    lbaas: "10.10.13.111/24"
+    storage: "10.10.14.111/24"
+    stor_cl: "10.10.15.111/24"
+  epo-tb-osc02:
+    hostname: "epo-tb-osc02"
     ext: "192.168.119.112/24"
     ext_gw: "192.168.119.1"
-  mix03:
-    hostname: "epo-tb-node03"
-    mgmt: "10.10.11.113/24"
-    vxlan: "10.10.12.113/24"
-    ext: "192.168.119.113/24"
-    ext_gw: "192.168.119.1"
-  compute01:
+    mgmt: "10.10.11.112/24"
+    vxlan: "10.10.12.112/24"
+    lbaas: "10.10.13.112/24"
+    storage: "10.10.14.112/24"
+    stor_cl: "10.10.15.112/24"
+
+  # ... osc03 생략 ...
+
+  epo-tb-comp01:
     hostname: "epo-tb-comp01"
-    mgmt: "10.10.11.114/24"
-    vxlan: "10.10.12.114/24"
     ext: "192.168.119.114/24"
     ext_gw: "192.168.119.1"
+    mgmt: "10.10.11.114/24"
+    vxlan: "10.10.12.114/24"
+    storage: "10.10.14.114/24"
 ```
+
+컨트롤러에는 `lbaas`와 `stor_cl` 항목이 더 있고, 컴퓨트에는 없습니다. **참조하지 않는 값은 정의하지 않아도 됩니다.** group_vars에서 컴퓨트가 `br-lbaas`를 만들지 않으니 그 IP도 필요 없습니다.
+
+네트워크마다 대역의 세 번째 옥텟만 다르게 잡았습니다.
+
+| 네트워크 | 대역 |
+|---|---|
+| External | `192.168.119.0/24` |
+| Management | `10.10.11.0/24` |
+| VXLAN | `10.10.12.0/24` |
+| LBaaS | `10.10.13.0/24` |
+| Storage | `10.10.14.0/24` |
+| Storage Cluster | `10.10.15.0/24` |
+
+마지막 옥텟은 노드마다 `111`부터 순서대로 붙였습니다. **IP만 보고도 어느 노드의 어떤 네트워크인지 바로 읽힙니다.** 노드가 늘어날수록 이런 규칙성이 장애 대응 시간을 줄여줍니다.
 
 이 구조의 실익이 큽니다.
 
 - **IP 정보가 한 파일에 모입니다.** 노드가 늘어나면 여기에 항목만 추가합니다.
 - **group_vars의 네트워크 구조는 건드리지 않습니다.** 구조와 값이 분리됩니다.
 - 사업마다 IP 대역이 달라져도 `user_variables.yml`만 교체하면 됩니다.
-
-`config_overrides`는 롤이 기본 제공하지 않는 systemd 옵션을 끼워넣는 통로입니다. 위 예시에서는 `[Network]` 섹션에 `Gateway`를 추가했습니다. **롤이 감싸지 못한 옵션도 이 경로로 대부분 해결됩니다.**
+- `hostname` 값도 함께 관리하므로, 앞서 만든 부트스트랩 플레이북이 같은 소스를 참조합니다.
 
 ## 9. 컴퓨트 노드 설정
 
-컴퓨트 전용 노드는 HCI와 **NIC 명명부터 다릅니다.** 장비 세대가 달라 `enp*` 형식이고, bond 번호도 0부터 매겼습니다. 같은 구조를 복사해 쓰는 게 아니라 그룹별로 따로 정의해야 하는 이유입니다.
+컴퓨트는 컨트롤러와 **물리 구성이 동일**합니다. NIC 이름도 bond 번호도 VLAN도 같습니다. 차이는 브리지 두 개가 없다는 것뿐입니다.
 
 ```yaml
 # group_vars/compute_hosts.yml
@@ -420,22 +433,30 @@ openstack_hosts_systemd_networkd_devices:
     Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
   - NetDev: { Name: bond2, Kind: bond }
     Bond: { Mode: active-backup, MIIMonitorSec: "100ms" }
+    #Bond: { Mode: 802.3ad, TransmitHashPolicy: layer3+4, MIIMonitorSec: 1s, LACPTransmitRate: fast }
 
-  - NetDev: { Name: bond0.11, Kind: vlan }
+  - NetDev: { Name: bond1.11, Kind: vlan }
     VLAN: { Id: 11 }
-  - NetDev: { Name: bond0.12, Kind: vlan }
+  - NetDev: { Name: bond1.12, Kind: vlan }
     VLAN: { Id: 12 }
-  - NetDev: { Name: bond0.13, Kind: vlan }
+  - NetDev: { Name: bond1.13, Kind: vlan }
     VLAN: { Id: 13 }
-  - NetDev: { Name: bond0.14, Kind: vlan }
+  - NetDev: { Name: bond1.14, Kind: vlan }
     VLAN: { Id: 14 }
-  - NetDev: { Name: bond0.15, Kind: vlan }
+  - NetDev: { Name: bond1.15, Kind: vlan }
     VLAN: { Id: 15 }
 
   - NetDev: { Name: br-ext, Kind: bridge }
   - NetDev: { Name: br-mgmt, Kind: bridge }
   - NetDev: { Name: br-vxlan, Kind: bridge }
+  - NetDev: { Name: br-storage, Kind: bridge }
+```
 
+**VLAN은 5개를 그대로 선언합니다.** 컴퓨트에서 실제로 쓰는 건 11, 12, 14 세 개인데, 13과 15도 만들어둡니다. 나중에 컴퓨트에 LBaaS를 붙이거나 스토리지 클러스터망이 필요해지면 브리지만 추가하면 되기 때문입니다.
+
+연결과 IP 할당입니다.
+
+```yaml
 openstack_hosts_systemd_networkd_networks:
   - interface: enp1s0
     match: { name: enp1s0 }
@@ -447,24 +468,28 @@ openstack_hosts_systemd_networkd_networks:
     match: { name: enp3s0 }
     bond: bond2
 
+  - interface: bond1
+    match: { name: bond1 }
+    vlan:
+      - bond1.11
+      - bond1.12
+      - bond1.13
+      - bond1.14
+      - bond1.15
+
   - interface: bond0
     match: { name: bond0 }
-    vlan:
-      - bond0.11
-      - bond0.12
-      - bond0.13
-      - bond0.14
-      - bond0.15
-
-  - interface: bond0.11
-    match: { name: bond0.11 }
-    bridge: br-mgmt
-  - interface: bond0.12
-    match: { name: bond0.12 }
-    bridge: br-vxlan
-  - interface: bond2
-    match: { name: bond2 }
     bridge: br-ext
+  - interface: bond1.11
+    match: { name: bond1.11 }
+    bridge: br-mgmt
+  - interface: bond1.12
+    match: { name: bond1.12 }
+    bridge: br-vxlan
+    #mtu: 9000
+  - interface: bond1.14
+    match: { name: bond1.14 }
+    bridge: br-storage
 
   - interface: br-ext
     match: { name: br-ext }
@@ -474,33 +499,33 @@ openstack_hosts_systemd_networkd_networks:
       Network:
         Gateway:
           - "{{ node_fixed_ips[inventory_hostname]['ext_gw'] }}"
-
   - interface: br-mgmt
     match: { name: br-mgmt }
     address:
       - "{{ node_fixed_ips[inventory_hostname]['mgmt'] }}"
-
   - interface: br-vxlan
     match: { name: br-vxlan }
     address:
       - "{{ node_fixed_ips[inventory_hostname]['vxlan'] }}"
+      #mtu: 9000
+  - interface: br-storage
+    match: { name: br-storage }
+    address:
+      - "{{ node_fixed_ips[inventory_hostname]['storage'] }}"
 ```
 
-**`br-ext`가 VLAN이 아니라 bond2에 직접 붙는 점**을 눈여겨볼 만합니다. HCI에서는 `bond2.22`(VLAN 22)를 거치는데, 컴퓨트에서는 물리 bond를 통째로 외부 연결에 씁니다. 노드마다 NIC 여유가 다르면 이렇게 갈립니다.
+두 그룹의 차이는 이게 전부입니다.
 
-두 그룹을 나란히 놓고 보면 차이가 명확합니다.
-
-| 항목 | HCI 노드 | 컴퓨트 노드 |
+| 항목 | 컨트롤러 | 컴퓨트 |
 |---|---|---|
-| 물리 NIC | eno1, eno2, eno3 | enp1s0, enp2s0, enp3s0 |
-| bond | bond1, bond2, bond3 | bond0, bond1, bond2 |
-| VLAN 태깅 대상 | bond2 | bond0 |
-| 외부 연결 | bond2.22 (VLAN) | bond2 (bond 직결) |
-| 브리지 | 5개 | 3개 |
-| 스토리지 네트워크 | br-stcl, br-stsvc | 없음 |
-| Ceph 역할 | MON + OSD | 없음 (로컬 디스크) |
+| 물리 NIC | enp1s0, enp2s0, enp3s0 | 동일 |
+| bond | bond0, bond1, bond2 | 동일 |
+| VLAN | bond1.11 ~ bond1.15 | 동일 |
+| 브리지 | 6개 | 4개 (`br-lbaas`, `br-stor-cluster` 제외) |
 
-컴퓨트에 스토리지 네트워크가 없는 것은 이 테스트베드가 로컬 디스크를 쓰기 때문입니다. **실제 사업에서 컴퓨트가 Ceph 볼륨을 붙여야 한다면 `br-stsvc`를 추가해야 합니다.** 예비로 선언해둔 `bond0.13`을 여기에 쓰면 됩니다.
+**구조를 최대한 같게 맞춰두면 나중이 편합니다.** 노드 역할이 바뀌어도 브리지 정의만 더하면 되고, 두 파일을 나란히 놓고 비교하기도 쉽습니다.
+
+주석으로 남겨둔 것도 둘 있습니다. `bond2`의 **LACP(802.3ad) 설정**과 VXLAN·스토리지망의 **MTU 9000**입니다. 환경에 따라 켜면 되도록 자리만 잡아둔 것입니다.
 
 ## 10. 적용
 

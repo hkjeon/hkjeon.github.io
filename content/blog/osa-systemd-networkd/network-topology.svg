@@ -1,95 +1,100 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="900" height="470" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
 <rect x="0" y="0" width="900" height="470" fill="#ffffff"/>
-<rect x="176" y="24" width="118" height="88" rx="6" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
-<text x="235.0" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">배포 노드</text>
-<text x="235.0" y="63" text-anchor="middle" font-size="10" fill="#475569">Repo / Deploy</text>
-<text x="235.0" y="80" text-anchor="middle" font-size="9" fill="#64748b">bond0</text>
-<text x="235.0" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">1G / 10G</text>
-<rect x="320" y="24" width="112" height="88" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
-<text x="376.0" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">mix01</text>
-<text x="376.0" y="63" text-anchor="middle" font-size="10" fill="#b91c1c">HCI</text>
-<text x="376.0" y="80" text-anchor="middle" font-size="9" fill="#64748b">Controller + Compute</text>
-<text x="376.0" y="93" text-anchor="middle" font-size="9" fill="#64748b">Ceph MON / OSD</text>
-<text x="376.0" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">bond1~3</text>
-<rect x="448" y="24" width="112" height="88" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
-<text x="504.0" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">mix02</text>
-<text x="504.0" y="63" text-anchor="middle" font-size="10" fill="#b91c1c">HCI</text>
-<text x="504.0" y="80" text-anchor="middle" font-size="9" fill="#64748b">Controller + Compute</text>
-<text x="504.0" y="93" text-anchor="middle" font-size="9" fill="#64748b">Ceph MON / OSD</text>
-<text x="504.0" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">bond1~3</text>
-<rect x="576" y="24" width="112" height="88" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
-<text x="632.0" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">mix03</text>
-<text x="632.0" y="63" text-anchor="middle" font-size="10" fill="#b91c1c">HCI</text>
-<text x="632.0" y="80" text-anchor="middle" font-size="9" fill="#64748b">Controller + Compute</text>
-<text x="632.0" y="93" text-anchor="middle" font-size="9" fill="#64748b">Ceph MON / OSD</text>
-<text x="632.0" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">bond1~3</text>
-<rect x="712" y="24" width="118" height="88" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
-<text x="771.0" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">compute01</text>
-<text x="771.0" y="63" text-anchor="middle" font-size="10" fill="#1d4ed8">Compute</text>
-<text x="771.0" y="80" text-anchor="middle" font-size="9" fill="#64748b">로컬 디스크</text>
-<text x="771.0" y="105" text-anchor="middle" font-size="9" fill="#94a3b8">bond0~2</text>
-<rect x="14" y="157" width="152" height="38" rx="4" fill="#ffffff" stroke="#e11d48" stroke-width="1.5"/>
-<text x="90" y="173" text-anchor="middle" font-size="11" font-weight="600" fill="#9f1239">Internal API</text>
-<text x="90" y="188" text-anchor="middle" font-size="8.5" fill="#64748b">br-mgmt · 10.10.11.0/24</text>
-<line x1="166" y1="176" x2="862" y2="176" stroke="#e11d48" stroke-width="2"/>
-<polygon points="862,171 874,176 862,181" fill="#e11d48"/>
-<rect x="14" y="212" width="152" height="38" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
-<text x="90" y="228" text-anchor="middle" font-size="11" font-weight="600" fill="#5b21b6">External API</text>
-<text x="90" y="243" text-anchor="middle" font-size="8.5" fill="#64748b">br-ext · 192.168.119.0/24</text>
-<line x1="166" y1="231" x2="862" y2="231" stroke="#7c3aed" stroke-width="2"/>
-<polygon points="862,226 874,231 862,236" fill="#7c3aed"/>
-<rect x="14" y="267" width="152" height="38" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
-<text x="90" y="283" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">Tenant (VXLAN)</text>
-<text x="90" y="298" text-anchor="middle" font-size="8.5" fill="#64748b">br-vxlan · 10.10.12.0/24</text>
-<line x1="166" y1="286" x2="862" y2="286" stroke="#2563eb" stroke-width="2"/>
-<polygon points="862,281 874,286 862,291" fill="#2563eb"/>
-<rect x="14" y="322" width="152" height="38" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
-<text x="90" y="338" text-anchor="middle" font-size="11" font-weight="600" fill="#047857">Ceph Service</text>
-<text x="90" y="353" text-anchor="middle" font-size="8.5" fill="#64748b">br-stsvc · public network</text>
-<line x1="166" y1="341" x2="686" y2="341" stroke="#059669" stroke-width="2" stroke-dasharray="6 3"/>
-<polygon points="686,336 698,341 686,346" fill="#059669"/>
-<rect x="14" y="377" width="152" height="38" rx="4" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
-<text x="90" y="393" text-anchor="middle" font-size="11" font-weight="600" fill="#0e7490">Ceph Cluster</text>
-<text x="90" y="408" text-anchor="middle" font-size="8.5" fill="#64748b">br-stcl · OSD 복제 전용</text>
-<line x1="166" y1="396" x2="686" y2="396" stroke="#0891b2" stroke-width="2" stroke-dasharray="6 3"/>
-<polygon points="686,391 698,396 686,401" fill="#0891b2"/>
-<line x1="235" y1="112" x2="235" y2="176" stroke="#e11d48" stroke-width="1.5"/>
-<circle cx="235" cy="176" r="3.5" fill="#e11d48"/>
-<line x1="350" y1="112" x2="350" y2="176" stroke="#e11d48" stroke-width="1.5"/>
-<circle cx="350" cy="176" r="3.5" fill="#e11d48"/>
-<line x1="363" y1="112" x2="363" y2="231" stroke="#7c3aed" stroke-width="1.5"/>
-<circle cx="363" cy="231" r="3.5" fill="#7c3aed"/>
-<line x1="376" y1="112" x2="376" y2="286" stroke="#2563eb" stroke-width="1.5"/>
-<circle cx="376" cy="286" r="3.5" fill="#2563eb"/>
-<line x1="389" y1="112" x2="389" y2="341" stroke="#059669" stroke-width="1.5"/>
-<circle cx="389" cy="341" r="3.5" fill="#059669"/>
-<line x1="402" y1="112" x2="402" y2="396" stroke="#0891b2" stroke-width="1.5"/>
-<circle cx="402" cy="396" r="3.5" fill="#0891b2"/>
-<line x1="478" y1="112" x2="478" y2="176" stroke="#e11d48" stroke-width="1.5"/>
-<circle cx="478" cy="176" r="3.5" fill="#e11d48"/>
-<line x1="491" y1="112" x2="491" y2="231" stroke="#7c3aed" stroke-width="1.5"/>
-<circle cx="491" cy="231" r="3.5" fill="#7c3aed"/>
-<line x1="504" y1="112" x2="504" y2="286" stroke="#2563eb" stroke-width="1.5"/>
-<circle cx="504" cy="286" r="3.5" fill="#2563eb"/>
-<line x1="517" y1="112" x2="517" y2="341" stroke="#059669" stroke-width="1.5"/>
-<circle cx="517" cy="341" r="3.5" fill="#059669"/>
-<line x1="530" y1="112" x2="530" y2="396" stroke="#0891b2" stroke-width="1.5"/>
-<circle cx="530" cy="396" r="3.5" fill="#0891b2"/>
-<line x1="606" y1="112" x2="606" y2="176" stroke="#e11d48" stroke-width="1.5"/>
-<circle cx="606" cy="176" r="3.5" fill="#e11d48"/>
-<line x1="619" y1="112" x2="619" y2="231" stroke="#7c3aed" stroke-width="1.5"/>
-<circle cx="619" cy="231" r="3.5" fill="#7c3aed"/>
-<line x1="632" y1="112" x2="632" y2="286" stroke="#2563eb" stroke-width="1.5"/>
-<circle cx="632" cy="286" r="3.5" fill="#2563eb"/>
-<line x1="645" y1="112" x2="645" y2="341" stroke="#059669" stroke-width="1.5"/>
-<circle cx="645" cy="341" r="3.5" fill="#059669"/>
-<line x1="658" y1="112" x2="658" y2="396" stroke="#0891b2" stroke-width="1.5"/>
-<circle cx="658" cy="396" r="3.5" fill="#0891b2"/>
-<line x1="758" y1="112" x2="758" y2="176" stroke="#e11d48" stroke-width="1.5"/>
-<circle cx="758" cy="176" r="3.5" fill="#e11d48"/>
-<line x1="771" y1="112" x2="771" y2="231" stroke="#7c3aed" stroke-width="1.5"/>
-<circle cx="771" cy="231" r="3.5" fill="#7c3aed"/>
-<line x1="784" y1="112" x2="784" y2="286" stroke="#2563eb" stroke-width="1.5"/>
-<circle cx="784" cy="286" r="3.5" fill="#2563eb"/>
-<text x="700" y="400" font-size="9.5" fill="#64748b">스토리지 네트워크는 HCI 노드 간에만 연결</text>
+<rect x="186" y="26" width="116" height="72" rx="6" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+<text x="244.0" y="52" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">배포 노드</text>
+<text x="244.0" y="70" text-anchor="middle" font-size="10" fill="#475569">Repo / Deploy</text>
+<text x="244.0" y="88" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond0 / bond1 / bond2</text>
+<rect x="330" y="26" width="104" height="72" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+<text x="382.0" y="52" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">osc01</text>
+<text x="382.0" y="70" text-anchor="middle" font-size="10" fill="#b91c1c">Controller</text>
+<text x="382.0" y="88" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond0 / bond1 / bond2</text>
+<rect x="446" y="26" width="104" height="72" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+<text x="498.0" y="52" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">osc02</text>
+<text x="498.0" y="70" text-anchor="middle" font-size="10" fill="#b91c1c">Controller</text>
+<text x="498.0" y="88" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond0 / bond1 / bond2</text>
+<rect x="562" y="26" width="104" height="72" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+<text x="614.0" y="52" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">osc03</text>
+<text x="614.0" y="70" text-anchor="middle" font-size="10" fill="#b91c1c">Controller</text>
+<text x="614.0" y="88" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond0 / bond1 / bond2</text>
+<rect x="690" y="26" width="190" height="72" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="785.0" y="52" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">comp01 ~ comp04</text>
+<text x="785.0" y="70" text-anchor="middle" font-size="10" fill="#1d4ed8">Compute ×4</text>
+<text x="785.0" y="88" text-anchor="middle" font-size="8.5" fill="#94a3b8">bond0 / bond1 / bond2</text>
+<rect x="14" y="154" width="158" height="36" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="93" y="169" text-anchor="middle" font-size="11" font-weight="600" fill="#5b21b6">External API</text>
+<text x="93" y="183" text-anchor="middle" font-size="8.5" fill="#64748b">br-ext · 192.168.119.0/24</text>
+<line x1="172" y1="172" x2="862" y2="172" stroke="#7c3aed" stroke-width="2"/>
+<polygon points="862,167 874,172 862,177" fill="#7c3aed"/>
+<rect x="14" y="200" width="158" height="36" rx="4" fill="#ffffff" stroke="#e11d48" stroke-width="1.5"/>
+<text x="93" y="215" text-anchor="middle" font-size="11" font-weight="600" fill="#9f1239">Management</text>
+<text x="93" y="229" text-anchor="middle" font-size="8.5" fill="#64748b">br-mgmt · VLAN 11</text>
+<line x1="172" y1="218" x2="862" y2="218" stroke="#e11d48" stroke-width="2"/>
+<polygon points="862,213 874,218 862,223" fill="#e11d48"/>
+<rect x="14" y="246" width="158" height="36" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="93" y="261" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">Tenant (VXLAN)</text>
+<text x="93" y="275" text-anchor="middle" font-size="8.5" fill="#64748b">br-vxlan · VLAN 12</text>
+<line x1="172" y1="264" x2="862" y2="264" stroke="#2563eb" stroke-width="2"/>
+<polygon points="862,259 874,264 862,269" fill="#2563eb"/>
+<rect x="14" y="292" width="158" height="36" rx="4" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="93" y="307" text-anchor="middle" font-size="11" font-weight="600" fill="#b45309">LBaaS</text>
+<text x="93" y="321" text-anchor="middle" font-size="8.5" fill="#64748b">br-lbaas · VLAN 13</text>
+<line x1="172" y1="310" x2="660" y2="310" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 3"/>
+<polygon points="660,305 672,310 660,315" fill="#f59e0b"/>
+<rect x="14" y="338" width="158" height="36" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+<text x="93" y="353" text-anchor="middle" font-size="11" font-weight="600" fill="#047857">Storage</text>
+<text x="93" y="367" text-anchor="middle" font-size="8.5" fill="#64748b">br-storage · VLAN 14</text>
+<line x1="172" y1="356" x2="862" y2="356" stroke="#059669" stroke-width="2"/>
+<polygon points="862,351 874,356 862,361" fill="#059669"/>
+<rect x="14" y="384" width="158" height="36" rx="4" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="93" y="399" text-anchor="middle" font-size="11" font-weight="600" fill="#0e7490">Storage Cluster</text>
+<text x="93" y="413" text-anchor="middle" font-size="8.5" fill="#64748b">br-stor-cluster · VLAN 15</text>
+<line x1="172" y1="402" x2="660" y2="402" stroke="#0891b2" stroke-width="2" stroke-dasharray="6 3"/>
+<polygon points="660,397 672,402 660,407" fill="#0891b2"/>
+<line x1="244" y1="98" x2="244" y2="218" stroke="#e11d48" stroke-width="1.5"/>
+<circle cx="244" cy="218" r="3.5" fill="#e11d48"/>
+<line x1="350" y1="98" x2="350" y2="172" stroke="#7c3aed" stroke-width="1.5"/>
+<circle cx="350" cy="172" r="3.5" fill="#7c3aed"/>
+<line x1="362" y1="98" x2="362" y2="218" stroke="#e11d48" stroke-width="1.5"/>
+<circle cx="362" cy="218" r="3.5" fill="#e11d48"/>
+<line x1="376" y1="98" x2="376" y2="264" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="376" cy="264" r="3.5" fill="#2563eb"/>
+<line x1="388" y1="98" x2="388" y2="310" stroke="#f59e0b" stroke-width="1.5"/>
+<circle cx="388" cy="310" r="3.5" fill="#f59e0b"/>
+<line x1="402" y1="98" x2="402" y2="356" stroke="#059669" stroke-width="1.5"/>
+<circle cx="402" cy="356" r="3.5" fill="#059669"/>
+<line x1="414" y1="98" x2="414" y2="402" stroke="#0891b2" stroke-width="1.5"/>
+<circle cx="414" cy="402" r="3.5" fill="#0891b2"/>
+<line x1="466" y1="98" x2="466" y2="172" stroke="#7c3aed" stroke-width="1.5"/>
+<circle cx="466" cy="172" r="3.5" fill="#7c3aed"/>
+<line x1="478" y1="98" x2="478" y2="218" stroke="#e11d48" stroke-width="1.5"/>
+<circle cx="478" cy="218" r="3.5" fill="#e11d48"/>
+<line x1="492" y1="98" x2="492" y2="264" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="492" cy="264" r="3.5" fill="#2563eb"/>
+<line x1="504" y1="98" x2="504" y2="310" stroke="#f59e0b" stroke-width="1.5"/>
+<circle cx="504" cy="310" r="3.5" fill="#f59e0b"/>
+<line x1="518" y1="98" x2="518" y2="356" stroke="#059669" stroke-width="1.5"/>
+<circle cx="518" cy="356" r="3.5" fill="#059669"/>
+<line x1="530" y1="98" x2="530" y2="402" stroke="#0891b2" stroke-width="1.5"/>
+<circle cx="530" cy="402" r="3.5" fill="#0891b2"/>
+<line x1="582" y1="98" x2="582" y2="172" stroke="#7c3aed" stroke-width="1.5"/>
+<circle cx="582" cy="172" r="3.5" fill="#7c3aed"/>
+<line x1="594" y1="98" x2="594" y2="218" stroke="#e11d48" stroke-width="1.5"/>
+<circle cx="594" cy="218" r="3.5" fill="#e11d48"/>
+<line x1="608" y1="98" x2="608" y2="264" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="608" cy="264" r="3.5" fill="#2563eb"/>
+<line x1="620" y1="98" x2="620" y2="310" stroke="#f59e0b" stroke-width="1.5"/>
+<circle cx="620" cy="310" r="3.5" fill="#f59e0b"/>
+<line x1="634" y1="98" x2="634" y2="356" stroke="#059669" stroke-width="1.5"/>
+<circle cx="634" cy="356" r="3.5" fill="#059669"/>
+<line x1="646" y1="98" x2="646" y2="402" stroke="#0891b2" stroke-width="1.5"/>
+<circle cx="646" cy="402" r="3.5" fill="#0891b2"/>
+<line x1="766" y1="98" x2="766" y2="172" stroke="#7c3aed" stroke-width="1.5"/>
+<circle cx="766" cy="172" r="3.5" fill="#7c3aed"/>
+<line x1="778" y1="98" x2="778" y2="218" stroke="#e11d48" stroke-width="1.5"/>
+<circle cx="778" cy="218" r="3.5" fill="#e11d48"/>
+<line x1="792" y1="98" x2="792" y2="264" stroke="#2563eb" stroke-width="1.5"/>
+<circle cx="792" cy="264" r="3.5" fill="#2563eb"/>
+<line x1="804" y1="98" x2="804" y2="356" stroke="#059669" stroke-width="1.5"/>
+<circle cx="804" cy="356" r="3.5" fill="#059669"/>
+<text x="676" y="440" font-size="9.5" fill="#64748b">LBaaS · Storage Cluster 는 컨트롤러에만 연결</text>
 </svg>
