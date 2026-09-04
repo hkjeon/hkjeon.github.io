@@ -1,6 +1,6 @@
 ---
 title: 대규모 5G NSA 가상화 플랫폼 (RHOSP13) 구축 및 무장애 운영
-summary: S사 대규모 통신망 환경(약 280대 Compute 노드)을 100% 무장애로 관리한 DCN 기반 인프라 운영 성과
+summary: 국내 통신사 5G 코어 인프라에 RHOSP13 기반 가상화 플랫폼을 구축하고, Compute 280대 규모를 DCN 구조로 운영한 사례
 tags:
   - OpenStack
   - Architecture
@@ -8,7 +8,7 @@ date: '2023-01-01T00:00:00Z'
 ---
 
 ## 핵심 요약
-* **프로젝트:** S사 대규모 5G NSA 가상화 플랫폼 구축
+* **발주처:** 국내 통신사
 * **규모:** Compute 노드 약 280대
 * **인프라 환경:** RHOSP13 (Red Hat OpenStack Platform 13)
 * **주요 아키텍처:** DCN(Distributed Compute Network) 기반 L3 라우팅 설계 적용
