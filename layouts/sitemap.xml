@@ -1,0 +1,34 @@
+{{/*
+  사이트맵 템플릿 오버라이드
+
+  테마 기본 템플릿은 `.Data.Pages` 를 순회하는데, 현재 Hugo 버전에서 이 값은
+  홈의 하위 섹션 페이지만 반환한다. 그 결과 블로그 글과 태그 페이지가
+  sitemap.xml 에서 통째로 빠졌다. `site.Pages` 로 바꿔 전체 페이지를 포함시킨다.
+*/}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{/* 빌드된(URL 이 있는) 페이지 중 비공개가 아닌 것만 포함한다. */}}
+  {{ range where (where site.Pages "Permalink" "!=" "") "Params.private" "ne" true }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    {{- if not .Lastmod.IsZero }}<lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}
+    {{- with .Sitemap.ChangeFreq }}<changefreq>{{ . }}</changefreq>{{ end }}
+    {{- if ge .Sitemap.Priority 0.0 }}<priority>{{ .Sitemap.Priority }}</priority>{{ end }}
+    {{- if .IsTranslated -}}
+    {{- range .Translations -}}
+    <xhtml:link
+      rel="alternate"
+      hreflang="{{ .Language.Lang }}"
+      href="{{ .Permalink }}"
+    />
+    {{- end -}}
+    <xhtml:link
+      rel="alternate"
+      hreflang="{{ .Language.Lang }}"
+      href="{{ .Permalink }}"
+    />
+    {{- end -}}
+  </url>
+  {{- end -}}
+</urlset>

@@ -33,13 +33,9 @@ footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 disableAliases: true
 outputs:
-  # Hugo 0.125+ 부터 sitemap 이 output format 이라, 각 페이지 종류마다 명시해야
-  # /sitemap.xml 목록에 포함된다. home 에만 넣으면 하위 페이지가 누락된다.
+  # Hugo 0.125+ 부터 sitemap 이 output format 이므로 home 에 명시해야 생성된다.
   home: [HTML, RSS, sitemap, headers, redirects, backlinks]
-  section: [HTML, RSS, sitemap]
-  page: [HTML, sitemap]
-  term: [HTML, RSS, sitemap]
-  taxonomy: [HTML, RSS, sitemap]
+  section: [HTML, RSS]
 imaging:
   resampleFilter: lanczos
   quality: 90
