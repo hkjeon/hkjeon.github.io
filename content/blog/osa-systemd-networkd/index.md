@@ -111,16 +111,16 @@ OpenStack-Ansible **Epoxy(2025.1)** 기준 테스트베드입니다. 컨트롤�
 
 | 브리지 | VLAN | 용도 | 컨트롤러 | 컴퓨트 |
 |---|---|---|---|---|
-| `br-ext` | — (bond0 직결) | 외부 연결 | ✅ | ✅ |
+| `br-ext` | — (bond0 flat 직결) | External API | ✅ | ✅ |
 | `br-mgmt` | 11 | 관리 · Internal API | ✅ | ✅ |
 | `br-vxlan` | 12 | 테넌트 오버레이 | ✅ | ✅ |
-| `br-lbaas` | 13 | LBaaS (Octavia) | ✅ | — |
+| `br-lbaas` | 13 | LBaaS — Octavia amphora 연동 | ✅ | — |
 | `br-storage` | 14 | 스토리지 서비스 | ✅ | ✅ |
 | `br-stor-cluster` | 15 | 스토리지 클러스터 (복제) | ✅ | — |
 
 **스토리지 네트워크를 둘로 나눈 이유**는 복제 트래픽이 클라이언트 I/O를 밀어내지 않게 하기 위해서입니다. 복구나 리밸런싱이 돌면 노드 간 트래픽이 순간적으로 크게 늘어나는데, 서비스 네트워크와 같은 경로를 타면 VM의 디스크 응답이 함께 느려집니다.
 
-컴퓨트에는 `br-lbaas`와 `br-stor-cluster`가 없습니다. Octavia는 컨트롤러에 올라가고, 복제 트래픽은 컴퓨트를 거치지 않기 때문입니다. 다만 **VLAN 장치는 양쪽에 똑같이 선언**해뒀습니다. 나중에 필요하면 브리지만 추가하면 됩니다.
+컴퓨트에는 `br-lbaas`와 `br-stor-cluster`가 없습니다. `br-lbaas`는 컨트롤러가 Octavia amphora와 통신하는 경로이고, 복제 트래픽은 컴퓨트를 거치지 않기 때문입니다. 다만 **VLAN 장치는 양쪽에 똑같이 선언**해뒀습니다. 나중에 필요하면 브리지만 추가하면 됩니다.
 
 ### 논리 네트워크 구성
 
@@ -134,11 +134,19 @@ OpenStack-Ansible **Epoxy(2025.1)** 기준 테스트베드입니다. 컨트롤�
 
 ![물리 인터페이스 계층 구조](interface-stack.svg)
 
-**NIC 세 개를 각각 bond로 묶고, 그중 `bond1`에만 VLAN을 태웁니다.** 외부 연결은 VLAN 없이 `bond0`을 브리지에 직접 붙였습니다. 외부망은 스위치에서 이미 분리되어 들어오는 경우가 많아 태깅이 불필요합니다.
+**NIC 세 개를 각각 bond로 묶고, 그중 `bond1`에만 VLAN을 태웁니다.** 세 bond의 역할이 명확히 갈립니다.
 
-`bond2`(`enp3s0`)는 선언만 하고 어느 브리지에도 연결하지 않았습니다. 확장용으로 남겨둔 것입니다.
+| bond | NIC | 역할 |
+|---|---|---|
+| `bond0` | enp1s0 | External API 전용. flat 구성이라 VLAN 태깅 없이 `br-ext`에 직결 |
+| `bond1` | enp2s0 | 내부 서비스 네트워크. VLAN 11~15로 분리 |
+| `bond2` | enp3s0 | **Provider network 용.** Neutron이 OVS 브리지로 가져감 |
 
-컴퓨트 노드도 이 그림과 같습니다. 점선으로 표시한 `br-lbaas`와 `br-stor-cluster` 두 개만 만들지 않습니다.
+**`bond2`에 Linux bridge가 없는 것은 쓰지 않아서가 아닙니다.** Provider network는 Neutron이 OVS 브리지를 만들어 물기 때문에, systemd-networkd 단계에서는 bond만 만들어두고 손대지 않습니다. 여기서 브리지를 만들어버리면 오히려 OVS와 충돌합니다.
+
+**어디까지가 systemd-networkd의 영역인지 구분하는 게 중요합니다.** OSA 배포 전에 준비해야 할 것은 bond와 VLAN, 그리고 OpenStack 서비스가 쓸 Linux bridge까지입니다. 테넌트 트래픽이 실제로 흐르는 OVS 계층은 Neutron이 알아서 만듭니다.
+
+컴퓨트 노드도 이 그림과 같습니다. `br-lbaas`와 `br-stor-cluster` 두 개만 만들지 않습니다.
 
 아래 설정 코드는 이 그림을 그대로 YAML로 옮긴 것입니다.
 
@@ -323,7 +331,7 @@ openstack_hosts_systemd_networkd_networks:
     bridge: br-stor-cluster
 ```
 
-**`br-ext`만 VLAN을 거치지 않습니다.** `bond0`을 브리지에 직접 붙였습니다.
+**`br-ext`만 VLAN을 거치지 않습니다.** External API 망을 flat으로 구성해 `bond0`을 브리지에 직접 붙였습니다. `bond2`는 어느 브리지에도 연결하지 않는데, provider network용으로 Neutron이 OVS 브리지를 씌우기 때문입니다.
 
 마지막으로 bridge에 IP를 붙입니다.
 

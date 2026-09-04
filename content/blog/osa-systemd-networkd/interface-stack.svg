@@ -20,9 +20,9 @@
 <rect x="206" y="213" width="110" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
 <text x="261.0" y="229.0" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">bond1</text>
 <text x="261.0" y="243.0" text-anchor="middle" font-size="8.5" fill="#64748b">VLAN 태깅</text>
-<rect x="206" y="373" width="110" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7" stroke-dasharray="4 3"/>
+<rect x="206" y="373" width="110" height="34" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.7"/>
 <text x="261.0" y="389.0" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">bond2</text>
-<text x="261.0" y="403.0" text-anchor="middle" font-size="8.5" fill="#64748b">예비 (미사용)</text>
+<text x="261.0" y="403.0" text-anchor="middle" font-size="8.5" fill="#64748b">Provider N/W</text>
 <rect x="392" y="123" width="124" height="34" rx="5" fill="#ffffff" stroke="#e11d48" stroke-width="1.7"/>
 <text x="454.0" y="139.0" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">bond1.11</text>
 <text x="454.0" y="153.0" text-anchor="middle" font-size="8.5" fill="#64748b">VLAN 11</text>
@@ -84,5 +84,10 @@
 <polygon points="383,359.5 392,364 383,368.5" fill="#0891b2"/>
 <path d="M 516 364 C 576.0 364, 576.0 364, 627 364" fill="none" stroke="#0891b2" stroke-width="1.6" stroke-dasharray="5 3"/>
 <polygon points="627,359.5 636,364 627,368.5" fill="#0891b2"/>
-<text x="470.0" y="454" text-anchor="middle" font-size="9.5" fill="#94a3b8">컴퓨트 노드는 점선 표시된 br-lbaas · br-stor-cluster 만 제외하고 동일하다</text>
+<path d="M 316 390 C 480 390, 480 420, 634 420" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 3"/>
+<polygon points="625,415.5 634,420 625,424.5" fill="#94a3b8"/>
+<rect x="636" y="403" width="200" height="34" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="736" y="419" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">OVS provider bridge</text>
+<text x="736" y="432" text-anchor="middle" font-size="8.5" fill="#64748b">Neutron 이 생성 — systemd-networkd 영역 밖</text>
+<text x="470.0" y="458" text-anchor="middle" font-size="9.5" fill="#94a3b8">컴퓨트 노드는 br-lbaas · br-stor-cluster 만 제외하고 동일하다</text>
 </svg>
