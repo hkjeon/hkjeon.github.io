@@ -60,8 +60,10 @@ sections:
           tag: OpenStack
         - name: Storage
           tag: Storage
-        - name: Open Source
-          tag: Open Source
+        - name: NFV
+          tag: NFV
+        - name: Kubernetes
+          tag: Kubernetes
       default_button_index: 0
       # Archive link auto-shown if more projects exist than 'count' above
       # archive:
