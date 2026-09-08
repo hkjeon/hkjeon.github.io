@@ -62,8 +62,8 @@ sections:
           tag: Storage
         - name: NFV
           tag: NFV
-        - name: Kubernetes
-          tag: Kubernetes
+        - name: Migration
+          tag: Migration
       default_button_index: 0
       # Archive link auto-shown if more projects exist than 'count' above
       # archive:
