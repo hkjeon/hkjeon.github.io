@@ -43,7 +43,7 @@ eras:
             desc: 폐쇄망 오프라인 설치, systemd-networkd 자동화, 업스트림 기여
             tags: [OpenStack-Ansible, Caracal, Epoxy, Ansible]
 
-  - name: 통신사 5G 가상화 · 컨테이너
+  - name: 통신사 5G · Red Hat 가상화/컨테이너 (RHOSP · RHOCP)
     period: 2020.04 ~ 2024.10
     color: "#f59e0b"
     companies:

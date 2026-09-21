@@ -59,7 +59,7 @@ experience:
       - 공공 인프라 공기업 정보인프라 도입·증설 및 OpenStack 3개 클러스터 유지보수
       - OpenStack-Ansible 업스트림 기여 (openstack-ansible-os_swift)
   - role: Cloud Platform Engineer
-    org: E사 → O사 · S사(통신사) 5G 가상화 · 컨테이너 플랫폼
+    org: E사 → O사 · S사(통신사) 5G Red Hat 가상화 · 컨테이너 플랫폼 (RHOSP · RHOCP)
     start: 2020-04-01
     end: 2024-10-31
     summary: |
