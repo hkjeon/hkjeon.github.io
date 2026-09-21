@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="520" fill="#ffffff"/>
+<text x="150" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">RHOSP13 · Single Stack</text>
+<rect x="18" y="42" width="264" height="356" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="6 4"/>
+<text x="150" y="62" text-anchor="middle" font-size="10" fill="#64748b">overcloud (Stack 1개)</text>
+<rect x="40" y="74" width="220" height="40" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+<text x="150.0" y="91" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">Controller ×3</text>
+<text x="150.0" y="105" text-anchor="middle" font-size="9" fill="#b91c1c">Central</text>
+<rect x="40" y="128" width="220" height="34" rx="5" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="150.0" y="149" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1e3a8a">Zone 1 · Compute</text>
+<rect x="40" y="170" width="220" height="34" rx="5" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="150.0" y="191" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1e3a8a">Zone 2 · Compute</text>
+<rect x="40" y="212" width="220" height="34" rx="5" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="150.0" y="233" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1e3a8a">Zone 3 · Compute</text>
+<rect x="40" y="254" width="220" height="34" rx="5" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="150.0" y="275" text-anchor="middle" font-size="10.5" font-weight="600" fill="#1e3a8a">Zone N · Compute</text>
+<text x="150" y="308" text-anchor="middle" font-size="10" fill="#64748b">⋯  Compute 200~300대</text>
+<rect x="34" y="356" width="232" height="32" rx="5" fill="#fff1f2" stroke="#e11d48" stroke-width="1.2"/>
+<text x="150.0" y="376" text-anchor="middle" font-size="10.5" font-weight="600" fill="#9f1239">배포·변경 1회 = 전체 노드 대상</text>
+<line x1="292" y1="220" x2="326" y2="220" stroke="#94a3b8" stroke-width="2.4"/>
+<polygon points="326,215 336,220 326,225" fill="#94a3b8"/>
+<text x="612" y="28" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">RHOSP 16.2 · Multi-Stack (DCN)</text>
+<rect x="522" y="42" width="180" height="42" rx="6" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+<text x="612.0" y="60" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0f172a">Undercloud</text>
+<text x="612.0" y="75" text-anchor="middle" font-size="9" fill="#475569">Stack 3개를 개별 관리</text>
+<line x1="612" y1="84" x2="426" y2="118" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4 3"/>
+<rect x="342" y="118" width="168" height="150" rx="8" fill="#ffffff" stroke="#b91c1c" stroke-width="1.8" stroke-dasharray="6 3"/>
+<text x="426" y="138" text-anchor="middle" font-size="11" font-weight="600" fill="#b91c1c">Central Stack</text>
+<rect x="354" y="150" width="144" height="30" rx="4" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+<text x="426.0" y="169" text-anchor="middle" font-size="10" fill="#0f172a">KVM 호스트</text>
+<rect x="354" y="186" width="144" height="30" rx="4" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+<text x="426.0" y="205" text-anchor="middle" font-size="10" fill="#0f172a">Controller VM ×3</text>
+<rect x="354" y="222" width="144" height="30" rx="4" fill="#fef2f2" stroke="#b91c1c" stroke-width="1"/>
+<text x="426.0" y="241" text-anchor="middle" font-size="10" fill="#0f172a">패키지 저장소 · 레지스트리</text>
+<line x1="612" y1="84" x2="612" y2="118" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4 3"/>
+<rect x="528" y="118" width="168" height="150" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.8" stroke-dasharray="6 3"/>
+<text x="612" y="138" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">Zone A Stack · AZ1</text>
+<rect x="540" y="150" width="144" height="30" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+<text x="612.0" y="169" text-anchor="middle" font-size="10" fill="#0f172a">Compute ×8</text>
+<rect x="540" y="186" width="144" height="30" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+<text x="612.0" y="205" text-anchor="middle" font-size="10" fill="#0f172a">OVS-DPDK · OVN</text>
+<rect x="540" y="222" width="144" height="30" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+<text x="612.0" y="241" text-anchor="middle" font-size="10" fill="#0f172a">Zone 전용 서브넷</text>
+<line x1="612" y1="84" x2="798" y2="118" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4 3"/>
+<rect x="714" y="118" width="168" height="150" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.8" stroke-dasharray="6 3"/>
+<text x="798" y="138" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">Zone B Stack · AZ2</text>
+<rect x="726" y="150" width="144" height="30" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+<text x="798.0" y="169" text-anchor="middle" font-size="10" fill="#0f172a">Compute ×8</text>
+<rect x="726" y="186" width="144" height="30" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+<text x="798.0" y="205" text-anchor="middle" font-size="10" fill="#0f172a">OVS-DPDK · OVN</text>
+<rect x="726" y="222" width="144" height="30" rx="4" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+<text x="798.0" y="241" text-anchor="middle" font-size="10" fill="#0f172a">Zone 전용 서브넷</text>
+<line x1="510" y1="290" x2="882" y2="290" stroke="#7c3aed" stroke-width="2.2"/>
+<line x1="426" y1="268" x2="426" y2="290" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="612" y1="268" x2="612" y2="290" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="798" y1="268" x2="798" y2="290" stroke="#7c3aed" stroke-width="1.6"/>
+<line x1="426" y1="290" x2="510" y2="290" stroke="#7c3aed" stroke-width="2.2"/>
+<rect x="560" y="300" width="104" height="22" rx="4" fill="#faf5ff" stroke="#7c3aed" stroke-width="1"/>
+<text x="612.0" y="315" text-anchor="middle" font-size="9.5" font-weight="600" fill="#6b21a8">L3 라우팅</text>
+<text x="342" y="350" text-anchor="start" font-size="10.5" font-weight="600" fill="#0f172a">배포 순서</text>
+<rect x="342" y="360" width="160" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+<text x="422.0" y="379" text-anchor="middle" font-size="10" fill="#334155">①  --stack central</text>
+<line x1="504" y1="375" x2="518" y2="375" stroke="#94a3b8" stroke-width="1.6"/>
+<polygon points="518,370 528,375 518,380" fill="#94a3b8"/>
+<rect x="528" y="360" width="160" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+<text x="608.0" y="379" text-anchor="middle" font-size="10" fill="#334155">②  --stack zone-a</text>
+<line x1="690" y1="375" x2="704" y2="375" stroke="#94a3b8" stroke-width="1.6"/>
+<polygon points="704,370 714,375 704,380" fill="#94a3b8"/>
+<rect x="714" y="360" width="160" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+<text x="794.0" y="379" text-anchor="middle" font-size="10" fill="#334155">③  --stack zone-b</text>
+<rect x="342" y="404" width="540" height="32" rx="5" fill="#ecfdf5" stroke="#059669" stroke-width="1.2"/>
+<text x="612.0" y="424" text-anchor="middle" font-size="10.5" font-weight="600" fill="#047857">배포·변경 1회 = 해당 Zone Stack 노드만 대상</text>
+<text x="18" y="472" text-anchor="start" font-size="9" fill="#94a3b8">※ Zone 구분·Stack 이름은 일반화한 표기입니다. Zone당 Compute 8대가 표준 단위.</text>
+<text x="18" y="490" text-anchor="start" font-size="9" fill="#94a3b8">※ Central Stack 배포 후 Zone Stack을 순차 배포 — 각 Zone Stack의 태스크는 다른 Stack 노드를 건드리지 않음.</text>
+</svg>

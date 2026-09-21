@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" width="900" height="330" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="330" fill="#ffffff"/>
+<text x="18" y="26" text-anchor="start" font-size="12" font-weight="600" fill="#0f172a">Central KVM 호스트 — 후면 포트 구성 (2U 서버)</text>
+<rect x="18" y="40" width="864" height="230" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.6"/>
+<text x="150" y="62" text-anchor="middle" font-size="9.5" fill="#475569">25G SFP (Slot 1~3)</text>
+<rect x="40" y="68" width="220" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="52" y="85" text-anchor="start" font-size="8.5" fill="#64748b">S1</text>
+<rect x="78" y="72" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="115.0" y="88" text-anchor="middle" font-size="9.5" fill="#0f172a">ens1f1</text>
+<rect x="160" y="72" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="197.0" y="88" text-anchor="middle" font-size="9.5" fill="#0f172a">ens1f0</text>
+<rect x="40" y="104" width="220" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="52" y="121" text-anchor="start" font-size="8.5" fill="#64748b">S2</text>
+<rect x="78" y="108" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="115.0" y="124" text-anchor="middle" font-size="9.5" fill="#0f172a">ens2f1</text>
+<rect x="160" y="108" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="197.0" y="124" text-anchor="middle" font-size="9.5" fill="#0f172a">ens2f0</text>
+<rect x="40" y="140" width="220" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="52" y="157" text-anchor="start" font-size="8.5" fill="#64748b">S3</text>
+<rect x="78" y="144" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="115.0" y="160" text-anchor="middle" font-size="9.5" fill="#0f172a">ens3f1</text>
+<rect x="160" y="144" width="74" height="24" rx="3" fill="#fef3c7" stroke="#b45309" stroke-width="1.4"/>
+<text x="197.0" y="160" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">ens3f0</text>
+<text x="470" y="62" text-anchor="middle" font-size="9.5" fill="#475569">10G (Slot 4·5) · 25G SFP (Slot 6)</text>
+<rect x="360" y="68" width="220" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="372" y="85" text-anchor="start" font-size="8.5" fill="#64748b">S4</text>
+<rect x="398" y="72" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="435.0" y="88" text-anchor="middle" font-size="9.5" fill="#0f172a">ens4f1</text>
+<rect x="480" y="72" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="517.0" y="88" text-anchor="middle" font-size="9.5" fill="#0f172a">ens4f0</text>
+<rect x="360" y="104" width="220" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="372" y="121" text-anchor="start" font-size="8.5" fill="#64748b">S5</text>
+<rect x="398" y="108" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="435.0" y="124" text-anchor="middle" font-size="9.5" fill="#0f172a">ens5f1</text>
+<rect x="480" y="108" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="517.0" y="124" text-anchor="middle" font-size="9.5" fill="#0f172a">ens5f0</text>
+<rect x="360" y="140" width="220" height="32" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="372" y="157" text-anchor="start" font-size="8.5" fill="#64748b">S6</text>
+<rect x="398" y="144" width="74" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="435.0" y="160" text-anchor="middle" font-size="9.5" fill="#0f172a">ens6f1</text>
+<rect x="480" y="144" width="74" height="24" rx="3" fill="#fef3c7" stroke="#b45309" stroke-width="1.4"/>
+<text x="517.0" y="160" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">ens6f0</text>
+<rect x="640" y="72" width="104" height="96" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="692.0" y="116" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">PSU</text>
+<text x="692.0" y="132" text-anchor="middle" font-size="8.5" fill="#64748b">이중화</text>
+<rect x="756" y="72" width="104" height="96" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+<text x="808.0" y="116" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">PSU</text>
+<text x="808.0" y="132" text-anchor="middle" font-size="8.5" fill="#64748b">이중화</text>
+<rect x="40" y="200" width="80" height="28" rx="3" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.4"/>
+<text x="80.0" y="218" text-anchor="middle" font-size="10" font-weight="600" fill="#1e3a8a">iDRAC</text>
+<text x="250" y="192" text-anchor="middle" font-size="9.5" fill="#475569">온보드 — eno1·eno2 10G / eno3·eno4 1G</text>
+<rect x="150" y="202" width="72" height="24" rx="3" fill="#dcfce7" stroke="#15803d" stroke-width="1.4"/>
+<text x="186.0" y="218" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0f172a">eno1</text>
+<rect x="230" y="202" width="72" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="266.0" y="218" text-anchor="middle" font-size="9.5" fill="#0f172a">eno2</text>
+<rect x="310" y="202" width="72" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="346.0" y="218" text-anchor="middle" font-size="9.5" fill="#0f172a">eno3</text>
+<rect x="390" y="202" width="72" height="24" rx="3" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+<text x="426.0" y="218" text-anchor="middle" font-size="9.5" fill="#0f172a">eno4</text>
+<rect x="18" y="282" width="12" height="12" rx="2" fill="#dcfce7" stroke="#15803d" stroke-width="1.2"/>
+<text x="36" y="292" text-anchor="start" font-size="9.5" fill="#334155">Provisioning / PXE</text>
+<rect x="160" y="282" width="12" height="12" rx="2" fill="#fef3c7" stroke="#b45309" stroke-width="1.2"/>
+<text x="178" y="292" text-anchor="start" font-size="9.5" fill="#334155">bond0 (active-backup) — MGMT · External(MANO/OAM), 서로 다른 슬롯</text>
+<rect x="660" y="282" width="12" height="12" rx="2" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.2"/>
+<text x="678" y="292" text-anchor="start" font-size="9.5" fill="#334155">iDRAC (OOB)</text>
+<text x="18" y="318" text-anchor="start" font-size="9" fill="#94a3b8">※ 호스트명·VLAN ID는 제외한 일반화 표기입니다. bond0 위 VLAN별 Linux Bridge로 Controller VM에 연결.</text>
+</svg>
