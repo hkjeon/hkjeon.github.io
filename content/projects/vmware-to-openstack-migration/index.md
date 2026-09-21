@@ -1,6 +1,6 @@
 ---
-title: 통신사 메시징 시스템 VMware → OpenStack 전환 (RHOSP16)
-summary: VMware 기반으로 운영되던 통신사 메시징 시스템을 RHOSP16으로 옮기기 위한 PoC와 플랫폼 구축. 마이그레이션 방식 검증부터 장애 복구 시험, 상용 전환 설계까지 수행한 사례
+title: S사(통신사) 메시징 시스템 VMware → OpenStack 전환 (RHOSP16)
+summary: VMware 기반으로 운영되던 S사(통신사) 메시징 시스템을 RHOSP16으로 옮기기 위한 PoC와 플랫폼 구축. 마이그레이션 방식 검증부터 장애 복구 시험, 상용 전환 설계까지 수행한 사례
 tags:
   - OpenStack
   - Migration

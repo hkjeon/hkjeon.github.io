@@ -1,6 +1,6 @@
 ---
-title: 대규모 5G NSA 가상화 플랫폼 (RHOSP13) 구축 및 무장애 운영
-summary: 국내 통신사 5G 코어 인프라에 RHOSP13 기반 가상화 플랫폼을 구축하고, Compute 280대 규모를 DCN 구조로 운영한 사례
+title: S사(통신사) 대규모 5G NSA 가상화 플랫폼 (RHOSP13) 구축 및 무장애 운영
+summary: 국내 통신사 S사의 5G 코어 인프라에 RHOSP13 기반 가상화 플랫폼을 구축하고, Compute 280대 규모를 DCN 구조로 운영한 사례
 tags:
   - OpenStack
   - Architecture
