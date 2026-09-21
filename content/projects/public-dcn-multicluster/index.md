@@ -31,7 +31,7 @@ KA → OSA|배포 도구 전환 재구축
 | 구분 | 구성 |
 |---|---|
 | 노드 | Controller + Compute **혼합형 3대** + Compute 전용 2대, 배포 노드 · 별도 컨트롤러는 VM |
-| 가용 영역 | L3 라우팅 구간별 **AZ 분리** — 워크로드를 구역 성격에 맞게 배치 |
+| 가용 영역 | **Bigdata AZ**(혼합형 3대) · **Combine AZ**(Compute 전용 2대)로 분리 — 워크로드를 구역 성격에 맞게 배치 |
 | 스토리지 | **Cinder Multi-Backend** — A 구역 Pure Storage(FC), B 구역 NetApp ONTAP(FC), 볼륨 타입으로 구분 |
 | 네트워크 | bond0 API · Tenant / bond1 Provider(서비스) / bond2 Provider(NAS), Provider flat 구성 |
 | 이중화 | 노드별 HBA 이중화 + FC Multipath |

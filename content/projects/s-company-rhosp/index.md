@@ -21,7 +21,7 @@ RHOSP13|Red Hat OpenStack Platform
 | 항목 | 내용 |
 |---|---|
 | 발주처 | S사(통신사) |
-| 기간 | 2020.04 ~ 2023 (구축 후 운영 · 기술지원) |
+| 기간 | 2020.04 ~ 2023.12 (구축 후 운영 · 기술지원) |
 | 사업 | 5G NSA 코어 인프라용 **RHOSP13 기반 가상화 플랫폼** 구축 및 운영 |
 | 규모 | Compute 약 280대, 7개 리전 |
 | 기술 | RHOSP13 · DCN(L3 라우팅) · OVS-DPDK · SR-IOV · PCI Passthrough · Ansible |
@@ -30,13 +30,14 @@ RHOSP13|Red Hat OpenStack Platform
 
 | 구분 | 구성 |
 |---|---|
-| 아키텍처 | **DCN(Distributed Compute Node)** — Controller와 원격 Compute 간 L3 라우팅 분리 |
+| 아키텍처 | **DCN(Distributed Compute Node)** — Director 2대(KVM 호스트 VM)가 Compute Zone을 **홀수 / 짝수 AZ로 나눠 관리**, Director · Controller는 같은 서브넷, Zone마다 별도 서브넷(L3 라우팅) |
+| 규모 | Compute 약 280대, AZ당 8대 (Director별 약 17개 AZ) |
 | 성능 | 통신사 VNF 요구에 맞춘 OVS-DPDK, SR-IOV, PCI Passthrough 적용 |
 | 운영 | 200대 이상 노드 대상 보안취약점 조치 · 정기점검 **Ansible 자동화**, 결과 중앙 수집 |
 
 ## 구성도
 
-[![RHOSP13 DCN 구조 — Central과 원격 리전 Compute의 L3 연결](dcn-architecture.svg)](dcn-architecture.svg "클릭하면 원본 크기로 열립니다")
+[![RHOSP13 DCN 구조 — Director 2개가 홀수·짝수 Compute Zone을 나눠 관리](dcn-architecture.svg)](dcn-architecture.svg "클릭하면 원본 크기로 열립니다")
 
 ## 담당 역할 및 수행 내용
 
