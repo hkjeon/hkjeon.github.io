@@ -57,7 +57,7 @@ eras:
             title: S사(통신사) NFV 플랫폼 DCN Multi-Stack 전환
             link: /projects/telco-nfv-dcn-multistack/
             tags: [RHOSP 16.2, OVS-DPDK, DCN]
-          - period: 2024.01 ~ 2024.10
+          - period: 2024.04 ~ 2024.10
             title: S사(통신사) 메시징 시스템 VMware → OpenStack 전환
             link: /projects/vmware-to-openstack-migration/
             tags: [RHOSP16, Migration]

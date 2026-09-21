@@ -22,7 +22,7 @@ Controller 3대|전체 다운에도 VNF 무영향
 | 항목 | 내용 |
 |---|---|
 | 발주처 | S사(통신사) |
-| 기간 | 2024.04 ~ 2024.10 |
+| 기간 | 2024.04 ~ 2024.10 (망 설계 · IP 준비 착수 2024.04 → 장비 입고 · RHOSP 설치 2024.05 → 1차 PoC 2024.06 ~) |
 | 사업 | VMware 기반 **메시징 시스템(SMS 계열 VNF)을 RHOSP16으로 전환**하기 위한 플랫폼 구축 및 PoC |
 | 규모 | Director 1 · Controller 3 · Compute 2 (베어메탈) |
 | 기술 | RHOSP 16.2 · OVN · virt-v2v · Cinder Multi-attach · SAN 연동 · NUMA · HugePages |
