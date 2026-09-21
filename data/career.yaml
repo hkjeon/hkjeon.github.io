@@ -49,9 +49,9 @@ eras:
     companies:
       - name: O사
         period: 2024.01 ~ 2024.10
-        position: 프로 · 파트장
+        position: 프로
         role: Cloud Platform Engineer
-        note: E사 Red Hat 사업 이관으로 소속 변경, 업무 연속
+        note: E사 Red Hat 사업 이관으로 소속 변경, 업무 연속 · RHOSP 파트 파트장
         projects:
           - period: 2024.07 ~ 2024.09
             title: S사(통신사) NFV 플랫폼 DCN Multi-Stack 전환
