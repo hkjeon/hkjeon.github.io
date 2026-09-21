@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="600" fill="#ffffff"/>
+<rect x="14" y="22" width="150" height="62" rx="6" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+<text x="89.0" y="49" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">배포 노드</text>
+<text x="89.0" y="68" text-anchor="middle" font-size="9.5" fill="#475569">Deploy VM · Repo</text>
+<rect x="172" y="22" width="150" height="62" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+<text x="247.0" y="49" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">Controller ×3</text>
+<text x="247.0" y="68" text-anchor="middle" font-size="9.5" fill="#b91c1c">HA · Galera · HAProxy</text>
+<rect x="330" y="22" width="186" height="62" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+<text x="423.0" y="49" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">Compute ×7</text>
+<text x="423.0" y="68" text-anchor="middle" font-size="9.5" fill="#1d4ed8">KVM · OVN</text>
+<rect x="524" y="22" width="120" height="62" rx="6" fill="#f8fafc" stroke="#475569" stroke-width="1.5"/>
+<text x="584.0" y="49" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">CMP</text>
+<text x="584.0" y="68" text-anchor="middle" font-size="9.5" fill="#475569">클라우드 관리</text>
+<rect x="652" y="22" width="234" height="62" rx="6" fill="#f0fdf4" stroke="#047857" stroke-width="1.5"/>
+<text x="769.0" y="49" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">SAN / NAS 스토리지</text>
+<text x="769.0" y="68" text-anchor="middle" font-size="9.5" fill="#047857">각 50TB</text>
+<rect x="14" y="108" width="320" height="34" rx="4" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/>
+<text x="174.0" y="130" text-anchor="middle" font-size="10.5" font-weight="600" fill="#92400e">방화벽 ×2 (HA) · ToR 스위치 ×2 · OOB 스위치 ×2</text>
+<text x="350" y="130" font-size="9.5" fill="#94a3b8">기관 백본과 4포트 LAG 연동 · 전 노드 기본 게이트웨이</text>
+<rect x="14" y="168" width="200" height="38" rx="4" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
+<text x="114.0" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">IPMI</text>
+<text x="114.0" y="198" text-anchor="middle" font-size="8.5" fill="#64748b">10.0.0.0/24 · OOB 전용</text>
+<line x1="214" y1="187" x2="880" y2="187" stroke="#64748b" stroke-width="2"/>
+<polygon points="880,182 892,187 880,192" fill="#64748b"/>
+<rect x="14" y="216" width="200" height="38" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="114.0" y="232" text-anchor="middle" font-size="11" font-weight="600" fill="#5b21b6">External API</text>
+<text x="114.0" y="246" text-anchor="middle" font-size="8.5" fill="#64748b">172.16.1.0/24 · VLAN 1610</text>
+<line x1="214" y1="235" x2="880" y2="235" stroke="#7c3aed" stroke-width="2"/>
+<polygon points="880,230 892,235 880,240" fill="#7c3aed"/>
+<rect x="14" y="264" width="200" height="38" rx="4" fill="#ffffff" stroke="#e11d48" stroke-width="1.5"/>
+<text x="114.0" y="280" text-anchor="middle" font-size="11" font-weight="600" fill="#9f1239">Internal API</text>
+<text x="114.0" y="294" text-anchor="middle" font-size="8.5" fill="#64748b">10.0.2.0/24 · VLAN 1020</text>
+<line x1="214" y1="283" x2="516" y2="283" stroke="#e11d48" stroke-width="2"/>
+<polygon points="516,278 528,283 516,288" fill="#e11d48"/>
+<rect x="14" y="312" width="200" height="38" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="114.0" y="328" text-anchor="middle" font-size="11" font-weight="600" fill="#1d4ed8">Tenant (Geneve)</text>
+<text x="114.0" y="342" text-anchor="middle" font-size="8.5" fill="#64748b">10.0.3.0/24 · VLAN 1030</text>
+<line x1="214" y1="331" x2="516" y2="331" stroke="#2563eb" stroke-width="2"/>
+<polygon points="516,326 528,331 516,336" fill="#2563eb"/>
+<rect x="14" y="360" width="200" height="38" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+<text x="114.0" y="376" text-anchor="middle" font-size="11" font-weight="600" fill="#047857">Provider · 서비스</text>
+<text x="114.0" y="390" text-anchor="middle" font-size="8.5" fill="#64748b">172.17.x.0/24 · VLAN 1710~1740</text>
+<line x1="214" y1="379" x2="516" y2="379" stroke="#059669" stroke-width="2"/>
+<polygon points="516,374 528,379 516,384" fill="#059669"/>
+<rect x="14" y="408" width="200" height="38" rx="4" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="114.0" y="424" text-anchor="middle" font-size="11" font-weight="600" fill="#0e7490">Provider · NAS</text>
+<text x="114.0" y="438" text-anchor="middle" font-size="8.5" fill="#64748b">172.18.x.0/24 · VLAN 1810/1820</text>
+<line x1="214" y1="427" x2="880" y2="427" stroke="#0891b2" stroke-width="2"/>
+<polygon points="880,422 892,427 880,432" fill="#0891b2"/>
+<rect x="14" y="456" width="200" height="38" rx="4" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="114.0" y="472" text-anchor="middle" font-size="11" font-weight="600" fill="#b45309">Provider · 백업</text>
+<text x="114.0" y="486" text-anchor="middle" font-size="8.5" fill="#64748b">192.168.0.0/24 · 전용 스위치</text>
+<line x1="214" y1="475" x2="516" y2="475" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 3"/>
+<polygon points="516,470 528,475 516,480" fill="#f59e0b"/>
+<rect x="14" y="504" width="200" height="38" rx="4" fill="#ffffff" stroke="#9333ea" stroke-width="1.5"/>
+<text x="114.0" y="520" text-anchor="middle" font-size="11" font-weight="600" fill="#6b21a8">SAN (FC 32G)</text>
+<text x="114.0" y="534" text-anchor="middle" font-size="8.5" fill="#64748b">Multipath · 이더넷과 분리</text>
+<line x1="214" y1="523" x2="880" y2="523" stroke="#9333ea" stroke-width="2" stroke-dasharray="6 3"/>
+<polygon points="880,518 892,523 880,528" fill="#9333ea"/>
+<text x="14" y="562" font-size="9.5" fill="#94a3b8">※ 실제 구축 대역은 표기 규칙만 반영한 예시 표기입니다. Provider·서비스 망은 업무 / 컨테이너 / 모니터링 / DMZ 4개 VLAN으로 분리.</text>
+<text x="14" y="580" font-size="9.5" fill="#94a3b8">※ IPMI·백업 망은 서비스 경로와 물리적으로 분리, SAN은 이더넷을 경유하지 않는 FC 전용 경로.</text>
+</svg>

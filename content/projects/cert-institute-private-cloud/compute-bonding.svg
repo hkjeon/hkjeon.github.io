@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="430" fill="#ffffff"/>
+<text x="14" y="24" font-size="11.5" font-weight="600" fill="#0f172a">Compute 노드 인터페이스 구성 — 용도별 본딩 4개 + FC HBA 이중화</text>
+<rect x="14" y="48" width="210" height="58" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="119.0" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Slot4 P1 + Slot7 P1</text>
+<text x="119.0" y="90" text-anchor="middle" font-size="8.5" fill="#94a3b8">서로 다른 슬롯에 분산</text>
+<line x1="224" y1="77" x2="292" y2="77" stroke="#2563eb" stroke-width="2"/>
+<polygon points="292,72 304,77 292,82" fill="#2563eb"/>
+<rect x="304" y="48" width="150" height="58" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="379.0" y="72" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">bond0</text>
+<text x="379.0" y="90" text-anchor="middle" font-size="9.5" fill="#2563eb">25G LACP</text>
+<line x1="454" y1="77" x2="522" y2="77" stroke="#2563eb" stroke-width="2"/>
+<polygon points="522,72 534,77 522,82" fill="#2563eb"/>
+<rect x="534" y="48" width="352" height="58" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+<text x="710.0" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#2563eb">br-ext / br-mgmt / br-vxlan</text>
+<text x="710.0" y="90" text-anchor="middle" font-size="9.5" fill="#475569">API · Tenant</text>
+<rect x="14" y="118" width="210" height="58" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="119.0" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Slot4 P2 + Slot7 P2</text>
+<text x="119.0" y="160" text-anchor="middle" font-size="8.5" fill="#94a3b8">서로 다른 슬롯에 분산</text>
+<line x1="224" y1="147" x2="292" y2="147" stroke="#059669" stroke-width="2"/>
+<polygon points="292,142 304,147 292,152" fill="#059669"/>
+<rect x="304" y="118" width="150" height="58" rx="6" fill="#f0fdf4" stroke="#059669" stroke-width="1.5"/>
+<text x="379.0" y="142" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">bond1</text>
+<text x="379.0" y="160" text-anchor="middle" font-size="9.5" fill="#059669">25G LACP</text>
+<line x1="454" y1="147" x2="522" y2="147" stroke="#059669" stroke-width="2"/>
+<polygon points="522,142 534,147 522,152" fill="#059669"/>
+<rect x="534" y="118" width="352" height="58" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+<text x="710.0" y="142" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">br-provider</text>
+<text x="710.0" y="160" text-anchor="middle" font-size="9.5" fill="#475569">VM 서비스 (VLAN 4종)</text>
+<rect x="14" y="188" width="210" height="58" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="119.0" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Slot5 P1 + OCP P1</text>
+<text x="119.0" y="230" text-anchor="middle" font-size="8.5" fill="#94a3b8">서로 다른 슬롯에 분산</text>
+<line x1="224" y1="217" x2="292" y2="217" stroke="#0891b2" stroke-width="2"/>
+<polygon points="292,212 304,217 292,222" fill="#0891b2"/>
+<rect x="304" y="188" width="150" height="58" rx="6" fill="#ecfeff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="379.0" y="212" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">bond2</text>
+<text x="379.0" y="230" text-anchor="middle" font-size="9.5" fill="#0891b2">25G LACP</text>
+<line x1="454" y1="217" x2="522" y2="217" stroke="#0891b2" stroke-width="2"/>
+<polygon points="522,212 534,217 522,222" fill="#0891b2"/>
+<rect x="534" y="188" width="352" height="58" rx="6" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+<text x="710.0" y="212" text-anchor="middle" font-size="11" font-weight="600" fill="#0891b2">br-nas</text>
+<text x="710.0" y="230" text-anchor="middle" font-size="9.5" fill="#475569">VM NAS 서비스</text>
+<rect x="14" y="258" width="210" height="58" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="119.0" y="282" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">Onboard1 + Onboard2</text>
+<text x="119.0" y="300" text-anchor="middle" font-size="8.5" fill="#94a3b8">서로 다른 슬롯에 분산</text>
+<line x1="224" y1="287" x2="292" y2="287" stroke="#f59e0b" stroke-width="2"/>
+<polygon points="292,282 304,287 292,292" fill="#f59e0b"/>
+<rect x="304" y="258" width="150" height="58" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="379.0" y="282" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">bond3</text>
+<text x="379.0" y="300" text-anchor="middle" font-size="9.5" fill="#f59e0b">1G LACP</text>
+<line x1="454" y1="287" x2="522" y2="287" stroke="#f59e0b" stroke-width="2"/>
+<polygon points="522,282 534,287 522,292" fill="#f59e0b"/>
+<rect x="534" y="258" width="352" height="58" rx="6" fill="#ffffff" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="710.0" y="282" text-anchor="middle" font-size="11" font-weight="600" fill="#f59e0b">br-backup</text>
+<text x="710.0" y="300" text-anchor="middle" font-size="9.5" fill="#475569">VM 백업 (전용 스위치)</text>
+<rect x="14" y="328" width="210" height="58" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="119.0" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#0f172a">HBA Slot3 + Slot6</text>
+<text x="119.0" y="370" text-anchor="middle" font-size="8.5" fill="#94a3b8">서로 다른 슬롯에 분산</text>
+<line x1="224" y1="357" x2="292" y2="357" stroke="#9333ea" stroke-width="2"/>
+<polygon points="292,352 304,357 292,362" fill="#9333ea"/>
+<rect x="304" y="328" width="150" height="58" rx="6" fill="#faf5ff" stroke="#9333ea" stroke-width="1.5"/>
+<text x="379.0" y="352" text-anchor="middle" font-size="12.5" font-weight="600" fill="#0f172a">Multipath</text>
+<text x="379.0" y="370" text-anchor="middle" font-size="9.5" fill="#9333ea">32G FC</text>
+<line x1="454" y1="357" x2="522" y2="357" stroke="#9333ea" stroke-width="2"/>
+<polygon points="522,352 534,357 522,362" fill="#9333ea"/>
+<rect x="534" y="328" width="352" height="58" rx="6" fill="#ffffff" stroke="#9333ea" stroke-width="1.5"/>
+<text x="710.0" y="352" text-anchor="middle" font-size="11" font-weight="600" fill="#9333ea">—</text>
+<text x="710.0" y="370" text-anchor="middle" font-size="9.5" fill="#475569">Cinder 볼륨</text>
+<text x="14" y="412" font-size="9.5" fill="#94a3b8">※ 본딩 구성 시 두 포트를 같은 NIC에서 뽑지 않고 서로 다른 슬롯에 분산 — 카드 단위 장애에도 본딩이 유지되도록 설계.</text>
+</svg>
