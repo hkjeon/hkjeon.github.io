@@ -22,7 +22,7 @@ Controller 3대|전체 다운에도 VNF 무영향
 | 항목 | 내용 |
 |---|---|
 | 발주처 | S사(통신사) |
-| 기간 | 2024.04 ~ 2024.10 (망 설계 · IP 준비 착수 2024.04 → 장비 입고 · RHOSP 설치 2024.05 → 1차 PoC 2024.06 ~) |
+| 기간 | 2024.04 ~ 2024.10 (망 설계 · IP 준비 착수 2024.04 → 장비 입고 · RHOSP 설치 2024.05 → 1차 PoC 2024.06 ~ → KVM 호스트 · Controller 3대 선배포 ~2024.08) |
 | 사업 | VMware 기반 **메시징 시스템(SMS 계열 VNF)을 RHOSP16으로 전환**하기 위한 플랫폼 구축 및 PoC |
 | 규모 | Director 1 · Controller 3 · Compute 2 (베어메탈) |
 | 기술 | RHOSP 16.2 · OVN · virt-v2v · Cinder Multi-attach · SAN 연동 · NUMA · HugePages |
@@ -50,6 +50,7 @@ Controller 3대|전체 다운에도 VNF 무영향
 | 마이그레이션 검증 | virt-v2v 변환 시연(300GB 약 5시간) → 상용은 **골든 이미지 + rsync 방식** 권고 (다운타임을 IP 전환 구간으로 한정) |
 | 이슈 대응 | 공유 SAN 디스크 OVF 누락 → Cinder Multi-attach 검증 추가, UEFI 이미지 `hw_firmware_type` 대응, 원본 3배 용량 산정 · 디스크 재구성 |
 | 장애 복구 시험 | 서비스 컨테이너 · Controller 순차 Power-off · Compute 재기동 · 스냅샷 복원 · 롤링 업데이트, 2차는 **최대 부하 상태**에서 수행 |
+| 후속 배포 | PoC 이후 **KVM 호스트 · Controller(OSC) 3대 선배포** (~2024.08) — Compute 증설은 퇴사 이후 진행 |
 | 산출물 | 구축 절차서 · 연동 결과서, 상용 전환 방안 제안 |
 
 | 방식 | 절차 | 다운타임 | 판단 |
