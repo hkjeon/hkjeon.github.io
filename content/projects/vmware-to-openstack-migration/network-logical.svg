@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="440" fill="#ffffff"/>
+<text x="18" y="26" font-size="13" font-weight="700" fill="#0f172a">RHOSP 16.2 논리 구성 — Director 호스트 · Controller 3대</text>
+<line x1="600" y1="22" x2="630" y2="22" stroke="#334155" stroke-width="2"/><text x="636" y="26" font-size="10" fill="#334155">1G</text>
+<line x1="670" y1="22" x2="700" y2="22" stroke="#334155" stroke-width="2" stroke-dasharray="6,4"/><text x="706" y="26" font-size="10" fill="#334155">10G (bond0 active-backup)</text>
+<line x1="560" y1="60" x2="560" y2="400" stroke="#dc2626" stroke-width="3"/>
+<circle cx="560" cy="60" r="5" fill="#dc2626"/>
+<line x1="620" y1="60" x2="620" y2="400" stroke="#2563eb" stroke-width="3"/>
+<circle cx="620" cy="60" r="5" fill="#2563eb"/>
+<line x1="680" y1="60" x2="680" y2="400" stroke="#16a34a" stroke-width="3"/>
+<circle cx="680" cy="60" r="5" fill="#16a34a"/>
+<line x1="740" y1="60" x2="740" y2="400" stroke="#7c3aed" stroke-width="3"/>
+<circle cx="740" cy="60" r="5" fill="#7c3aed"/>
+<line x1="800" y1="60" x2="800" y2="400" stroke="#ea580c" stroke-width="3"/>
+<circle cx="800" cy="60" r="5" fill="#ea580c"/>
+<text x="560" y="418" text-anchor="middle" font-size="9.5" font-weight="600" fill="#dc2626">iDRAC</text>
+<text x="620" y="418" text-anchor="middle" font-size="9.5" font-weight="600" fill="#2563eb">Provisioning / PXE</text>
+<text x="680" y="418" text-anchor="middle" font-size="9.5" font-weight="600" fill="#16a34a">External API</text>
+<text x="680" y="431" text-anchor="middle" font-size="9" fill="#16a34a">(MANO)</text>
+<text x="740" y="418" text-anchor="middle" font-size="9.5" font-weight="600" fill="#7c3aed">Internal API</text>
+<text x="740" y="431" text-anchor="middle" font-size="9" fill="#7c3aed">(OSC-MGMT)</text>
+<text x="800" y="418" text-anchor="middle" font-size="9.5" font-weight="600" fill="#ea580c">OAM</text>
+<rect x="30" y="55" width="440" height="160" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.6"/>
+<text x="44" y="77" font-size="12" font-weight="700" fill="#0f172a">Director 호스트 (KVM)</text>
+<text x="44" y="203" font-size="9.5" fill="#64748b">RHEL 8.4 · Linux Bridge (br-prov / br-mano / br-oam)</text>
+<rect x="44" y="89" width="150" height="100" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+<text x="119" y="109" text-anchor="middle" font-size="11" font-weight="700" fill="#1e3a8a">Director VM</text>
+<text x="119" y="125" text-anchor="middle" font-size="9" fill="#1e3a8a">Undercloud</text>
+<text x="119" y="143" text-anchor="middle" font-size="8.5" fill="#1e3a8a">enp1s0 → br-prov</text>
+<text x="119" y="157" text-anchor="middle" font-size="8.5" fill="#1e3a8a">enp2s0 → br-mano</text>
+<text x="119" y="171" text-anchor="middle" font-size="8.5" fill="#1e3a8a">enp3s0 → br-oam</text>
+<rect x="390" y="85" width="70" height="22" rx="3" fill="#fee2e2" stroke="#dc2626"/>
+<text x="425" y="100" text-anchor="middle" font-size="9.5" fill="#0f172a">iDRAC</text>
+<line x1="460" y1="96" x2="560" y2="96" stroke="#dc2626" stroke-width="2"/>
+<circle cx="560" cy="96" r="3.5" fill="#dc2626"/>
+<rect x="390" y="115" width="70" height="22" rx="3" fill="#ffffff" stroke="#94a3b8"/>
+<text x="425" y="130" text-anchor="middle" font-size="9.5" fill="#0f172a">eno4 (1G)</text>
+<line x1="460" y1="126" x2="620" y2="126" stroke="#2563eb" stroke-width="2"/>
+<circle cx="620" cy="126" r="3.5" fill="#2563eb"/>
+<rect x="382" y="143" width="86" height="58" rx="5" fill="none" stroke="#475569" stroke-dasharray="3,3"/>
+<text x="376" y="175" text-anchor="end" font-size="9" font-weight="600" fill="#475569">bond0</text>
+<rect x="390" y="147" width="70" height="22" rx="3" fill="#ffffff" stroke="#94a3b8"/>
+<text x="425" y="162" text-anchor="middle" font-size="9.5" fill="#0f172a">ens1f0</text>
+<rect x="390" y="175" width="70" height="22" rx="3" fill="#ffffff" stroke="#94a3b8"/>
+<text x="425" y="190" text-anchor="middle" font-size="9.5" fill="#0f172a">ens2f0</text>
+<line x1="468" y1="158" x2="680" y2="158" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,4"/>
+<circle cx="680" cy="158" r="3.5" fill="#16a34a"/>
+<line x1="468" y1="186" x2="800" y2="186" stroke="#ea580c" stroke-width="2" stroke-dasharray="6,4"/>
+<circle cx="800" cy="186" r="3.5" fill="#ea580c"/>
+<rect x="30" y="250" width="440" height="140" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.6"/>
+<rect x="36" y="244" width="440" height="140" rx="8" fill="none" stroke="#cbd5e1"/>
+<text x="44" y="274" font-size="12" font-weight="700" fill="#0f172a">Controller × 3</text>
+<text x="44" y="292" font-size="9.5" fill="#64748b">RHEL 8.4 · RHOSP 16.2 (베어메탈)</text>
+<text x="44" y="310" font-size="9.5" fill="#64748b">API · DB · 메시지 큐 · OVN 제어</text>
+<rect x="390" y="264" width="70" height="22" rx="3" fill="#fee2e2" stroke="#dc2626"/>
+<text x="425" y="279" text-anchor="middle" font-size="9.5" fill="#0f172a">iDRAC</text>
+<line x1="460" y1="275" x2="560" y2="275" stroke="#dc2626" stroke-width="2"/>
+<circle cx="560" cy="275" r="3.5" fill="#dc2626"/>
+<rect x="390" y="292" width="70" height="22" rx="3" fill="#ffffff" stroke="#94a3b8"/>
+<text x="425" y="307" text-anchor="middle" font-size="9.5" fill="#0f172a">eno4 (1G)</text>
+<line x1="460" y1="303" x2="620" y2="303" stroke="#2563eb" stroke-width="2"/>
+<circle cx="620" cy="303" r="3.5" fill="#2563eb"/>
+<rect x="382" y="320" width="86" height="58" rx="5" fill="none" stroke="#475569" stroke-dasharray="3,3"/>
+<text x="376" y="352" text-anchor="end" font-size="9" font-weight="600" fill="#475569">bond0 (VLAN)</text>
+<rect x="390" y="324" width="70" height="22" rx="3" fill="#ffffff" stroke="#94a3b8"/>
+<text x="425" y="339" text-anchor="middle" font-size="9.5" fill="#0f172a">ens1f0</text>
+<rect x="390" y="352" width="70" height="22" rx="3" fill="#ffffff" stroke="#94a3b8"/>
+<text x="425" y="367" text-anchor="middle" font-size="9.5" fill="#0f172a">ens2f0</text>
+<line x1="468" y1="334" x2="680" y2="334" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,4"/>
+<circle cx="680" cy="334" r="3.5" fill="#16a34a"/>
+<line x1="468" y1="349" x2="740" y2="349" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6,4"/>
+<circle cx="740" cy="349" r="3.5" fill="#7c3aed"/>
+<line x1="468" y1="364" x2="800" y2="364" stroke="#ea580c" stroke-width="2" stroke-dasharray="6,4"/>
+<circle cx="800" cy="364" r="3.5" fill="#ea580c"/>
+</svg>
