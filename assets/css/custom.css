@@ -6,3 +6,14 @@
     max-width: 90ch;
   }
 }
+
+/* 경력기술서(/career/) — 표 위주 페이지라 폭을 넓히고 표 글자 크기를 줄인다 */
+section[id^="career-"] .max-w-prose {
+  max-width: 72rem;
+}
+section[id^="career-"] .prose table {
+  font-size: 0.9rem;
+}
+section[id^="career-"] .prose td:first-child {
+  white-space: nowrap;
+}
