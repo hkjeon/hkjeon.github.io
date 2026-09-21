@@ -34,6 +34,10 @@ RHOSP13|Red Hat OpenStack Platform
 | 성능 | 통신사 VNF 요구에 맞춘 OVS-DPDK, SR-IOV, PCI Passthrough 적용 |
 | 운영 | 200대 이상 노드 대상 보안취약점 조치 · 정기점검 **Ansible 자동화**, 결과 중앙 수집 |
 
+## 구성도
+
+[![RHOSP13 DCN 구조 — Central과 원격 리전 Compute의 L3 연결](dcn-architecture.svg)](dcn-architecture.svg "클릭하면 원본 크기로 열립니다")
+
 ## 담당 역할 및 수행 내용
 
 <div class="pf-role">

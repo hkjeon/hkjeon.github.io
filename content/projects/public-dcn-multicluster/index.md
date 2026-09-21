@@ -41,6 +41,10 @@ KA → OSA|배포 도구 전환 재구축
 | A 구역 | Pure Storage | `PureFCDriver` | 이미지 볼륨 캐시 활성화 |
 | B 구역 | NetApp ONTAP | `NetAppDriver` | — |
 
+## 구성도
+
+[![업무망 OpenStack 구성 — 혼합형 노드와 구역별 스토리지 분리](storage-architecture.svg)](storage-architecture.svg "클릭하면 원본 크기로 열립니다")
+
 ## 담당 역할 및 수행 내용
 
 <div class="pf-role">

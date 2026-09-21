@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<rect x="0" y="0" width="900" height="400" fill="#ffffff"/>
+<text x="18" y="26" text-anchor="start" font-size="13" font-weight="700" fill="#0f172a">업무망 OpenStack 구성 — 혼합형 노드 · 구역별 스토리지 분리</text>
+<rect x="20" y="45" width="500" height="300" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.6"/>
+<text x="34" y="68" text-anchor="start" font-size="12" font-weight="700" fill="#0f172a">OpenStack-Ansible 클러스터 (AZ 분리)</text>
+<text x="34" y="86" text-anchor="start" font-size="9.5" font-weight="400" fill="#64748b">배포 노드 · 별도 컨트롤러는 VM으로 구성</text>
+<rect x="34" y="100" width="108" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+<text x="88" y="125" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e3a8a">혼합형 #1</text>
+<text x="88" y="142" text-anchor="middle" font-size="9" font-weight="400" fill="#1e3a8a">Controller</text>
+<text x="88" y="156" text-anchor="middle" font-size="9" font-weight="400" fill="#1e3a8a">+ Compute</text>
+<rect x="154" y="100" width="108" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+<text x="208" y="125" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e3a8a">혼합형 #2</text>
+<text x="208" y="142" text-anchor="middle" font-size="9" font-weight="400" fill="#1e3a8a">Controller</text>
+<text x="208" y="156" text-anchor="middle" font-size="9" font-weight="400" fill="#1e3a8a">+ Compute</text>
+<rect x="274" y="100" width="108" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+<text x="328" y="125" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1e3a8a">혼합형 #3</text>
+<text x="328" y="142" text-anchor="middle" font-size="9" font-weight="400" fill="#1e3a8a">Controller</text>
+<text x="328" y="156" text-anchor="middle" font-size="9" font-weight="400" fill="#1e3a8a">+ Compute</text>
+<rect x="34" y="185" width="108" height="55" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+<text x="88" y="209" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">Compute #1</text>
+<text x="88" y="225" text-anchor="middle" font-size="9" font-weight="400" fill="#14532d">전용</text>
+<rect x="154" y="185" width="108" height="55" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+<text x="208" y="209" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">Compute #2</text>
+<text x="208" y="225" text-anchor="middle" font-size="9" font-weight="400" fill="#14532d">전용</text>
+<text x="34" y="265" text-anchor="start" font-size="10" font-weight="700" fill="#0f172a">노드 공통 인터페이스</text>
+<rect x="34" y="275" width="108" height="50" rx="5" fill="#ffffff" stroke="#7c3aed" stroke-width="1.4"/>
+<text x="88" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#7c3aed">bond0</text>
+<text x="88" y="312" text-anchor="middle" font-size="9" font-weight="400" fill="#334155">API · Tenant</text>
+<rect x="154" y="275" width="108" height="50" rx="5" fill="#ffffff" stroke="#ea580c" stroke-width="1.4"/>
+<text x="208" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#ea580c">bond1</text>
+<text x="208" y="312" text-anchor="middle" font-size="9" font-weight="400" fill="#334155">Provider (서비스)</text>
+<rect x="274" y="275" width="108" height="50" rx="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.4"/>
+<text x="328" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#0891b2">bond2</text>
+<text x="328" y="312" text-anchor="middle" font-size="9" font-weight="400" fill="#334155">Provider (NAS)</text>
+<rect x="394" y="275" width="108" height="50" rx="5" fill="#ffffff" stroke="#475569" stroke-width="1.4"/>
+<text x="448" y="296" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">HBA ×2</text>
+<text x="448" y="312" text-anchor="middle" font-size="9" font-weight="400" fill="#334155">FC Multipath</text>
+<rect x="580" y="60" width="300" height="60" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.6"/>
+<text x="730" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#78350f">Cinder Multi-Backend</text>
+<text x="730" y="103" text-anchor="middle" font-size="9.5" font-weight="400" fill="#78350f">볼륨 타입으로 구역 선택</text>
+<rect x="580" y="180" width="300" height="40" rx="6" fill="#e2e8f0" stroke="#475569" stroke-width="1.6"/>
+<text x="730" y="205" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">SAN Switch (FC)</text>
+<rect x="580" y="270" width="140" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.6"/>
+<text x="650" y="295" text-anchor="middle" font-size="11" font-weight="700" fill="#7f1d1d">A 구역</text>
+<text x="650" y="312" text-anchor="middle" font-size="9.5" font-weight="400" fill="#7f1d1d">Pure Storage</text>
+<text x="650" y="327" text-anchor="middle" font-size="8.5" font-weight="400" fill="#7f1d1d">이미지 볼륨 캐시</text>
+<rect x="740" y="270" width="140" height="70" rx="6" fill="#e0e7ff" stroke="#4f46e5" stroke-width="1.6"/>
+<text x="810" y="295" text-anchor="middle" font-size="11" font-weight="700" fill="#312e81">B 구역</text>
+<text x="810" y="312" text-anchor="middle" font-size="9.5" font-weight="400" fill="#312e81">NetApp ONTAP</text>
+<line x1="730" y1="120" x2="730" y2="180" stroke="#b45309" stroke-width="2" stroke-dasharray="5,4"/>
+<text x="738" y="155" text-anchor="start" font-size="8.5" font-weight="400" fill="#b45309">드라이버 제어</text>
+<line x1="650" y1="220" x2="650" y2="270" stroke="#475569" stroke-width="2.5"/>
+<line x1="810" y1="220" x2="810" y2="270" stroke="#475569" stroke-width="2.5"/>
+<line x1="514" y1="300" x2="580" y2="200" stroke="#475569" stroke-width="2.5"/>
+<text x="532" y="262" text-anchor="start" font-size="9" font-weight="700" fill="#475569">FC</text>
+<text x="18" y="385" text-anchor="start" font-size="9.5" font-weight="400" fill="#475569">※ 볼륨 생성 시 지정한 타입의 스토리지에만 생성 — 구역 간 데이터 분리를 스토리지 계층에서 보장</text>
+</svg>
