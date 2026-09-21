@@ -26,14 +26,14 @@ eras:
             title: 국가 보안기술 연구기관 N2SF Test-Bed 클라우드 구축
             desc: 구축 완료, 사업 종료 전
             tags: [OpenStack]
-          - period: 2025
-            title: 국가 시험인증기관 프라이빗 클라우드 구축
-            link: /projects/cert-institute-private-cloud/
-            tags: [OpenStack, FC SAN, NAS, Kubernetes]
           - period: 2025.05
             title: 공공 인프라 공기업 업무망 OpenStack 재구축 및 VM 이관
             link: /projects/public-dcn-multicluster/
             tags: [OpenStack-Ansible, Cinder Multi-Backend]
+          - period: 2025.04 ~ 2025.11
+            title: 국가 시험인증기관 프라이빗 클라우드 구축
+            link: /projects/cert-institute-private-cloud/
+            tags: [OpenStack, FC SAN, NAS, Kubernetes]
           - period: 2024.11 ~ 2026.07
             title: 공공 인프라 공기업 정보인프라 도입·증설 및 유지보수
             desc: OpenStack 3개 클러스터 유지보수
