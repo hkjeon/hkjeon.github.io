@@ -37,21 +37,20 @@ education:
     end: 2009-02-28
 
 experience:
-  - role: IaaS Platform Engineer
-    org: IaaS 플랫폼 서비스 구축 · 운영
-    start: 2026-07-06
+  - role: IaaS Platform Engineer (前 IaaS Solution Developer)
+    org: IaaS 솔루션 개발 · 프라이빗 클라우드 구축 · IaaS 플랫폼 서비스
+    start: 2024-11-01
     summary: |
-      Kolla-Ansible 기반 OpenStack IaaS 서비스 구축·운영 담당.
+      OpenStack-Ansible(OSA) 기반 IaaS 솔루션 개발과 공공 부문 프라이빗 클라우드 구축을 수행했으며,
+      2026.07 회사 합병 이후 기존 업무를 이어가며 Kolla-Ansible 기반 IaaS 플랫폼 서비스로 역할을 확장.
+
+      **2026.07 ~ 현재 · IaaS Platform Engineer (합병 후)**
 
       - Kolla-Ansible 기반 OpenStack IaaS 플랫폼 구축·운영
       - OpenStack 셀프서비스 포털 배포 및 IaaS 서비스 연동
       - 기존 납품 OpenStack-Ansible(OSA) 기반 클라우드 기술지원 및 유지보수 병행
-  - role: IaaS Solution Developer
-    org: 자사 IaaS 솔루션 개발 · 프라이빗 클라우드 구축
-    start: 2024-11-01
-    end: 2026-07-05
-    summary: |
-      OpenStack-Ansible(OSA) 기반 IaaS 솔루션 개발과 공공 부문 프라이빗 클라우드 구축을 병행.
+
+      **2024.11 ~ 2026.07 · IaaS Solution Developer**
 
       - OSA 기반 배포 패키지 구조 재설계 및 폐쇄망 오프라인 설치 체계 구축 (Caracal, Epoxy)
       - systemd-networkd 기반 타깃 노드 네트워크 구성 자동화, Cinder Multi-Backend, 컨트롤러 DB 백업 자동화
