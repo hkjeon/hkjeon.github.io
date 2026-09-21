@@ -1,0 +1,9 @@
+{{/* 핵심 수치 타일: 한 줄에 "값|설명" */}}
+<div class="pf-kpis not-prose">
+{{- range split (strings.TrimSpace .Inner) "\n" }}
+  {{- $p := split (strings.TrimSpace .) "|" }}
+  {{- if ge (len $p) 2 }}
+  <div class="pf-kpi"><b>{{ index $p 0 }}</b><span>{{ index $p 1 }}</span></div>
+  {{- end }}
+{{- end }}
+</div>

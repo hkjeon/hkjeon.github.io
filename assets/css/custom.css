@@ -49,3 +49,20 @@
   .cv-era-title small { margin-left: 0; }
   .cv-era-title { flex-wrap: wrap; }
 }
+
+/* 프로젝트 카드 본문 ({{% pf %}}) — 요약형 레이아웃 */
+.pf { --a: #14b8a6; --line: rgba(148,163,184,.3); --card: rgba(148,163,184,.07); }
+.pf h2 { display: flex; align-items: center; gap: .6rem; margin-top: 2.5rem; padding-bottom: .4rem; border-bottom: 1px solid var(--line); font-size: 1.5rem; }
+.pf h2::before { content: ""; width: .35rem; height: 1.3rem; border-radius: 2px; background: var(--a); flex: none; }
+.pf h3 { color: var(--a); font-size: 1.1rem; margin-top: 1.5rem; }
+.pf strong { color: var(--a); }
+.pf table { font-size: .9rem; border: 1px solid var(--line); border-radius: .5rem; overflow: hidden; }
+.pf thead th { background: color-mix(in srgb, var(--a) 14%, transparent); }
+.pf td:first-child { font-weight: 600; white-space: nowrap; }
+.pf ul { padding-left: 1.1rem; }
+.pf li { margin: .3rem 0; }
+.pf-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: .75rem; margin: 1rem 0 2rem; }
+.pf-kpi { border: 1px solid var(--line); border-top: 3px solid var(--a); border-radius: .6rem; background: var(--card); padding: .9rem 1rem; display: flex; flex-direction: column; gap: .2rem; }
+.pf-kpi b { font-size: 1.6rem; font-weight: 800; color: var(--a); line-height: 1.2; }
+.pf-kpi span { font-size: .8rem; opacity: .8; line-height: 1.35; }
+.pf .pf-role { border-left: 3px solid var(--a); background: var(--card); padding: .8rem 1rem; border-radius: 0 .5rem .5rem 0; }
