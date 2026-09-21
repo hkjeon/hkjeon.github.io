@@ -4,14 +4,14 @@ is_owner: true
 name:
   display: HK Jeon
 postnominals: []
-role: OpenStack Engineer & IaaS Solution Developer
+role: OpenStack Engineer & IaaS Platform Engineer
 email: nosmile0412@hanmail.net
 bio: |
   17년 경력의 인프라 엔지니어. 통신망 구축에서 출발해 NFV를 거쳐
   OpenStack 기반 프라이빗 클라우드의 설계·구축·운영을 담당하고 있습니다.
   공공기관·통신사 환경에서 30여 개 프로젝트를 수행했으며,
-  현재는 구축 경험을 자사 IaaS 솔루션에 반영하는 배포 패키지 개발과
-  고도화를 함께 맡고 있습니다. OpenStack-Ansible 업스트림에도 기여했습니다.
+  IaaS 솔루션 배포 패키지 개발을 거쳐, 현재는 Kolla-Ansible 기반
+  IaaS 플랫폼 서비스의 구축·운영을 맡고 있습니다. OpenStack-Ansible 업스트림에도 기여했습니다.
 
 links:
   - icon: at-symbol
@@ -37,9 +37,19 @@ education:
     end: 2009-02-28
 
 experience:
+  - role: IaaS Platform Engineer
+    org: IaaS 플랫폼 서비스 구축 · 운영
+    start: 2026-07-06
+    summary: |
+      Kolla-Ansible 기반 OpenStack IaaS 서비스 구축·운영 담당.
+
+      - Kolla-Ansible 기반 OpenStack IaaS 플랫폼 구축·운영
+      - OpenStack 셀프서비스 포털 배포 및 IaaS 서비스 연동
+      - 기존 납품 OpenStack-Ansible(OSA) 기반 클라우드 기술지원 및 유지보수 병행
   - role: IaaS Solution Developer
     org: 자사 IaaS 솔루션 개발 · 프라이빗 클라우드 구축
     start: 2024-11-01
+    end: 2026-07-05
     summary: |
       OpenStack-Ansible(OSA) 기반 IaaS 솔루션 개발과 공공 부문 프라이빗 클라우드 구축을 병행.
 
