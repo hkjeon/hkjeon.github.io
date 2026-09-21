@@ -7,17 +7,50 @@ tags:
 date: '2023-01-01T00:00:00Z'
 ---
 
-## 핵심 요약
-* **발주처:** 국내 통신사
-* **규모:** Compute 노드 약 280대
-* **인프라 환경:** RHOSP13 (Red Hat OpenStack Platform 13)
-* **주요 아키텍처:** DCN(Distributed Compute Network) 기반 L3 라우팅 설계 적용
+{{% pf %}}
 
-## 주요 수행 역할 및 성과
-1. **데이터 센터 간 트래픽 분산 및 최적화**
-   * 컨트롤러 노드와 컴퓨트 노드 간의 통신을 L3 라우팅 구조로 분리 설계
-   * 이를 통해 데이터 센터 간 발생할 수 있는 트래픽 병목 현상을 사전에 차단하고 인프라 확장성(Scalability) 확보
+{{< kpis >}}
+약 280대|Compute 노드 (DCN)
+7개|리전
+RHOSP13|Red Hat OpenStack Platform
+무장애|대규모 통신망 운영
+{{< /kpis >}}
 
-2. **대규모 노드 100% 무장애(Zero-Downtime) 운영 달성**
-   * 280대에 달하는 대규모 컴퓨트 노드 환경에 대해 철저한 리소스 모니터링 및 사전 점검 체계 구축
-   * 최고 수준의 가용성이 요구되는 통신망 인프라를 무장애로 안정적으로 관리하여 운영 역량 입증
+## 프로젝트 개요
+
+| 항목 | 내용 |
+|---|---|
+| 발주처 | S사(통신사) |
+| 기간 | 2020.04 ~ 2023 (구축 후 운영 · 기술지원) |
+| 사업 | 5G NSA 코어 인프라용 **RHOSP13 기반 가상화 플랫폼** 구축 및 운영 |
+| 규모 | Compute 약 280대, 7개 리전 |
+| 기술 | RHOSP13 · DCN(L3 라우팅) · OVS-DPDK · SR-IOV · PCI Passthrough · Ansible |
+
+## 구축 형태
+
+| 구분 | 구성 |
+|---|---|
+| 아키텍처 | **DCN(Distributed Compute Node)** — Controller와 원격 Compute 간 L3 라우팅 분리 |
+| 성능 | 통신사 VNF 요구에 맞춘 OVS-DPDK, SR-IOV, PCI Passthrough 적용 |
+| 운영 | 200대 이상 노드 대상 보안취약점 조치 · 정기점검 **Ansible 자동화**, 결과 중앙 수집 |
+
+## 담당 역할 및 수행 내용
+
+<div class="pf-role">
+
+**역할** 가상화 플랫폼 구축 · 운영 · 기술지원
+
+</div>
+
+| 영역 | 수행 내용 |
+|---|---|
+| 네트워크 설계 | Controller ↔ Compute 통신을 **L3 라우팅 구조로 분리** 설계, 데이터센터 간 트래픽 병목 사전 차단 · 확장성 확보 |
+| 성능 구성 | OVS-DPDK · SR-IOV · PCI Passthrough 기반 NFV Compute 구성 |
+| 운영 | 약 280대 Compute 리소스 모니터링 · 사전 점검 체계 구축, **무장애 운영** |
+| 자동화 | 정기점검 · 보안 조치 Ansible 플레이북 작성 ([관련 글](/blog/rhosp-maintenance-automation/)) |
+
+## 기타
+
+- 이 환경의 Single Stack 구조 한계를 이후 [RHOSP16.2 Multi-Stack 전환](/projects/telco-nfv-dcn-multistack/)으로 해결
+
+{{% /pf %}}

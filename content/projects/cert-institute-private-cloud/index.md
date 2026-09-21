@@ -1,6 +1,6 @@
 ---
 title: 국가 시험인증기관 프라이빗 클라우드 구축
-summary: 시험·인증 기관의 업무시스템 11종을 수용할 OpenStack 프라이빗 클라우드를 폐쇄망 환경에서 설계·구축한 사례. 용도별 8개 망 분리와 FC SAN·NAS 이중 스토리지 연동, VM 기반 Kubernetes 플랫폼까지 수행
+summary: 시험·인증 기관의 업무시스템 11종을 수용할 OpenStack 프라이빗 클라우드를 폐쇄망 환경에서 설계·구축한 사례. 용도별 8개 망 분리와 FC SAN·NAS 이중 스토리지 연동, Kubernetes 플랫폼용 VM 인프라 제공까지 수행
 tags:
   - OpenStack
   - Architecture
@@ -36,7 +36,7 @@ date: '2025-11-01T00:00:00Z'
 | Compute | **4-Bond** (25G LACP ×3 + 백업 1G) + FC 32G ×2, 본딩 포트를 NIC 슬롯별로 분산 |
 | 스토리지 | **FC SAN 50TB**(Cinder · Glance) + **NAS 50TB**(NFS) — 인프라용 / VM용 경로 분리 |
 | 고가용성 | Controller · Galera 3중화, HAProxy + Keepalived, 방화벽 · ToR · SAN 스위치 이중화 |
-| PaaS | OpenStack VM 위 **Kubernetes 2개 클러스터**(Common / Dev) — 레지스트리 · GitOps · OpenSearch · Prometheus |
+| PaaS | OpenStack VM 위 **Kubernetes 2개 클러스터**(Common / Dev) — VM · 네트워크는 본인 제공, 클러스터는 K8s팀 구축 |
 
 ## 구성도
 
@@ -68,7 +68,7 @@ date: '2025-11-01T00:00:00Z'
 | 설계 | 아키텍처정의서 작성 — 망 · VLAN · IP/NAT · 포트맵 설계, 자원 산정 (CPU 4:1 · 메모리 1:1 · 노드당 32GB 예약) |
 | 폐쇄망 배포 | APT · PyPI · Git 미러 컨테이너 구성, 운영 기간용 OS 패키지 저장소 VM 구축 |
 | OpenStack | Controller 3중화 · Galera · HAProxy/Keepalived, OVN, FC SAN Multipath · NAS 연동, 볼륨 기반 Flavor(Disk=0) |
-| Kubernetes | VM 기반 2개 클러스터 — 사설 레지스트리, GitOps 배포, 로그 · 모니터링 · 백업 구성 |
+| K8s 인프라 제공 | K8s팀 요청 기반 VM 대상 정리, IP 설계 · 할당, 인스턴스 생성 · 제공 (클러스터 구축은 K8s팀 수행) |
 | 이관 | 업무시스템 11종 **서비스 IP 유지 이관**, NAT 매핑 대조 검증, 프로젝트 3개 · VM 53대 Quota 구성 |
 | 운영 전환 | 운영자 매뉴얼 · 교육, 시스템 전환 · 시범 운영, 인수인계, 시스템구축결과서 작성 |
 

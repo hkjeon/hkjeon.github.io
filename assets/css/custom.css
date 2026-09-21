@@ -66,3 +66,5 @@
 .pf-kpi b { font-size: 1.6rem; font-weight: 800; color: var(--a); line-height: 1.2; }
 .pf-kpi span { font-size: .8rem; opacity: .8; line-height: 1.35; }
 .pf .pf-role { border-left: 3px solid var(--a); background: var(--card); padding: .8rem 1rem; border-radius: 0 .5rem .5rem 0; }
+.pf details { border: 1px solid var(--line); border-radius: .5rem; padding: .6rem 1rem; margin: 1.25rem 0; }
+.pf summary { cursor: pointer; font-weight: 600; color: var(--a); }
