@@ -1,0 +1,179 @@
+# 경력기술서(/career/) 데이터
+# 표기 규칙: 회사·민간 발주처는 첫 글자(S사 등), 공공·보안 발주처는 업종만 표기
+eras:
+  - name: IaaS 솔루션 · 플랫폼
+    period: 2024.10 ~ 현재
+    color: "#14b8a6"
+    companies:
+      - name: I사
+        period: 2026.07 ~ 현재
+        position: 수석
+        role: IaaS Platform Engineer
+        note: N사 합병으로 소속 변경, 업무 연속
+        projects:
+          - period: 2026.07 ~ 현재
+            title: IaaS 플랫폼 서비스 구축·운영
+            tags: [Kolla-Ansible, OpenStack, 셀프서비스 포털]
+          - period: 2026.07 ~ 현재
+            title: 기존 납품 OpenStack-Ansible 클라우드 기술지원·유지보수
+            tags: [OpenStack-Ansible]
+      - name: N사
+        period: 2024.10 ~ 2026.07
+        position: 수석
+        role: IaaS Solution Developer
+        projects:
+          - period: 2025
+            title: 국가 시험인증기관 프라이빗 클라우드 구축
+            link: /projects/cert-institute-private-cloud/
+            tags: [OpenStack, FC SAN, NAS, Kubernetes]
+          - period: 2025 ~
+            title: 국가 보안기술 연구기관 N2SF Test-Bed 클라우드 구축
+            desc: 구축 완료, 사업 종료 전
+            tags: [OpenStack]
+          - period: 2025.05
+            title: 공공 인프라 공기업 업무망 OpenStack 재구축 및 VM 이관
+            link: /projects/public-dcn-multicluster/
+            tags: [OpenStack-Ansible, Cinder Multi-Backend]
+          - period: 2024.11 ~ 2026.07
+            title: 공공 인프라 공기업 정보인프라 도입·증설 및 유지보수
+            desc: OpenStack 3개 클러스터 유지보수
+            tags: [OpenStack]
+          - period: 2024.11 ~ 2026.07
+            title: OSA 기반 IaaS 솔루션 배포 패키지 개발
+            desc: 폐쇄망 오프라인 설치, systemd-networkd 자동화, 업스트림 기여
+            tags: [OpenStack-Ansible, Caracal, Epoxy, Ansible]
+
+  - name: 통신사 5G 가상화 · 컨테이너
+    period: 2020.04 ~ 2024.10
+    color: "#f59e0b"
+    companies:
+      - name: O사
+        period: 2024.01 ~ 2024.10
+        position: 프로 · 파트장
+        role: Cloud Platform Engineer
+        note: E사 Red Hat 사업 이관으로 소속 변경, 업무 연속
+        projects:
+          - period: 2024.07 ~ 2024.09
+            title: S사(통신사) NFV 플랫폼 DCN Multi-Stack 전환
+            link: /projects/telco-nfv-dcn-multistack/
+            tags: [RHOSP 16.2, OVS-DPDK, DCN]
+          - period: 2024.01 ~ 2024.10
+            title: S사(통신사) 메시징 시스템 VMware → OpenStack 전환
+            link: /projects/vmware-to-openstack-migration/
+            tags: [RHOSP16, Migration]
+      - name: E사
+        period: 2020.04 ~ 2023.12
+        position: 과장 → 수석
+        role: Cloud Platform Engineer
+        projects:
+          - period: 2023.08 ~ 2023.12
+            title: S사(통신사) 5G AMF 컨테이너 플랫폼 구축·기술지원
+            tags: [RHOCP]
+          - period: 2023.01 ~ 2023.12
+            title: S사(통신사) 가입자 DB(CSDB) 컨테이너 플랫폼 구축·기술지원
+            tags: [RHOCP]
+          - period: 2022.09 ~ 2023.12
+            title: S사(통신사) IMS(cMSS) 컨테이너 플랫폼 설계·구축
+            tags: [RHOCP 4.10]
+          - period: 2022.04 ~ 2022.07
+            title: L사(통신사) Test-Bed 컨테이너 플랫폼 구축
+            tags: [RHOCP 4.10, Local Repo]
+          - period: 2021.12 ~ 2022.07
+            title: S사(통신사) 5G SA Core CNF 플랫폼 구축
+            tags: [RHOCP 4.9, Local Repo]
+          - period: 2021.08 ~ 2023.12
+            title: S사(통신사) 5G 게이트웨이 라인업 간소화 재구축
+            desc: S/PGW → SPGW
+            tags: [OpenStack]
+          - period: 2020.04 ~ 2023.12
+            title: S사(통신사) 대규모 5G NSA 가상화 플랫폼 구축 및 운영
+            link: /projects/s-company-rhosp/
+            tags: [RHOSP13, DCN, DPDK, SR-IOV, Ansible]
+
+  - name: 프라이빗 클라우드 · NFV
+    period: 2016.09 ~ 2020.03
+    color: "#8b5cf6"
+    companies:
+      - name: A사
+        period: 2018.12 ~ 2020.03
+        position: 과장
+        role: Private Cloud / NFV Engineer
+        note: 재입사
+        projects:
+          - period: 2019.11 ~ 2020.02
+            title: 에너지 공기업 클라우드PC 고도화
+            tags: [OpenStack, Ceph, Octavia, GPU]
+          - period: 2019.11 ~ 2019.12
+            title: D사(클라우드 서비스 기업) 프라이빗 클라우드 구축
+            tags: [OpenStack, DPDK, Ceph]
+          - period: 2019.09 ~ 2019.11
+            title: I사(IT 서비스 기업) 클라우드 시범망 구축
+            tags: [NFV, SDN, OpenStack, Ceph]
+          - period: 2019.07 ~ 2019.08
+            title: 지방자치단체 SDDC 구축
+            tags: [OpenStack]
+          - period: 2019.03 ~ 2019.06
+            title: 공공기관 통합정보시스템 구축
+            tags: [SDN]
+          - period: 2019.01 ~ 2019.02
+            title: 철도 공공기관 클라우드 구축
+            tags: [OpenStack]
+          - period: 2018.12 ~ 2019.03
+            title: 광역자치단체 지능형 초연결망 유지보수
+            tags: [NFV, SDN, OpenStack, Ceph]
+          - period: 2018.12 ~ 2019.03
+            title: 교통 공기업 SDDC 유지보수
+            tags: [NFV, SDN, OpenStack]
+      - name: E사
+        period: 2018.10 ~ 2018.12
+        position: 과장
+        role: Private Cloud Engineer
+        projects:
+          - period: 2018.10 ~ 2018.12
+            title: S사(통신사) 운영지원 시스템 기술지원
+            tags: [Helion OpenStack]
+          - period: 2018.10 ~ 2018.11
+            title: S사(글로벌 제조사) 해외 통신사 NB-IoT 대규모 Trial
+            tags: [Helion OpenStack]
+      - name: A사
+        period: 2017.10 ~ 2017.12
+        position: 선임
+        role: NFV Engineer
+        projects:
+          - period: 2017.10 ~ 2017.12
+            title: 광역자치단체 NFV 구축
+            tags: [NFV]
+      - name: E사
+        period: 2015.12 ~ 2017.01
+        position: 대리
+        role: NFV QA · 호처리 검증
+        projects:
+          - period: 2016.09 ~ 2017.01
+            title: L사(통신사) C-SGN 구축
+            desc: NFV DVT·CVT
+            tags: [NFV, QA]
+          - period: 2015.12 ~ 2016.06
+            title: K사(통신사) 재난안전망 시범사업
+            desc: 호처리 검증
+            tags: [QA]
+
+  - name: 통신 시험장비
+    period: 2009.03 ~ 2015.06
+    color: "#64748b"
+    companies:
+      - name: T사
+        period: 2009.03 ~ 2015.06
+        position: 사원 → 주임
+        role: Telecom Test & Deployment Engineer
+        projects:
+          - period: 2013.01 ~ 2015.06
+            title: 해외 통신 시험기관 시험망 구축 (5건)
+            desc: IMS·MBMS, LTE-A·TD-SCDMA, Roaming GW·TD-LTE, PicoCell, PS-LTE — 납품·구축·호처리 검증
+            tags: [LTE, IMS]
+          - period: 2010.10 ~ 2012.10
+            title: LTE UE·EPC 시뮬레이터/에뮬레이터 공급 (통신사·장비사 5건)
+            tags: [LTE EPC]
+          - period: 2009.04 ~ 2010.10
+            title: 통신 시험 시뮬레이터 유지보수
+            desc: MGTS, Catapult
+            tags: [시뮬레이터]

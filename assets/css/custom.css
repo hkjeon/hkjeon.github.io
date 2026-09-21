@@ -7,13 +7,45 @@
   }
 }
 
-/* 경력기술서(/career/) — 표 위주 페이지라 폭을 넓히고 표 글자 크기를 줄인다 */
-section[id^="career-"] .max-w-prose {
-  max-width: 72rem;
-}
-section[id^="career-"] .prose table {
-  font-size: 0.9rem;
-}
-section[id^="career-"] .prose td:first-child {
-  white-space: nowrap;
+/* 경력기술서(/career/) — layouts/career/single.html + data/career.yaml */
+.cv-wrap { max-width: 64rem; margin: 0 auto; padding: 6rem 1rem 4rem; --line: rgba(148,163,184,.25); --card: rgba(148,163,184,.06); --muted: #64748b; }
+.dark .cv-wrap { --muted: #94a3b8; }
+.cv-head { text-align: center; margin-bottom: 2rem; }
+.cv-head h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: .75rem; }
+.cv-head p { color: var(--muted); }
+.cv-sub { font-size: .85rem; margin-top: .25rem; }
+.cv-star { color: #f59e0b; }
+.cv-toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .75rem; margin-bottom: 3.5rem; }
+.cv-toc a { display: flex; flex-direction: column; gap: .15rem; padding: .8rem 1rem; border: 1px solid var(--line); border-left: 4px solid var(--c); border-radius: .6rem; background: var(--card); text-decoration: none; }
+.cv-toc a:hover { border-color: var(--c); }
+.cv-toc b { font-size: .95rem; }
+.cv-toc span { font-size: .8rem; color: var(--muted); }
+.cv-era { margin-bottom: 3.5rem; scroll-margin-top: 5rem; }
+.cv-era-title { display: flex; align-items: center; gap: .75rem; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.25rem; }
+.cv-era-title small { font-size: .9rem; font-weight: 500; color: var(--c); margin-left: auto; }
+.cv-dot { width: .9rem; height: .9rem; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 25%, transparent); flex: none; }
+.cv-line { position: relative; padding-left: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.cv-line::before { content: ""; position: absolute; left: .4rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--c), color-mix(in srgb, var(--c) 20%, transparent)); }
+.cv-co { position: relative; border: 1px solid var(--line); border-radius: .75rem; background: var(--card); overflow: hidden; }
+.cv-co::before { content: ""; position: absolute; left: -1.85rem; top: 1.35rem; width: .7rem; height: .7rem; border-radius: 50%; background: var(--c); }
+.cv-co-head { display: grid; grid-template-columns: 4rem 1fr auto; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--c) 8%, transparent); }
+.cv-co-name { font-size: 1.35rem; font-weight: 800; color: var(--c); }
+.cv-co-role { font-weight: 600; }
+.cv-co-role span { font-weight: 400; color: var(--muted); }
+.cv-co-note { font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+.cv-co-period { font-size: .9rem; font-weight: 600; white-space: nowrap; }
+.cv-pj { list-style: none; margin: 0; padding: .25rem 1.25rem; }
+.cv-pj li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem; padding: .7rem 0; border-top: 1px dashed var(--line); }
+.cv-pj li:first-child { border-top: 0; }
+.cv-pj-period { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: .1rem; }
+.cv-pj-title { font-weight: 600; }
+.cv-pj-title a { text-decoration: underline; text-underline-offset: 3px; }
+.cv-pj-desc { font-size: .85rem; color: var(--muted); margin-top: .15rem; }
+.cv-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .4rem; }
+.cv-tags span { font-size: .72rem; padding: .1rem .5rem; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); color: var(--c); }
+@media (max-width: 640px) {
+  .cv-co-head { grid-template-columns: 1fr; gap: .25rem; }
+  .cv-pj li { grid-template-columns: 1fr; gap: .2rem; }
+  .cv-era-title small { margin-left: 0; }
+  .cv-era-title { flex-wrap: wrap; }
 }

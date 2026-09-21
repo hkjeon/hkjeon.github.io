@@ -1,0 +1,48 @@
+{{- define "main" -}}
+{{- $d := hugo.Data.career -}}
+<div class="cv-wrap">
+  <header class="cv-head">
+    <h1>{{ .Title }}</h1>
+    <p>회사(재직 기간)별 수행 프로젝트입니다. <span class="cv-star">★</span> 표시는 상세 사례 카드가 있는 프로젝트입니다.</p>
+    <p class="cv-sub">회사·민간 발주처는 첫 글자로, 공공·보안 분야 발주처는 업종으로 표기합니다.</p>
+  </header>
+
+  <nav class="cv-toc">
+    {{- range $i, $e := $d.eras }}
+    <a href="#era-{{ $i }}" style="--c: {{ $e.color }}"><b>{{ $e.name }}</b><span>{{ $e.period }}</span></a>
+    {{- end }}
+  </nav>
+
+  {{- range $i, $e := $d.eras }}
+  <section class="cv-era" id="era-{{ $i }}" style="--c: {{ $e.color }}">
+    <h2 class="cv-era-title"><span class="cv-dot"></span>{{ $e.name }}<small>{{ $e.period }}</small></h2>
+    <div class="cv-line">
+      {{- range $e.companies }}
+      <article class="cv-co">
+        <div class="cv-co-head">
+          <div class="cv-co-name">{{ .name }}</div>
+          <div class="cv-co-meta">
+            <div class="cv-co-role">{{ .role }} <span>· {{ .position }}</span></div>
+            {{- with .note }}<div class="cv-co-note">{{ . }}</div>{{ end }}
+          </div>
+          <div class="cv-co-period">{{ .period }}</div>
+        </div>
+        <ul class="cv-pj">
+          {{- range .projects }}
+          <li>
+            <span class="cv-pj-period">{{ .period }}</span>
+            <div class="cv-pj-body">
+              <div class="cv-pj-title">{{ with .link }}<a href="{{ . | relURL }}"><span class="cv-star">★</span> {{ end }}{{ .title }}{{ with .link }}</a>{{ end }}</div>
+              {{- with .desc }}<div class="cv-pj-desc">{{ . }}</div>{{ end }}
+              {{- with .tags }}<div class="cv-tags">{{ range . }}<span>{{ . }}</span>{{ end }}</div>{{ end }}
+            </div>
+          </li>
+          {{- end }}
+        </ul>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+</div>
+{{- end -}}
