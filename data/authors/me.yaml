@@ -72,7 +72,7 @@ experience:
       - Ansible 플레이북으로 200대 이상 노드의 보안취약점 조치·정기점검 자동화 및 결과 중앙 수집 체계 구축
       - RHOCP 4.9 / 4.10 기반 5G SA Core CNF, IMS 컨테이너 플랫폼 구축
   - role: Private Cloud / NFV Engineer
-    org: E사 → A사 · 공공 · 기업 프라이빗 클라우드 및 NFV 구축
+    org: E사 → A사 → E사 → A사(재입사) · 공공 · 기업 프라이빗 클라우드 및 NFV 구축
     start: 2016-09-01
     end: 2020-03-31
     summary: |
