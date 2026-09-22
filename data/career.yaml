@@ -61,6 +61,10 @@ eras:
             title: S사(통신사) 메시징 시스템 VMware → OpenStack 전환
             link: /projects/vmware-to-openstack-migration/
             tags: [RHOSP16, Migration]
+          - period: 2024.01 ~ 2024.04
+            title: S사(통신사) 5G 컨테이너 플랫폼(RHOCP) 기술지원
+            desc: E사 업무 연속 — IMS · CSDB · AMF 컨테이너 플랫폼
+            tags: [RHOCP]
       - name: E사
         period: 2020.04 ~ 2023.12
         position: 수석
@@ -81,7 +85,8 @@ eras:
             tags: [RHOCP 4.10, Local Repo]
           - period: 2021.12 ~ 2022.07
             title: S사(통신사) 5G SA Core CNF 플랫폼 구축
-            tags: [RHOCP 4.9, Local Repo]
+            link: /projects/telco-5g-sa-core-rhocp/
+            tags: [RHOCP 4.9, UPI, SR-IOV, OVN-Kubernetes]
           - period: 2021.08 ~ 2023.12
             title: S사(통신사) 5G 게이트웨이 라인업 간소화 재구축
             desc: S/PGW → SPGW
