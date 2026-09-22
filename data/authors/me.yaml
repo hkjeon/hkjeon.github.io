@@ -52,7 +52,7 @@ experience:
 
       **2024.11 ~ 2026.07 · IaaS Solution Developer**
 
-      - OSA 기반 배포 패키지 구조 재설계 및 폐쇄망 오프라인 설치 체계 구축 (Caracal, Epoxy)
+      - OSA 기반 배포 패키지 구조 재설계 및 폐쇄망 오프라인 설치 체계 구축 (Caracal 고도화, Epoxy 패키지 구성)
       - systemd-networkd 기반 타깃 노드 네트워크 구성 자동화, Cinder Multi-Backend, 컨트롤러 DB 백업 자동화
       - 국가 보안기술 연구기관 N2SF Test-Bed 클라우드 구축
       - 국가 시험인증기관 프라이빗 클라우드 구축

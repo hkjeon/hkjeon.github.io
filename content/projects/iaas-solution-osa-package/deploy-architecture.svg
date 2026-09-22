@@ -5,9 +5,9 @@
 <rect x="20" y="45" width="260" height="370" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.4"/>
 <text x="150" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="#1e3a8a">배포 노드 (Maker)</text>
 <rect x="36" y="82" width="228" height="26" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
-<text x="150" y="99" text-anchor="middle" font-size="9.5" font-weight="400" fill="#1e3a8a">Local Repository (deb · source)</text>
+<text x="150" y="99" text-anchor="middle" font-size="9.5" font-weight="400" fill="#1e3a8a">APT · PyPI · Git 저장소 (컨테이너)</text>
 <rect x="36" y="116" width="228" height="26" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
-<text x="150" y="133" text-anchor="middle" font-size="9.5" font-weight="400" fill="#1e3a8a">Python 환경 · OSA 29.x</text>
+<text x="150" y="133" text-anchor="middle" font-size="9.5" font-weight="400" fill="#1e3a8a">Caracal 고도화 · Epoxy flat repo</text>
 <rect x="36" y="150" width="228" height="26" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>
 <text x="150" y="167" text-anchor="middle" font-size="9.5" font-weight="400" fill="#1e3a8a">Apache — 저장소 · 문서</text>
 <rect x="36" y="184" width="228" height="26" rx="4" fill="#ffffff" stroke="#93c5fd" stroke-width="1"/>

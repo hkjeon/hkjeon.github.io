@@ -1,6 +1,6 @@
 ---
 title: 자사 IaaS 솔루션(OpenStack-Ansible) 배포 패키지 고도화
-summary: OpenStack-Ansible 기반 자사 IaaS 솔루션의 배포 패키지를 폐쇄망 설치 · 노드 구성 자동화 · 설정 구조 · 보안 · 스토리지 연동 관점에서 고도화한 사례. 고객 구축 사업에 바로 적용되는 제품 기능으로 반영
+summary: OpenStack-Ansible 기반 자사 IaaS 솔루션의 Caracal 배포 패키지를 노드 구성 자동화 · 설정 구조 · 보안 · 스토리지 연동 관점에서 고도화하고, Epoxy 폐쇄망 패키지를 새로 구성한 사례. 고객 구축 사업에 바로 적용되는 제품 기능으로 반영
 tags:
   - OpenStack
   - Storage
@@ -11,10 +11,10 @@ date: '2026-06-01T00:00:00Z'
 {{% pf %}}
 
 {{< kpis >}}
-8개|고도화 항목 직접 수행
+9개|고도화 항목 직접 수행
 10 / 13|보안 취약점 배포 시 자동 적용
 2종|노드 구성 방식 (bash · systemd-networkd)
-Caracal|OSA 29.x · 폐쇄망 패키지
+Epoxy|폐쇄망 패키지 직접 구성 (OSA 31.x)
 {{< /kpis >}}
 
 ## 프로젝트 개요
@@ -23,15 +23,15 @@ Caracal|OSA 29.x · 폐쇄망 패키지
 |---|---|
 | 소속 | N사 (IaaS 솔루션 개발) |
 | 기간 | 2024.10 ~ 2026.07 |
-| 대상 | OpenStack-Ansible 기반 **자사 IaaS 솔루션 배포 패키지** |
+| 대상 | OpenStack-Ansible 기반 **자사 IaaS 솔루션 배포 패키지** — Caracal 패키지 기능 고도화, **Epoxy 패키지 신규 구성** |
 | 목적 | 구축 현장마다 반복되던 수작업을 줄이고, 고객 요구 기능을 **패키지 기능**으로 표준화 |
-| 기술 | OpenStack-Ansible (Caracal) · Ubuntu 22.04 · Ansible · bash · systemd-networkd · Cinder · Horizon · ansible-vault |
+| 기술 | OpenStack-Ansible Caracal (Ubuntu 22.04) · Epoxy 31.x (Ubuntu 24.04) · Ansible · bash · systemd-networkd · Cinder · Horizon · ansible-vault |
 
 ## 구축 형태
 
 | 구분 | 구성 |
 |---|---|
-| 배포 노드 | 저장소 · Python 환경 · 소스를 담은 **배포 노드(Maker)** 하나로 폐쇄망 설치 |
+| 배포 노드 | APT(apache) · PyPI(pypiserver) · Git(git-daemon) 컨테이너를 담은 **배포 노드(Maker)** 하나로 폐쇄망 설치 |
 | 노드 구성 | Target 노드 설정 · 네트워크 구성을 배포 노드에서 **원격 실행** 후 점검 |
 | 설정 구조 | `openstack_user_config.yml` = 컴포넌트 · IP만 / `user_variables.yml` = 모든 OpenStack 설정 |
 | 적용 기능 | 보안 취약점 자동 적용, Cinder Multi-Backend, cinder-backup(NAS), S3 연동, Horizon 커스텀, 설정 암호화 |
@@ -44,12 +44,13 @@ Caracal|OSA 29.x · 폐쇄망 패키지
 
 <div class="pf-role">
 
-**역할** 배포 패키지 구조 설계 및 기능 고도화 (아래 8개 항목 직접 수행)
+**역할** 배포 패키지 구조 설계 및 기능 고도화 (아래 9개 항목 직접 수행)
 
 </div>
 
 | 항목 | 개선 전 문제 | 수행 내용 |
 |---|---|---|
+| Epoxy 오프라인 패키지 | Caracal은 업스트림 도메인별 미러 트리라 **저장소 경로가 길고 복잡** | Epoxy(OSA 31.x · Ubuntu 24.04) 패키지를 새로 구성 — APT를 **flat repo**(`main` + MariaDB · RabbitMQ · Erlang 분리)로 단순화, `user_variables`의 repo 경로 표준화 |
 | 노드 구성 자동화 | 노드마다 스크립트를 복사해 **직접 실행하는 반복 작업** | bash 기반 Target 노드 설정 · 네트워크 구성 자동화, systemd-networkd 방식도 별도 구현 ([관련 글](/blog/osa-systemd-networkd/)) |
 | 설정 파일 구조 | 설정이 두 파일에 섞여 나열 · 반복 작성 | **user_config는 컴포넌트 · IP만, 설정은 모두 user_variables로** 원칙 수립, Cinder · Glance 설정 분리 |
 | 보안 취약점 | 구축 후 수작업 조치 | 클라우드 보안 취약점 **13개 중 10개를 배포 시 자동 적용** |
