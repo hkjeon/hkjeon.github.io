@@ -12,7 +12,7 @@ date: '2024-10-01T00:00:00Z'
 
 {{< kpis >}}
 3개사|SMS · MMS VNF 전환 검증
-2차|PoC 수행
+5명|RHOSP 파트 리딩 (파트장)
 Controller 3대|전체 다운에도 VNF 무영향
 16.2.5 → 16.2.6|무중단 마이너 업데이트 검증
 {{< /kpis >}}
@@ -62,7 +62,7 @@ Controller 3대|전체 다운에도 VNF 무영향
 | 인프라 설계 · 구축 | Director 호스트, Controller · Compute 하드웨어 · 네트워크 설계, RHOSP 16.2 오버클라우드 배포 |
 | 마이그레이션 검증 | 필수 이관 VM을 인스턴스로 전환해 구성 · 기능 동작 · 자체 성능측정 수행, virt-v2v 변환 시연(300GB 약 5시간) → 상용은 **골든 이미지 + rsync 방식** 권고 (다운타임을 IP 전환 구간으로 한정) |
 | 이슈 대응 | 공유 SAN 디스크 OVF 누락 → Cinder Multi-attach 검증 추가, UEFI 이미지 `hw_firmware_type` 대응, 원본 3배 용량 산정 · 디스크 재구성 |
-| 장애 복구 시험 | 서비스 컨테이너 · Controller 순차 Power-off · Compute 재기동 · 스냅샷 복원 · 롤링 업데이트, 2차는 **최대 부하 상태**에서 수행 |
+| 장애 복구 시험 | 서비스 컨테이너 · Controller 순차 Power-off · Compute 재기동 · 스냅샷 복원 · 롤링 업데이트 |
 | 상용 구축 | PoC 종료 직후 구축 착수 — **Director 호스트 · Controller(OSC) 3대 선배포** (~2024.08), Compute는 수량 미확정으로 개략 설계까지 수행 (증설은 퇴사 이후) |
 | 산출물 | 구축 절차서 · 연동 결과서, 상용 전환 방안 제안 |
 

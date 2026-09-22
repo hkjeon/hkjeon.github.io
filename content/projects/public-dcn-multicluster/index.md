@@ -23,14 +23,14 @@ KA → OSA|배포 도구 전환 재구축
 | 발주처 | 공공 인프라 공기업 |
 | 기간 | 2024.12 ~ 2025.05 |
 | 사업 | 운영 중인 Kolla-Ansible 기반 업무망 OpenStack을 **OpenStack-Ansible 기반으로 재구축**하고 기존 VM 이관 |
-| 규모 | 베어메탈 5대 (혼합형 3 + Compute 2), 배포 · 컨트롤러 VM, AZ 분리 |
+| 규모 | 베어메탈 5대 (혼합형 3 + Compute 2), 배포 노드 VM, AZ 2개 (Bigdata · Combine) |
 | 기술 | OpenStack-Ansible · Cinder Multi-Backend · FC Multipath · Pure Storage · NetApp ONTAP |
 
 ## 구축 형태
 
 | 구분 | 구성 |
 |---|---|
-| 노드 | Controller + Compute **혼합형 3대** + Compute 전용 2대, 배포 노드 · 별도 컨트롤러는 VM |
+| 노드 | Controller + Compute **혼합형 3대** + Compute 전용 2대 (총 5대) — 배포 노드는 Compute #2에 KVM 설치 후 **VM으로 구성** |
 | 가용 영역 | **Bigdata AZ**(혼합형 3대) · **Combine AZ**(Compute 전용 2대)로 분리 — 워크로드를 구역 성격에 맞게 배치 |
 | 스토리지 | **Cinder Multi-Backend** — A 구역 Pure Storage(FC), B 구역 NetApp ONTAP(FC), 볼륨 타입으로 구분 |
 | 네트워크 | bond0 API · Tenant / bond1 Provider(서비스) / bond2 Provider(NAS), Provider flat 구성 |

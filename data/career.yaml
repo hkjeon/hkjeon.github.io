@@ -86,7 +86,7 @@ eras:
             desc: S/PGW → SPGW
             tags: [OpenStack]
           - period: 2020.04 ~ 2023.12
-            title: S사(통신사) 대규모 5G NSA 가상화 플랫폼 구축 및 운영
+            title: S사(통신사) 대규모 5G NSA 가상화 플랫폼 구축 및 안정 운영
             link: /projects/s-company-rhosp/
             tags: [RHOSP13, DCN, DPDK, SR-IOV, Ansible]
 

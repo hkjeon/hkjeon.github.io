@@ -65,7 +65,7 @@ experience:
     summary: |
       국내 통신사 5G 코어 인프라의 가상화·컨테이너 플랫폼 구축 및 운영. RHOSP 구축 파트 리딩(파트장) 수행.
 
-      - 5G NSA 가상화 플랫폼 구축 — RHOSP13 (DCN 구성 포함), 7개 리전
+      - 5G NSA 가상화 플랫폼 구축 — RHOSP13 (DCN 구성 포함), 2개 클러스터 · Compute 약 280대
       - RHOSP13 → RHOSP16 업그레이드 수행
       - VMware → OpenStack 마이그레이션 (메시징군 장비)
       - 통신사급 성능 요구 대응 — OVS-DPDK, SR-IOV, PCI Passthrough 적용
@@ -85,7 +85,7 @@ experience:
   - role: Telecom Test & Deployment Engineer
     org: T사 → E사 · 이동통신 시험장비 공급 · 코어망 구축
     start: 2009-03-01
-    end: 2016-06-30
+    end: 2016-08-31
     summary: |
       이동통신 프로토콜 시험장비 공급·기술지원 및 코어망 장비 구축·검증.
 
