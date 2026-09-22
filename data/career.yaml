@@ -40,6 +40,7 @@ eras:
             tags: [OpenStack]
           - period: 2024.11 ~ 2026.07
             title: OSA 기반 IaaS 솔루션 배포 패키지 개발
+            link: /projects/iaas-solution-osa-package/
             desc: 폐쇄망 오프라인 설치, systemd-networkd 자동화, 업스트림 기여
             tags: [OpenStack-Ansible, Caracal, Epoxy, Ansible]
 
