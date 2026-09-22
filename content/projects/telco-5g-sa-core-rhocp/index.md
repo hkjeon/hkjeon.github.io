@@ -41,7 +41,7 @@ UPI|베어메탈 · 폐쇄망 설치
 
 ## 구성도
 
-[![RHOCP 4.9 클러스터 구성 — 공용 인프라와 클러스터 1식](cluster-architecture.svg)](cluster-architecture.svg "클릭하면 원본 크기로 열립니다")
+[![RHOCP 4.9 클러스터 구성 — Bastion 미러 레지스트리 기반 폐쇄망 클러스터 1식](cluster-architecture.svg)](cluster-architecture.svg "클릭하면 원본 크기로 열립니다")
 
 ## 담당 역할 및 수행 내용
 
