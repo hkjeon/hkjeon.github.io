@@ -48,7 +48,7 @@
 <text x="257" y="409" text-anchor="middle" font-size="8" font-weight="400" fill="#14532d">Compute</text>
 <line x1="230" y1="289" x2="228" y2="315" stroke="#b45309" stroke-width="1.8"/>
 <rect x="304" y="315" width="132" height="120" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6"/>
-<text x="370" y="335" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">AZ 5 …</text>
+<text x="370" y="335" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">… AZ 35</text>
 <text x="370" y="350" text-anchor="middle" font-size="8.5" font-weight="400" fill="#14532d">전용 서브넷</text>
 <rect x="314" y="360" width="54" height="26" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
 <text x="341" y="377" text-anchor="middle" font-size="8" font-weight="400" fill="#14532d">Compute</text>
@@ -99,7 +99,7 @@
 <text x="697" y="409" text-anchor="middle" font-size="8" font-weight="400" fill="#14532d">Compute</text>
 <line x1="670" y1="289" x2="668" y2="315" stroke="#b45309" stroke-width="1.8"/>
 <rect x="744" y="315" width="132" height="120" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6"/>
-<text x="810" y="335" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">AZ 6 …</text>
+<text x="810" y="335" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532d">… AZ 34</text>
 <text x="810" y="350" text-anchor="middle" font-size="8.5" font-weight="400" fill="#14532d">전용 서브넷</text>
 <rect x="754" y="360" width="54" height="26" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
 <text x="781" y="377" text-anchor="middle" font-size="8" font-weight="400" fill="#14532d">Compute</text>
@@ -112,5 +112,5 @@
 <line x1="670" y1="289" x2="810" y2="315" stroke="#b45309" stroke-width="1.8"/>
 <line x1="365" y1="95" x2="230" y2="125" stroke="#2563eb" stroke-width="2"/>
 <line x1="655" y1="95" x2="670" y2="125" stroke="#7c3aed" stroke-width="2"/>
-<text x="450" y="458" text-anchor="middle" font-size="10" font-weight="700" fill="#14532d">2개 독립 클러스터 · Compute 약 280대 · AZ당 8대 · OVS-DPDK / SR-IOV / PCI-PT</text>
+<text x="450" y="458" text-anchor="middle" font-size="10" font-weight="700" fill="#14532d">2개 독립 클러스터 · AZ 35개 (A 18 · B 17) × Compute 8대 = 약 280대 · OVS-DPDK / SR-IOV / PCI-PT</text>
 </svg>

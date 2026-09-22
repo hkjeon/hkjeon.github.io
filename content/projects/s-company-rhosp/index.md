@@ -23,14 +23,14 @@ RHOSP13|Red Hat OpenStack Platform
 | 발주처 | S사(통신사) |
 | 기간 | 2020.04 ~ 2023.12 (구축 후 운영 · 기술지원) |
 | 사업 | 5G NSA 코어 인프라용 **RHOSP13 기반 가상화 플랫폼** 구축 및 운영 |
-| 규모 | 클러스터 2개, Compute 약 280대 (AZ당 8대) |
+| 규모 | 클러스터 2개, AZ 35개 (A 18 · B 17), Compute 약 280대 (AZ당 8대) |
 | 기술 | RHOSP13 · DCN(L3 라우팅) · OVS-DPDK · SR-IOV · PCI Passthrough · Ansible |
 
 ## 구축 형태
 
 | 구분 | 구성 |
 |---|---|
-| 아키텍처 | **DCN(Distributed Compute Node)** — Director 2대(KVM 호스트 VM)가 각각 **독립 클러스터**(Controller 3대 + Compute Zone)를 관리, Compute Zone은 **홀수 / 짝수 AZ로 분리**, Director · Controller는 같은 서브넷, Zone마다 별도 서브넷(L3 라우팅) |
+| 아키텍처 | **DCN(Distributed Compute Node)** — Director 2대(KVM 호스트 VM)가 각각 **독립 클러스터**(Controller 3대 + Compute Zone)를 관리, Compute Zone은 **홀수 / 짝수 AZ로 분리**(A 18개 · B 17개), Director · Controller는 같은 서브넷, Zone마다 별도 서브넷(L3 라우팅) |
 | 성능 | 통신사 VNF 요구에 맞춘 OVS-DPDK, SR-IOV, PCI Passthrough 적용 |
 | 운영 | 200대 이상 노드 대상 보안취약점 조치 · 정기점검 **Ansible 자동화**, 결과 중앙 수집 |
 

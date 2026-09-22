@@ -63,7 +63,8 @@ eras:
             tags: [RHOSP16, Migration]
       - name: E사
         period: 2020.04 ~ 2023.12
-        position: 과장 → 수석
+        position: 수석
+        note: 2022.07 퇴사 후 2022.09 재입사
         role: Cloud Platform Engineer
         projects:
           - period: 2023.08 ~ 2023.12
@@ -91,11 +92,11 @@ eras:
             tags: [RHOSP13, DCN, DPDK, SR-IOV, Ansible]
 
   - name: 프라이빗 클라우드 · NFV
-    period: 2016.09 ~ 2020.03
+    period: 2015.12 ~ 2020.04
     color: "#8b5cf6"
     companies:
       - name: A사
-        period: 2018.12 ~ 2020.03
+        period: 2019.01 ~ 2020.04
         position: 과장
         role: Private Cloud / NFV Engineer
         note: 재입사
@@ -125,7 +126,7 @@ eras:
             title: 교통 공기업 SDDC 유지보수
             tags: [NFV, SDN, OpenStack]
       - name: E사
-        period: 2018.10 ~ 2018.12
+        period: 2018.10 ~ 2019.01
         position: 과장
         role: Private Cloud Engineer
         projects:
@@ -136,8 +137,8 @@ eras:
             title: S사(글로벌 제조사) 해외 통신사 NB-IoT 대규모 Trial
             tags: [Helion OpenStack]
       - name: A사
-        period: 2017.10 ~ 2017.12
-        position: 선임
+        period: 2017.01 ~ 2018.10
+        position: 과장
         role: NFV Engineer
         projects:
           - period: 2017.10 ~ 2017.12
@@ -158,11 +159,11 @@ eras:
             tags: [QA]
 
   - name: 통신 시험장비
-    period: 2009.03 ~ 2015.06
+    period: 2009.02 ~ 2015.08
     color: "#64748b"
     companies:
       - name: T사
-        period: 2009.03 ~ 2015.06
+        period: 2009.02 ~ 2015.08
         position: 사원 → 주임
         role: Telecom Test & Deployment Engineer
         projects:

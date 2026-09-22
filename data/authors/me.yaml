@@ -59,7 +59,7 @@ experience:
       - 공공 인프라 공기업 정보인프라 도입·증설 및 OpenStack 3개 클러스터 유지보수
       - OpenStack-Ansible 업스트림 기여 (openstack-ansible-os_swift)
   - role: Cloud Platform Engineer
-    org: E사 → O사 · S사(통신사) 5G Red Hat 가상화 · 컨테이너 플랫폼 (RHOSP · RHOCP)
+    org: E사(재입사 포함) → O사 · S사(통신사) 5G Red Hat 가상화 · 컨테이너 플랫폼 (RHOSP · RHOCP)
     start: 2020-04-01
     end: 2024-10-31
     summary: |
@@ -73,8 +73,8 @@ experience:
       - RHOCP 4.9 / 4.10 기반 5G SA Core CNF, IMS 컨테이너 플랫폼 구축
   - role: Private Cloud / NFV Engineer
     org: E사 → A사 → E사 → A사(재입사) · 공공 · 기업 프라이빗 클라우드 및 NFV 구축
-    start: 2016-09-01
-    end: 2020-03-31
+    start: 2015-12-01
+    end: 2020-04-30
     summary: |
       공공기관·지자체·기업 대상 OpenStack 기반 프라이빗 클라우드와 NFV 플랫폼 구축.
 
@@ -83,9 +83,9 @@ experience:
       - 통신사 NFV 플랫폼 구축 및 SDN 연계, 초연결망 선도사업 유지보수
       - 글로벌 통신사 NB-IoT 대규모 Trial 플랫폼 구축 지원
   - role: Telecom Test & Deployment Engineer
-    org: T사 → E사 · 이동통신 시험장비 공급 · 코어망 구축
-    start: 2009-03-01
-    end: 2016-08-31
+    org: T사 · 이동통신 시험장비 공급 · 코어망 구축
+    start: 2009-02-01
+    end: 2015-08-31
     summary: |
       이동통신 프로토콜 시험장비 공급·기술지원 및 코어망 장비 구축·검증.
 
