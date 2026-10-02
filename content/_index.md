@@ -52,7 +52,7 @@ sections:
         <div class="pf-kpi"><b>17년</b><span>통신 · 공공 IT 인프라 경력</span></div>
         <div class="pf-kpi"><b>30+</b><span>수행 프로젝트</span></div>
         <div class="pf-kpi"><b>280대</b><span>운영해 본 최대 Compute 규모</span></div>
-        <div class="pf-kpi"><b><a href="https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906" target="_blank" rel="noopener">2건</a></b><span>OpenStack 업스트림 공식 반영</span></div>
+        <div class="pf-kpi"><b><a href="/projects/iaas-solution-osa-package/">2건</a></b><span>OpenStack 업스트림 공식 반영</span></div>
         </div></div>
     design:
       spacing:
