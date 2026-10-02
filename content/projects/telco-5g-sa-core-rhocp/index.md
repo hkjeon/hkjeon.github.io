@@ -1,5 +1,5 @@
 ---
-title: S사(통신사) 5G SA Core CNF 플랫폼 구축 (RHOCP 4.9)
+title: 'S사 5G SA Core 컨테이너 플랫폼 (RHOCP 4.9)'
 summary: 국내 통신사 S사의 5G SA Core CNF를 수용하는 Red Hat OpenShift 4.9 플랫폼을 폐쇄망 베어메탈 UPI 방식으로 구축한 사례. TB 2개와 상용 국사 2개, 총 4개 클러스터를 구성하고 CNF 성능 튜닝과 인수시험까지 수행
 tags:
   - Kubernetes
