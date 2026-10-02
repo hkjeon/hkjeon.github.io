@@ -220,10 +220,10 @@ sections:
     id: contact
     content:
       title: 연락처
-      subtitle: "인프라에 관한 이야기라면 언제든 환영합니다"
+      subtitle: "궁금한 점은 언제든 편하게"
       text: |-
-        OpenStack 기반 프라이빗 클라우드 구축과 운영에 관한 문의,
-        기술 논의, 협업 제안 모두 편하게 연락 주세요.
+        경력이나 프로젝트 내용에 대해 궁금한 점이 있으시면
+        아래 메일로 편하게 연락 주세요.
       email: nosmile0412@hanmail.net
       autolink: true
     design:
