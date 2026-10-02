@@ -68,7 +68,7 @@ Epoxy|폐쇄망 설치 패키지 신규 구성
 
 | 문제 | 해결 | 결과 |
 |---|---|---|
-| 스토리지 서비스(Swift)가 **권한 오류로 시작되지 않음** | 서비스 권한 설정 1줄 추가 | ✅ **OpenStack 공식 반영** (2026.04) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
+| 스토리지 서비스(Swift)가 **권한 오류로 시작되지 않음** | 버그 보고 · 조치 방안 제안 → 서비스 권한 설정 1줄 수정 코드 제출 | ✅ **OpenStack 공식 반영** (2026.04) · [버그 보고](https://answers.launchpad.net/openstack-ansible/+question/824067) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
 | SSH 포트를 바꾸면 **인증 키 동기화가 실패**해 주기적 에러 | 포트를 설정값으로 바꿀 수 있게 코드 제안 → **실제 고객 환경에 적용** | 제안 · [이슈](https://answers.launchpad.net/openstack-ansible/+question/821851) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
 
 {{% /pf %}}
