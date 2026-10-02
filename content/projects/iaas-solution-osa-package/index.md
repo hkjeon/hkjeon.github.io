@@ -66,13 +66,15 @@ Epoxy|폐쇄망 설치 패키지 신규 구성
 
 ### ④ 업스트림 기여 — 현장에서 찾은 문제를 OpenStack에 반영
 
+<div class="pf-up">
+
 | 문제 | 해결 | 결과 |
 |---|---|---|
-| SSH 포트를 바꾸면 **인증 키 동기화가 실패**해 주기적 에러 | 포트를 설정값으로 바꿀 수 있게 코드 제안 → **실제 고객 환경에 적용** | 제안 (2025.05) · [이슈](https://answers.launchpad.net/openstack-ansible/+question/821851) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
-| 컨테이너 서비스(Zun)의 **웹 콘솔이 보안 정책에 막혀 화면이 안 나옴** | 문제 보고 · 해결 방안 제안 → 메인테이너가 패치 작성 후 **테스트 의뢰 → 검증 결과 공유** | ✅ **OpenStack 공식 반영** (2026.04) · [이슈](https://answers.launchpad.net/openstack-ansible/+question/824034) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2147415) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible/+/983525) |
-| 스토리지 서비스(Swift)가 **권한 오류로 시작되지 않음** | 버그 보고 · 조치 방안 제안 → 서비스 권한 설정 1줄 수정 코드 **직접 제출** | ✅ **OpenStack 공식 반영** (2026.04) · [버그 보고](https://answers.launchpad.net/openstack-ansible/+question/824067) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
+| SSH 포트를 바꾸면 **인증 키 동기화가 실패**해 주기적 에러 | 포트를 설정값으로 바꿀 수 있게 코드 제안 → **실제 고객 환경에 적용** | 제안 (2025.05)<br>[이슈](https://answers.launchpad.net/openstack-ansible/+question/821851) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
+| 컨테이너 서비스(Zun)의 **웹 콘솔이 보안 정책에 막혀** 화면이 안 나옴 | 문제 보고 · 해결 방안 제안 → 메인테이너가 패치 작성 → **테스트 · 검증 결과 공유** | ✅ **공식 반영** (2026.04)<br>[이슈](https://answers.launchpad.net/openstack-ansible/+question/824034) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2147415) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible/+/983525) |
+| 스토리지 서비스(Swift)가 **권한 오류로 시작되지 않음** | 버그 보고 · 조치 제안 → 수정 코드 **직접 제출** (Zun 건 이후 메인테이너 안내로 직접 기여) | ✅ **공식 반영** (2026.04)<br>[버그 보고](https://answers.launchpad.net/openstack-ansible/+question/824067) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
 
-Zun 건을 계기로 메인테이너에게 업스트림 기여 절차를 안내받았고, 이어서 Swift 수정은 **직접 코드를 올려 머지**했습니다.
+</div>
 
 {{% /pf %}}
 

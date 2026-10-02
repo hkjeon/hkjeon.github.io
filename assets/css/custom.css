@@ -75,3 +75,11 @@
 #highlights .pf-kpi { text-align: center; }
 #highlights .pf-kpi b a { color: inherit; text-decoration: none; }
 @media (max-width: 640px) { #highlights .hl-kpis { grid-template-columns: repeat(2, 1fr); } }
+
+/* 업스트림 기여 표 — 열 폭 고정 (문제 · 해결 · 결과) */
+.pf .pf-up table { table-layout: fixed; width: 100%; }
+.pf .pf-up td, .pf .pf-up th { white-space: normal !important; vertical-align: top; }
+.pf .pf-up th:nth-child(1), .pf .pf-up td:nth-child(1) { width: 32%; }
+.pf .pf-up th:nth-child(2), .pf .pf-up td:nth-child(2) { width: 40%; }
+.pf .pf-up th:nth-child(3), .pf .pf-up td:nth-child(3) { width: 28%; }
+.pf .pf-up td:nth-child(1) { font-weight: 600; }
