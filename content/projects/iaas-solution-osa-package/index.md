@@ -1,7 +1,8 @@
 ---
-title: 자사 IaaS 솔루션(OpenStack-Ansible) 배포 패키지 고도화
-summary: OpenStack-Ansible 기반 자사 IaaS 솔루션의 Caracal 배포 패키지를 노드 구성 자동화 · 설정 구조 · 보안 · 스토리지 연동 관점에서 고도화하고, Epoxy 폐쇄망 패키지를 새로 구성한 사례. 고객 구축 사업에 바로 적용되는 제품 기능으로 반영
+title: '[제품 개발] 자사 IaaS 솔루션(OpenStack-Ansible) 배포 패키지 고도화 · 업스트림 기여'
+summary: OpenStack-Ansible 기반 자사 IaaS 솔루션의 Caracal 배포 패키지를 노드 구성 자동화 · 설정 구조 · 보안 · 스토리지 연동 관점에서 고도화하고, Epoxy 폐쇄망 패키지를 새로 구성한 사례. 개발 · 현장 적용 중 발견한 문제는 OpenStack-Ansible 업스트림에 수정 · 제안으로 기여 고객 구축 사업에 바로 적용되는 제품 기능으로 반영
 tags:
+  - Product
   - OpenStack
   - Storage
   - Architecture
@@ -13,7 +14,7 @@ date: '2026-06-01T00:00:00Z'
 {{< kpis >}}
 9개|고도화 항목 직접 수행
 10 / 13|보안 취약점 배포 시 자동 적용
-2종|노드 구성 방식 (bash · systemd-networkd)
+머지 1 · 제안 1|OpenStack-Ansible 업스트림 기여
 Epoxy|폐쇄망 패키지 직접 구성 (OSA 31.x)
 {{< /kpis >}}
 
@@ -59,6 +60,36 @@ Epoxy|폐쇄망 패키지 직접 구성 (OSA 31.x)
 | Object Storage | VM에서 S3 스토리지 사용 요구 | 외부 Object Storage 연동 — s3fs 마운트 · aws cli 호환 검증 |
 | Horizon 커스텀 | 제품 식별 · 안내 부족 | 브랜드명 표시, 도움말 링크 연동 (운영 매뉴얼 PDF 연동까지 구현 → 요청에 따라 솔루션 소개 페이지로 변경) |
 | 설정 암호화 | 구축 후 설정 정보 유출 우려 | ansible-vault로 배포 템플릿 암호화 · 복호화 절차 구성 |
+
+## 업스트림 기여
+
+패키지 개발과 현장 적용 중 발견한 문제를 OpenStack-Ansible 커뮤니티에 올려, **수정 머지와 코드 제안**까지 이어간 기록입니다.
+
+| 구분 | 문제 | 기여 내용 | 상태 |
+|---|---|---|---|
+| **os_swift** 코드 기여 | Swift 데몬이 `os.setgid()`에서 **PermissionError로 기동 실패** | systemd `swift_service_defaults`에 `AmbientCapabilities: "CAP_SETGID CAP_SETUID"` 추가 | **Merged** (2026.04, master) · [Gerrit 984906](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
+| **os_keystone** 이슈 · 코드 제안 | 고객사 요구로 SSH 포트를 22에서 변경한 뒤 **주기적 Keystone 에러** — rsync · scp 기반 fernet · credential 키 동기화가 포트 22를 전제 | `keystone_ssh_port` 변수(`keystone_rotate_ssh_port`, 기본 22) 추가 — 키 배포 task 2개 · rotate 템플릿 2개에 적용, **실제 구축 환경에 적용 · 운영** | 제안 · [Question 821851](https://answers.launchpad.net/openstack-ansible/+question/821851) · [Bug 2110943](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
+
+<details>
+<summary>os_keystone 제안 코드 요약</summary>
+
+```yaml
+# defaults/main.yml — 포트 변수 추가 (기본값 22 유지)
+keystone_ssh_port: "{{ keystone_rotate_ssh_port | default('22') }}"
+
+# tasks/keystone_fernet_keys_distribute.yml · keystone_credential_distribute.yml
+rsync -e 'ssh -p {{ keystone_ssh_port }} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' ...
+
+# templates/keystone-fernet-rotate.sh.j2 · keystone-credential-rotate.sh.j2
+scp -P {{ keystone_ssh_port }} ...
+rsync -e 'ssh -p {{ keystone_ssh_port }} ...' ...
+
+# user_variables.yml — 비표준 SSH 포트 환경 사용 예
+ansible_ssh_port: 2222
+keystone_rotate_ssh_port: 2222
+```
+
+</details>
 
 ## 기타
 

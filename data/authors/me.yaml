@@ -11,7 +11,7 @@ bio: |
   OpenStack 기반 프라이빗 클라우드의 설계·구축·운영을 담당하고 있습니다.
   공공기관·통신사 환경에서 30여 개 프로젝트를 수행했으며,
   IaaS 솔루션 배포 패키지 개발을 거쳐, 현재는 Kolla-Ansible 기반
-  IaaS 플랫폼 서비스의 구축·운영을 맡고 있습니다. OpenStack-Ansible 업스트림에도 기여했습니다.
+  IaaS 플랫폼 서비스의 구축·운영을 맡고 있습니다. OpenStack-Ansible [업스트림에도 기여](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906)했습니다.
 
 links:
   - icon: at-symbol
@@ -57,7 +57,7 @@ experience:
       - 국가 보안기술 연구기관 N2SF Test-Bed 클라우드 구축
       - 국가 시험인증기관 프라이빗 클라우드 구축
       - 공공 인프라 공기업 정보인프라 도입·증설 및 OpenStack 3개 클러스터 유지보수
-      - OpenStack-Ansible 업스트림 기여 (openstack-ansible-os_swift)
+      - OpenStack-Ansible 업스트림 기여 — [os_swift 수정 머지](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906), os_keystone SSH 포트 변수화 제안
   - role: Cloud Platform Engineer
     org: E사(재입사 포함) → O사 · S사(통신사) 5G Red Hat 가상화 · 컨테이너 플랫폼 (RHOSP · RHOCP)
     start: 2020-04-01
