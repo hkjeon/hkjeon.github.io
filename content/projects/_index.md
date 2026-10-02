@@ -1,5 +1,5 @@
 ---
-title: 'Projects'
+title: '전체 프로젝트'
 date: 2024-05-19
 type: landing
 
@@ -7,8 +7,8 @@ type: landing
 sections:
   - block: collection
     content:
-      title: Selected Projects
-      text: I enjoy making things. Here are a selection of projects that I have worked on over the years.
+      title: 전체 프로젝트
+      text: 고객사 구축 사례와 제품 개발 · 업스트림 기여. 회사별 전체 이력은 [경력기술서](/career/)에서 볼 수 있습니다.
       filters:
         folders:
           - projects

@@ -15,7 +15,7 @@ sections:
       show_status: false
       show_scroll_indicator: true
       typewriter:
-        enable: true
+        enable: false
         prefix: "제가 다뤄온 것은"
         strings:
           - "OpenStack 기반 프라이빗 클라우드"
@@ -26,12 +26,12 @@ sections:
         delete_speed: 40
         pause_time: 2500
       cta_buttons:
-        - text: 프로젝트 보기
+        - text: 경력기술서 보기
+          url: "/career/"
+          icon: document-text
+        - text: 대표 프로젝트
           url: "#projects"
           icon: arrow-down
-        - text: 연락하기
-          url: "#contact"
-          icon: envelope
     design:
       style: centered
       avatar_shape: circle
@@ -43,35 +43,39 @@ sections:
       spacing:
         padding: ["6rem", "0", "4rem", "0"]
   
+  # 핵심 수치 — 5초 요약
+  - block: markdown
+    id: highlights
+    content:
+      text: |
+        <div class="pf"><div class="pf-kpis hl-kpis">
+        <div class="pf-kpi"><b>17년</b><span>통신 · 공공 IT 인프라 경력</span></div>
+        <div class="pf-kpi"><b>30+</b><span>수행 프로젝트</span></div>
+        <div class="pf-kpi"><b>280대</b><span>운영해 본 최대 Compute 규모</span></div>
+        <div class="pf-kpi"><b><a href="https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906" target="_blank" rel="noopener">공식 반영</a></b><span>OpenStack 업스트림 코드 머지</span></div>
+        </div></div>
+    design:
+      spacing:
+        padding: ["0", "0", "2rem", "0"]
+
   # Filterable Portfolio - Alpine.js powered project filtering
   - block: portfolio
     id: projects
     content:
-      title: "주요 프로젝트"
-      subtitle: "실제 수행한 인프라 구축 사례"
+      title: "대표 프로젝트"
+      subtitle: "설계 · 확장 · 제품화 — 핵심 사례 3가지"
       count: 0
       filters:
         folders:
           - projects
       buttons:
-        - name: 전체
-          tag: '*'
-        - name: OpenStack
-          tag: OpenStack
-        - name: Storage
-          tag: Storage
-        - name: NFV
-          tag: NFV
-        - name: Migration
-          tag: Migration
-        - name: 제품 개발
-          tag: Product
+        - name: 대표
+          tag: Featured
       default_button_index: 0
-      # Archive link auto-shown if more projects exist than 'count' above
-      # archive:
-      #   enable: false  # Set to false to explicitly hide
-      #   text: "Browse All"  # Customize text
-      #   link: "/work/"  # Custom URL
+      archive:
+        enable: true
+        text: "전체 프로젝트 보기 →"
+        link: "/projects/"
     design:
       columns: 3
       background:
@@ -81,6 +85,24 @@ sections:
       spacing:
         padding: ["4rem", "0", "4rem", "0"]
   
+  # Experience Timeline
+  - block: resume-experience
+    id: experience
+    content:
+      title: 경력 한눈에
+      text: "회사별 상세 이력과 전체 프로젝트는 **[경력기술서](/career/)**에서 볼 수 있습니다."
+      username: me
+      date_format: "2006.01"
+    design:
+      columns: '1'
+      is_education_first: false
+      background:
+        color:
+          light: "#ffffff"
+          dark: "#0d0d12"
+      spacing:
+        padding: ["4rem", "0", "4rem", "0"]
+
   # Visual Tech Stack - Icons organized by category
   - block: tech-stack
     id: skills
@@ -152,23 +174,6 @@ sections:
       spacing:
         padding: ["4rem", "0", "4rem", "0"]
   
-  # Experience Timeline
-  - block: resume-experience
-    id: experience
-    content:
-      title: 주요 경력
-      username: me
-      date_format: "2006.01"
-    design:
-      columns: '1'
-      is_education_first: false
-      background:
-        color:
-          light: "#ffffff"
-          dark: "#0d0d12"
-      spacing:
-        padding: ["4rem", "0", "4rem", "0"]
-
   # 자격 및 교육
   - block: resume-awards
     id: awards

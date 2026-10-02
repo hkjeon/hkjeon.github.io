@@ -2,6 +2,7 @@
 title: '[제품 개발] 자사 IaaS 솔루션(OpenStack-Ansible) 배포 패키지 고도화 · 업스트림 기여'
 summary: 구축 현장마다 반복되던 설치 · 설정 작업을 자사 IaaS 솔루션의 제품 기능으로 바꾸고, 그 과정에서 찾은 OpenStack 문제는 업스트림에 수정 · 제안으로 반영한 사례
 tags:
+  - Featured
   - Product
   - OpenStack
   - Storage
