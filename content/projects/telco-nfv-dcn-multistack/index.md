@@ -2,10 +2,10 @@
 title: S사(통신사) NFV 플랫폼 DCN Multi-Stack 전환 (RHOSP13 → RHOSP16.2)
 summary: 하나의 Stack으로 Compute 수백 대를 관리하던 RHOSP13 DCN 구조를, Zone마다 독립 Stack을 두는 RHOSP16.2 Multi-Stack으로 재설계한 사례. OVS-DPDK 기반 NFV Compute 튜닝과 사내 TB 사전 검증까지 수행
 tags:
-  - Featured
   - OpenStack
   - NFV
   - Architecture
+  - Featured
 date: '2024-09-01T00:00:00Z'
 ---
 
