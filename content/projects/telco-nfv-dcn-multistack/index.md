@@ -6,6 +6,7 @@ tags:
   - NFV
   - Architecture
   - Featured
+weight: 1
 date: '2024-09-01T00:00:00Z'
 ---
 

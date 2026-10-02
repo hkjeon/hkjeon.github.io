@@ -63,8 +63,10 @@ sections:
     id: projects
     content:
       title: "대표 프로젝트"
-      subtitle: "설계 · 확장 · 제품화 — 핵심 사례 3가지"
+      subtitle: "설계(Multi-Stack) → 확장(OpenShift) → 제품화(패키지 · 업스트림)"
       count: 0
+      sort_by: Weight
+      sort_ascending: true
       filters:
         folders:
           - projects
