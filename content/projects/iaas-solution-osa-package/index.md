@@ -73,9 +73,10 @@ Epoxy|폐쇄망 설치 패키지 신규 구성
 | SSH 포트를 바꾸면 **인증 키 동기화가 실패**해 주기적 에러 | 포트를 설정값으로 바꿀 수 있게 코드 제안 → **실제 고객 환경에 적용** | 제안 (2025.05)<br>[이슈](https://answers.launchpad.net/openstack-ansible/+question/821851) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
 | 컨테이너 서비스(Zun)의 **웹 콘솔이 보안 정책에 막혀** 화면이 안 나옴 | 문제 보고 · 해결 방안 제안 → 메인테이너가 패치 작성 → **테스트 · 검증 결과 공유** | ✅ **공식 반영** (2026.04)<br>[이슈](https://answers.launchpad.net/openstack-ansible/+question/824034) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2147415) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible/+/983525) |
 | 스토리지 서비스(Swift)가 **권한 오류로 시작되지 않음** | 버그 보고 · 조치 제안 → 수정 코드 **직접 제출** (Zun 건 이후 메인테이너 안내로 직접 기여) | ✅ **공식 반영** (2026.04)<br>[버그 보고](https://answers.launchpad.net/openstack-ansible/+question/824067) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
+| 장애 시 VM을 자동으로 옮기는 기능(Masakari)이 **동작하지 않음** | 에러 로그로 원인(필수 패키지 누락) 분석 → 설치 후 정상 동작 확인 → 수정 코드 **직접 제출** | 🔄 **리뷰 중** (2026.10)<br>[변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_masakari/+/1008427) |
 
 </div>
 
 {{% /pf %}}
 
-{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS OSA OpenStack-Ansible 오픈스택앤서블 Ansible 앤서블 업스트림 오픈소스 기여 Gerrit 제품개발 패키지 Zun 컨테이너 콘솔 HAProxy Swift Keystone{{< /keywords >}}
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS OSA OpenStack-Ansible 오픈스택앤서블 Ansible 앤서블 업스트림 오픈소스 기여 Gerrit 제품개발 패키지 Masakari 마사카리 HA 고가용성 Zun 컨테이너 콘솔 HAProxy Swift Keystone{{< /keywords >}}
