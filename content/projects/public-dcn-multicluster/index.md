@@ -67,3 +67,5 @@ KA → OSA|배포 도구 전환 재구축
 - NAS를 이관 통로 겸 원본 백업으로 사용해 재구축 중 롤백 여지 확보
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS OSA OpenStack-Ansible 공공 Cinder 스토리지 Pure NetApp 이관 마이그레이션{{< /keywords >}}

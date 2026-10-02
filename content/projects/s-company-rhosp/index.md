@@ -58,3 +58,5 @@ RHOSP13|Red Hat OpenStack Platform
 - 이 환경의 Single Stack 구조 한계를 이후 [RHOSP16.2 Multi-Stack 전환](/projects/telco-nfv-dcn-multistack/)으로 해결
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS RHOSP RHOSP13 레드햇오픈스택 DCN NFV DPDK SR-IOV 통신사 5G NSA{{< /keywords >}}

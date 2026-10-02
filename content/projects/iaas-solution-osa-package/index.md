@@ -72,3 +72,5 @@ Epoxy|폐쇄망 설치 패키지 신규 구성
 | SSH 포트를 바꾸면 **인증 키 동기화가 실패**해 주기적 에러 | 포트를 설정값으로 바꿀 수 있게 코드 제안 → **실제 고객 환경에 적용** | 제안 · [이슈](https://answers.launchpad.net/openstack-ansible/+question/821851) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS OSA OpenStack-Ansible 오픈스택앤서블 Ansible 앤서블 업스트림 오픈소스 기여 Gerrit 제품개발 패키지{{< /keywords >}}

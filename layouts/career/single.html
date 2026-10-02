@@ -1,6 +1,6 @@
 {{- define "main" -}}
 {{- $d := hugo.Data.career -}}
-<div class="cv-wrap">
+<div class="cv-wrap" data-pagefind-body>
   <header class="cv-head">
     <h1>{{ .Title }}</h1>
     <p>회사(재직 기간)별 수행 프로젝트입니다. <span class="cv-star">★</span> 표시는 상세 사례 카드가 있는 프로젝트입니다.</p>
@@ -44,5 +44,6 @@
     </div>
   </section>
   {{- end }}
+  <p class="sr-only" aria-hidden="true">경력기술서 경력 이력 RedHat 레드햇 Red Hat RHOSP RHOCP OpenShift 오픈시프트 오픈스택 OpenStack 쿠버네티스 Kubernetes NFV 통신사 공공</p>
 </div>
 {{- end -}}

@@ -86,3 +86,5 @@ OVS-DPDK|NFV Compute 튜닝
 - `NovaVcpuPinSet`(RHOSP13 방식) 유지 — 차기 업그레이드 전 `NovaComputeCpuDedicatedSet` 전환 항목으로 관리
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS RHOSP RHOSP16 RHOSP13 레드햇오픈스택 멀티스택 DCN NFV 엔에프브이 DPDK 통신사 SKT 5G{{< /keywords >}}

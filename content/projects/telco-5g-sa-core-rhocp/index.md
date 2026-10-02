@@ -66,3 +66,5 @@ UPI|베어메탈 · 폐쇄망 설치
 - 이후 S사 IMS(cMSS) · 가입자 DB(CSDB) · 5G AMF 컨테이너 플랫폼(RHOCP 4.10)으로 구축 · 기술지원 확장, 2024.01 O사 이관 후에도 업무 연속
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS RHOCP OpenShift 오픈시프트 쿠버네티스 Kubernetes k8s 컨테이너 CNF 5G 통신사{{< /keywords >}}

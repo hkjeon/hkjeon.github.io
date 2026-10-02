@@ -79,3 +79,5 @@ date: '2025-11-01T00:00:00Z'
 - DB는 NAS로 Full 백업 · 7일 보관 — 논리적 장애(삭제 · 마이그레이션 실패) 대비
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS OSA OpenStack-Ansible 공공 폐쇄망 쿠버네티스 Kubernetes SAN NAS{{< /keywords >}}

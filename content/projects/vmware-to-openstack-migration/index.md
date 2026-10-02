@@ -76,3 +76,5 @@ Controller 3대|전체 다운에도 VNF 무영향 (PoC 시연)
 - Controller 3대 전체 다운 시에도 Compute의 VNF 무영향 — 컨트롤 · 데이터 플레인 분리 실증
 
 {{% /pf %}}
+
+{{< keywords >}}RedHat 레드햇 레드헷 오픈스택 OpenStack 클라우드 프라이빗클라우드 IaaS RHOSP RHOSP16 VMware 브이엠웨어 마이그레이션 이관 통신사 NFV VNF{{< /keywords >}}
