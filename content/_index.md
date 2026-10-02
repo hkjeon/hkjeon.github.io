@@ -29,7 +29,7 @@ sections:
         - text: 경력기술서 보기
           url: "/career/"
           icon: document-text
-        - text: 대표 프로젝트
+        - text: 핵심 역량 보기
           url: "#projects"
           icon: arrow-down
     design:
@@ -62,8 +62,8 @@ sections:
   - block: portfolio
     id: projects
     content:
-      title: "대표 프로젝트"
-      subtitle: "설계(Multi-Stack) → 확장(OpenShift) → 제품화(패키지 · 업스트림)"
+      title: "핵심 역량"
+      subtitle: "OpenStack 아키텍처 · Kubernetes 플랫폼 · 제품 개발과 업스트림 기여 — 역량별 대표 사례"
       count: 0
       sort_by: Weight
       sort_ascending: true
