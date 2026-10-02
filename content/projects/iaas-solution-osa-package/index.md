@@ -1,6 +1,6 @@
 ---
 title: '[제품 개발] 자사 IaaS 솔루션(OpenStack-Ansible) 배포 패키지 고도화 · 업스트림 기여'
-summary: OpenStack-Ansible 기반 자사 IaaS 솔루션의 Caracal 배포 패키지를 노드 구성 자동화 · 설정 구조 · 보안 · 스토리지 연동 관점에서 고도화하고, Epoxy 폐쇄망 패키지를 새로 구성한 사례. 개발 · 현장 적용 중 발견한 문제는 OpenStack-Ansible 업스트림에 수정 · 제안으로 기여 고객 구축 사업에 바로 적용되는 제품 기능으로 반영
+summary: 구축 현장마다 반복되던 설치 · 설정 작업을 자사 IaaS 솔루션의 제품 기능으로 바꾸고, 그 과정에서 찾은 OpenStack 문제는 업스트림에 수정 · 제안으로 반영한 사례
 tags:
   - Product
   - OpenStack
@@ -11,88 +11,62 @@ date: '2026-06-01T00:00:00Z'
 
 {{% pf %}}
 
+<div class="pf-role">
+
+**한 줄 요약** 구축 현장마다 손으로 하던 설치 · 설정 작업을 **제품 기능으로 바꿨고**, 그 과정에서 찾은 OpenStack 문제는 **업스트림에 고쳐 올렸습니다.**
+
+</div>
+
 {{< kpis >}}
-9개|고도화 항목 직접 수행
-10 / 13|보안 취약점 배포 시 자동 적용
-머지 1 · 제안 1|OpenStack-Ansible 업스트림 기여
-Epoxy|폐쇄망 패키지 직접 구성 (OSA 31.x)
+9개|제품 기능 직접 개발 · 개선
+10 / 13|보안 취약점 설치 시 자동 조치
+Epoxy|폐쇄망 설치 패키지 신규 구성
+1건 머지|OpenStack 공식 코드 반영
 {{< /kpis >}}
 
 ## 프로젝트 개요
 
 | 항목 | 내용 |
 |---|---|
-| 소속 | N사 (IaaS 솔루션 개발) |
-| 기간 | 2024.10 ~ 2026.07 |
-| 대상 | OpenStack-Ansible 기반 **자사 IaaS 솔루션 배포 패키지** — Caracal 패키지 기능 고도화, **Epoxy 패키지 신규 구성** |
-| 목적 | 구축 현장마다 반복되던 수작업을 줄이고, 고객 요구 기능을 **패키지 기능**으로 표준화 |
-| 기술 | OpenStack-Ansible Caracal (Ubuntu 22.04) · Epoxy 31.x (Ubuntu 24.04) · Ansible · bash · systemd-networkd · Cinder · Horizon · ansible-vault |
-
-## 구축 형태
-
-| 구분 | 구성 |
-|---|---|
-| 배포 노드 | APT(apache) · PyPI(pypiserver) · Git(git-daemon) 컨테이너를 담은 **배포 노드(Maker)** 하나로 폐쇄망 설치 |
-| 노드 구성 | Target 노드 설정 · 네트워크 구성을 배포 노드에서 **원격 실행** 후 점검 |
-| 설정 구조 | `openstack_user_config.yml` = 컴포넌트 · IP만 / `user_variables.yml` = 모든 OpenStack 설정 |
-| 적용 기능 | 보안 취약점 자동 적용, Cinder Multi-Backend, cinder-backup(NAS), S3 연동, Horizon 커스텀, 설정 암호화 |
+| 소속 · 기간 | N사 (IaaS 솔루션 개발) · 2024.10 ~ 2026.07 |
+| 대상 | OpenStack-Ansible 기반 **자사 IaaS 솔루션 설치 패키지** |
+| 목표 | 현장마다 반복되던 수작업을 줄이고, 고객 요구를 **제품 기능으로 표준화** |
 
 ## 구성도
 
 [![OSA 기반 IaaS 솔루션 배포 구조](deploy-architecture.svg)](deploy-architecture.svg "클릭하면 원본 크기로 열립니다")
 
-## 담당 역할 및 수행 내용
+## 무엇을 했나
 
-<div class="pf-role">
+### ① 설치를 단순하게
 
-**역할** 배포 패키지 구조 설계 및 기능 고도화 (아래 9개 항목 직접 수행)
+| 한 일 | 효과 |
+|---|---|
+| **Epoxy 설치 패키지** 새로 구성 | 인터넷이 막힌 고객 환경에서도 그대로 설치. 저장소 구조를 단순화해 관리가 쉬워짐 |
+| **노드 설정 자동화** (bash · systemd-networkd) | 서버마다 접속해서 하던 설정을 배포 노드에서 **한 번에** 처리 |
+| **설정 파일 역할 분리** | "서버 배치 · IP"와 "기능 설정"을 나눠, 고객마다 바꿀 곳이 한눈에 보임 |
 
-</div>
+### ② 운영을 안전하게
 
-| 항목 | 개선 전 문제 | 수행 내용 |
+| 한 일 | 효과 |
+|---|---|
+| **보안 취약점 자동 조치** | 13개 점검 항목 중 10개를 **설치와 동시에** 적용 |
+| **설정 파일 암호화** | 구축이 끝난 뒤 설정 정보가 밖으로 새지 않도록 보호 |
+| **백업 연동** (NAS) | VM 디스크를 백업해 다른 클러스터로 옮길 수 있게 함 |
+
+### ③ 고객 요구를 기능으로
+
+| 한 일 | 효과 |
+|---|---|
+| **스토리지 2종 동시 사용** | 서로 다른 스토리지를 용도별로 나눠 사용 ([공공 인프라 사례](/projects/public-dcn-multicluster/)) |
+| **S3 오브젝트 스토리지 연동** | VM에서 S3 저장소를 바로 사용 |
+| **관리 화면 커스텀** | 제품명 표시, 도움말 링크 연결 |
+
+### ④ 업스트림 기여 — 현장에서 찾은 문제를 OpenStack에 반영
+
+| 문제 | 해결 | 결과 |
 |---|---|---|
-| Epoxy 오프라인 패키지 | Caracal은 업스트림 도메인별 미러 트리라 **저장소 경로가 길고 복잡** | Epoxy(OSA 31.x · Ubuntu 24.04) 패키지를 새로 구성 — APT를 **flat repo**(`main` + MariaDB · RabbitMQ · Erlang 분리)로 단순화, `user_variables`의 repo 경로 표준화 |
-| 노드 구성 자동화 | 노드마다 스크립트를 복사해 **직접 실행하는 반복 작업** | bash 기반 Target 노드 설정 · 네트워크 구성 자동화, systemd-networkd 방식도 별도 구현 ([관련 글](/blog/osa-systemd-networkd/)) |
-| 설정 파일 구조 | 설정이 두 파일에 섞여 나열 · 반복 작성 | **user_config는 컴포넌트 · IP만, 설정은 모두 user_variables로** 원칙 수립, Cinder · Glance 설정 분리 |
-| 보안 취약점 | 구축 후 수작업 조치 | 클라우드 보안 취약점 **13개 중 10개를 배포 시 자동 적용** |
-| cinder-backup | 클러스터 간 VM 이전 절차가 복잡 | cinder-backup **NAS 백엔드 연동 · 백업 저장까지 검증** |
-| Cinder Multi-Backend | 두 스토리지를 독립적으로 쓸 방법 필요 | 스토리지별 볼륨 타입 구성, 벤더별 연동 템플릿 내재화 ([공공 인프라 사례](/projects/public-dcn-multicluster/)) |
-| Object Storage | VM에서 S3 스토리지 사용 요구 | 외부 Object Storage 연동 — s3fs 마운트 · aws cli 호환 검증 |
-| Horizon 커스텀 | 제품 식별 · 안내 부족 | 브랜드명 표시, 도움말 링크 연동 (운영 매뉴얼 PDF 연동까지 구현 → 요청에 따라 솔루션 소개 페이지로 변경) |
-| 설정 암호화 | 구축 후 설정 정보 유출 우려 | ansible-vault로 배포 템플릿 암호화 · 복호화 절차 구성 |
-
-## 업스트림 기여
-
-패키지 개발과 현장 적용 중 발견한 문제를 OpenStack-Ansible 커뮤니티에 올려, **수정 머지와 코드 제안**까지 이어간 기록입니다.
-
-| 구분 | 문제 | 기여 내용 | 상태 |
-|---|---|---|---|
-| **os_swift** 코드 기여 | Swift 데몬이 `os.setgid()`에서 **PermissionError로 기동 실패** | systemd `swift_service_defaults`에 `AmbientCapabilities: "CAP_SETGID CAP_SETUID"` 추가 | **Merged** (2026.04, master) · [Gerrit 984906](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
-| **os_keystone** 이슈 · 코드 제안 | 고객사 요구로 SSH 포트를 22에서 변경한 뒤 **주기적 Keystone 에러** — rsync · scp 기반 fernet · credential 키 동기화가 포트 22를 전제 | `keystone_ssh_port` 변수(`keystone_rotate_ssh_port`, 기본 22) 추가 — 키 배포 task 2개 · rotate 템플릿 2개에 적용, **실제 구축 환경에 적용 · 운영** | 제안 · [Question 821851](https://answers.launchpad.net/openstack-ansible/+question/821851) · [Bug 2110943](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
-
-<details>
-<summary>os_keystone 제안 코드 요약</summary>
-
-```yaml
-# defaults/main.yml — 포트 변수 추가 (기본값 22 유지)
-keystone_ssh_port: "{{ keystone_rotate_ssh_port | default('22') }}"
-
-# tasks/keystone_fernet_keys_distribute.yml · keystone_credential_distribute.yml
-rsync -e 'ssh -p {{ keystone_ssh_port }} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' ...
-
-# templates/keystone-fernet-rotate.sh.j2 · keystone-credential-rotate.sh.j2
-scp -P {{ keystone_ssh_port }} ...
-rsync -e 'ssh -p {{ keystone_ssh_port }} ...' ...
-
-# user_variables.yml — 비표준 SSH 포트 환경 사용 예
-ansible_ssh_port: 2222
-keystone_rotate_ssh_port: 2222
-```
-
-</details>
-
-## 기타
-
-- 실제 구축 현장에서는 bash 방식을 선호해 두 방식을 모두 유지 — 현장 운영자 편의에 맞춘 선택지 제공
+| 스토리지 서비스(Swift)가 **권한 오류로 시작되지 않음** | 서비스 권한 설정 1줄 추가 | ✅ **OpenStack 공식 반영** (2026.04) · [변경 내역](https://review.opendev.org/c/openstack/openstack-ansible-os_swift/+/984906) |
+| SSH 포트를 바꾸면 **인증 키 동기화가 실패**해 주기적 에러 | 포트를 설정값으로 바꿀 수 있게 코드 제안 → **실제 고객 환경에 적용** | 제안 · [이슈](https://answers.launchpad.net/openstack-ansible/+question/821851) · [버그 리포트](https://bugs.launchpad.net/openstack-ansible/+bug/2110943) |
 
 {{% /pf %}}
