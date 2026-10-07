@@ -16,7 +16,9 @@ eras:
             tags: [Kolla-Ansible, OpenStack, 셀프서비스 포털]
           - period: 2026.07 ~ 현재
             title: 기존 납품 OpenStack-Ansible 클라우드 기술지원·유지보수
-            tags: [OpenStack-Ansible]
+            desc: 보안 패치 중 발생한 RabbitMQ 클러스터 장애 복구
+            link: /blog/osa-rabbitmq-recovery/
+            tags: [OpenStack-Ansible, RabbitMQ]
       - name: N사
         period: 2024.10 ~ 2026.07
         position: 수석
