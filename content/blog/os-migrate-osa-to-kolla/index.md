@@ -34,6 +34,7 @@ featured: true
 ### 함께 보면 좋은 글
 
 - [os-migrate와 cinder-backup(NFS) 비교](/blog/os-migrate-vs-cinder-backup/): 볼륨 백업으로 옮기는 다른 방법과 선택 기준
+- 이 글에서 쓴 스크립트와 변수 예시: [openstack-ops/os-migrate](https://github.com/hkjeon/openstack-ops/tree/main/os-migrate)
 
 ## 1. os-migrate는 어떻게 VM을 옮기는가
 
