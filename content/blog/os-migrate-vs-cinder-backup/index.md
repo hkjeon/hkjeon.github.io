@@ -56,11 +56,11 @@ openstack server show <SERVER> -c status        # SHUTOFF 확인
 
 ### 2-3. 클러스터 A — 백업 생성과 record export
 
-```bash
-# 사용 중인 볼륨이면 --force 필요 (정지 상태여도 attach되어 있으면 in-use)
-openstack volume backup create --name vm1-root --force <VOLUME_ID>
-openstack volume backup list                     # Status가 available이 될 때까지 대기
+1. 볼륨 백업을 만듭니다. (Horizon **볼륨 → 백업 생성**)
+2. 백업이 `available`이 되면 record를 export합니다.
 
+```bash
+openstack volume backup list
 openstack volume backup record export <BACKUP_ID>
 ```
 
@@ -75,35 +75,44 @@ openstack volume backup record export <BACKUP_ID>
 
 ### 2-4. 백업 데이터를 클러스터 B로
 
-같은 NFS를 쓰지 않는다면, A의 backup 경로에 생긴 **최상위 디렉터리**를 B의 backup 경로로 그대로 복사합니다.
+백업 데이터는 cinder-backup NFS 경로 아래에 **백업 ID 앞 글자로 나뉜 디렉터리**에 저장됩니다.
 
-```bash
-# A의 NFS 백업 경로 (예)
-ls /nfs_mount/osa/cinder_backup/
-53                                    # 백업 ID 앞 두 글자로 만들어진 디렉터리
-
-# B의 cinder-backup NFS 경로로 복사 (경로 구조 유지)
-rsync -a /nfs_mount/osa/cinder_backup/53 <B_BACKUP_NFS_PATH>/
 ```
+/nfs_mount/osa/cinder_backup/
+└── 53/                                   ← 최상위 디렉터리 (이것을 복사)
+    └── 7c/
+        └── 537cf7a4-28f2-495a-905f-9243eba6cc84/
+            ├── volume_<볼륨ID>_<시각>_backup_<백업ID>-00001 ~ -00006   (데이터 청크)
+            ├── volume_..._metadata
+            └── volume_..._sha256file
+```
+
+이 **최상위 디렉터리(`53`)를 통째로** 클러스터 B의 cinder-backup 경로에 복사합니다.
+
+| 상황 | 복사 방법 (시험 시) |
+|---|---|
+| 테스트베드 | 양쪽 NFS를 마운트해서 그대로 복사 |
+| 사내 다른 환경 | `scp`로 전송 |
+| 양쪽이 같은 NFS 사용 | 복사 불필요 |
 
 메타데이터 안의 `container` 값(예: `53/7c/<BACKUP_ID>`)이 이 경로를 가리키므로 **디렉터리 구조를 바꾸면 안 됩니다.**
 
 ### 2-5. 클러스터 B — record import와 복원
 
+1. record를 import합니다.
+
 ```bash
 openstack volume backup record import \
   cinder.backup.drivers.nfs.NFSBackupDriver <METADATA_BASE64>
-
-openstack volume backup list                     # 같은 ID로 available 확인
-
-# 백업에서 새 볼륨 생성
-openstack volume create --backup <BACKUP_ID> --size <SIZE_GB> vm1-root-restored
-# (또는) openstack volume backup restore <BACKUP_ID> <NEW_VOLUME_NAME>
-
-# 볼륨으로 인스턴스 부팅 — 네트워크 · flavor · 보안그룹은 B 기준으로 지정
-openstack server create --flavor <FLAVOR> --network <NET> \
-  --volume vm1-root-restored vm1
 ```
+
+| Field | Value |
+|---|---|
+| id | `537cf7a4-28f2-495a-905f-9243eba6cc84` (A와 같은 ID) |
+| name | None |
+
+2. Horizon **볼륨 → 볼륨 백업**에서 해당 백업을 선택하고 **볼륨 백업 복구 → 새로운 볼륨 생성**을 실행합니다.
+3. 복구된 볼륨으로 인스턴스를 생성합니다. 네트워크 · flavor · 보안그룹은 B 기준으로 지정합니다.
 
 ### 2-6. 확인
 
