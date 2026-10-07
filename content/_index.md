@@ -58,6 +58,21 @@ sections:
       spacing:
         padding: ["0", "0", "2rem", "0"]
 
+  # 강점 4가지 — 30초 판단용 (각 항목은 근거 페이지로 연결)
+  - block: markdown
+    id: strengths
+    content:
+      text: |
+        <div class="st-grid">
+        <div class="st-card"><b>설계 · 구축</b><p>통신사 5G 코어와 공공기관 프라이빗 클라우드를 설계부터 구축까지 수행</p><span><a href="/projects/telco-nfv-dcn-multistack/">NFV Multi-Stack</a> · <a href="/projects/telco-5g-sa-core-rhocp/">5G SA 컨테이너</a> · <a href="/projects/cert-institute-private-cloud/">공공 클라우드</a></span></div>
+        <div class="st-card"><b>이관</b><p>VMware와 OpenStack 클러스터 간 VM 이관을 방법별로 검증 · 수행</p><span><a href="/projects/vmware-to-openstack-migration/">VMware → OpenStack</a> · <a href="/blog/os-migrate-osa-to-kolla/">os-migrate</a> · <a href="/blog/os-migrate-vs-cinder-backup/">방법 비교</a></span></div>
+        <div class="st-card"><b>운영 · 장애 대응</b><p>Compute 280대 규모 운영, 점검 자동화와 실제 장애의 원인 분석 · 복구</p><span><a href="/blog/rhosp-maintenance-automation/">정기점검 자동화</a> · <a href="/blog/osa-rabbitmq-recovery/">RabbitMQ 장애 복구</a></span></div>
+        <div class="st-card"><b>자동화 · 기여</b><p>반복 작업을 제품 기능으로 만들고, 발견한 문제는 OpenStack에 반영</p><span><a href="/projects/iaas-solution-osa-package/">배포 패키지</a> · <a href="/blog/osa-systemd-networkd/">네트워크 자동화</a> · <a href="/projects/iaas-solution-osa-package/#-업스트림-기여--현장에서-찾은-문제를-openstack에-반영">업스트림 3건</a></span></div>
+        </div>
+    design:
+      spacing:
+        padding: ["0", "0", "2rem", "0"]
+
   # Filterable Portfolio - Alpine.js powered project filtering
   - block: portfolio
     id: projects

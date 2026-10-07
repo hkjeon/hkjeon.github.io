@@ -4,12 +4,12 @@ is_owner: true
 name:
   display: HK Jeon
 postnominals: []
-role: OpenStack Engineer & IaaS Platform Engineer
+role: Cloud Platform Engineer · Private Cloud Architect
 email: nosmile0412@hanmail.net
 bio: |
-  **통신사 · 공공 클라우드를 17년간 설계 · 구축해 온 OpenStack 엔지니어**
+  **통신사 · 공공 프라이빗 클라우드를 17년간 설계 · 구축 · 운영해 온 클라우드 플랫폼 엔지니어**
 
-  RHOSP · RHOCP · OpenStack-Ansible · Kolla-Ansible ｜ 설계 · 구축 · 제품 개발
+  OpenStack · OpenShift(Kubernetes) ｜ 설계 · 구축 · 이관 · 장애 대응 · 자동화 · 업스트림 기여
 
 links:
   - icon: at-symbol

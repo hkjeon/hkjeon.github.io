@@ -83,3 +83,15 @@
 .pf .pf-up th:nth-child(2), .pf .pf-up td:nth-child(2) { width: 40%; }
 .pf .pf-up th:nth-child(3), .pf .pf-up td:nth-child(3) { width: 28%; }
 .pf .pf-up td:nth-child(1) { font-weight: 600; }
+
+/* 메인 강점 4가지 (#strengths) — 30초 판단용 */
+#strengths { --a: #14b8a6; --line: rgba(148,163,184,.3); --card: rgba(148,163,184,.07); }
+#strengths .max-w-prose { max-width: 64rem; }
+#strengths .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
+#strengths .st-card { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--a); border-radius: .6rem; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .35rem; }
+#strengths .st-card b { font-size: 1rem; font-weight: 800; }
+#strengths .st-card p { font-size: .85rem; line-height: 1.45; margin: 0; opacity: .85; }
+#strengths .st-card span { font-size: .78rem; line-height: 1.5; margin-top: auto; }
+#strengths .st-card a { text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 900px) { #strengths .st-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { #strengths .st-grid { grid-template-columns: 1fr; } }
