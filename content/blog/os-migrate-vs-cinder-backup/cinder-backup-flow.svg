@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 360" width="980" height="360" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#64748b"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#7c3aed"/></marker></defs>
+<rect width="980" height="360" fill="#fff"/>
+<rect x="30" y="30" width="300" height="230" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="48" y="56" font-size="14" font-weight="700" fill="#2563eb">클러스터 A (소스)</text>
+<rect x="50" y="74" width="260" height="40" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="180" y="99" text-anchor="middle" font-size="12" fill="#0f172a">① 인스턴스 정지 (SHUTOFF)</text>
+<rect x="50" y="128" width="260" height="40" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="180" y="153" text-anchor="middle" font-size="12" fill="#0f172a">② volume backup create</text>
+<rect x="50" y="182" width="260" height="56" rx="6" fill="#f5f3ff" stroke="#7c3aed"/>
+<text x="180" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#7c3aed">③ backup record export</text>
+<text x="180" y="225" text-anchor="middle" font-size="11" fill="#64748b">Backup Service + Metadata(base64)</text>
+<rect x="650" y="30" width="300" height="230" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
+<text x="668" y="56" font-size="14" font-weight="700" fill="#059669">클러스터 B (대상)</text>
+<rect x="670" y="74" width="260" height="56" rx="6" fill="#f5f3ff" stroke="#7c3aed"/>
+<text x="800" y="97" text-anchor="middle" font-size="12" font-weight="700" fill="#7c3aed">⑤ backup record import</text>
+<text x="800" y="117" text-anchor="middle" font-size="11" fill="#64748b">Cinder DB에 백업 등록</text>
+<rect x="670" y="144" width="260" height="40" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="800" y="169" text-anchor="middle" font-size="12" fill="#0f172a">⑥ 백업 → 새 볼륨 생성</text>
+<rect x="670" y="198" width="260" height="40" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="800" y="223" text-anchor="middle" font-size="12" fill="#0f172a">⑦ 볼륨으로 인스턴스 부팅 (포트 · flavor 수동)</text>
+<line x1="180" y1="114" x2="180" y2="126" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="180" y1="168" x2="180" y2="180" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="800" y1="130" x2="800" y2="142" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="800" y1="184" x2="800" y2="196" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<path d="M312,210 C480,210 480,102 668,102" stroke="#7c3aed" stroke-width="2.2" fill="none" marker-end="url(#b)"/>
+<text x="520" y="196" text-anchor="middle" font-size="12" font-weight="700" fill="#7c3aed">메타데이터 문자열 전달</text>
+<rect x="340" y="282" width="300" height="56" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6"/>
+<text x="490" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#ea580c">NFS 백업 저장소</text>
+<text x="490" y="325" text-anchor="middle" font-size="11" fill="#64748b">④ 백업 디렉터리 복사 (같은 NFS면 생략)</text>
+<path d="M180,240 L180,310 L338,310" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#a)"/>
+<text x="190" y="290" font-size="11" fill="#64748b">백업 데이터 저장</text>
+<path d="M642,310 L800,310 L800,240" stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#a)"/>
+<text x="810" y="290" font-size="11" fill="#64748b">복원 시 읽기</text>
+</svg>

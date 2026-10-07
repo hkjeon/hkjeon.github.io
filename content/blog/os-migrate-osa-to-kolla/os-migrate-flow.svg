@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 470" width="980" height="470" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#64748b"/></marker>
+<marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#ea580c"/></marker></defs>
+<rect width="980" height="470" fill="#ffffff"/>
+<!-- os-migrate node -->
+<rect x="370" y="20" width="240" height="64" rx="8" fill="#f8fafc" stroke="#0f172a" stroke-width="1.6"/>
+<text x="490" y="46" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">os-migrate 노드</text>
+<text x="490" y="68" text-anchor="middle" font-size="11" fill="#64748b">Ansible 플레이북 실행 · 192.168.119.107</text>
+<!-- source -->
+<rect x="30" y="130" width="380" height="290" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+<text x="48" y="156" font-size="14" font-weight="700" fill="#2563eb">소스 · OSA Caracal</text>
+<text x="392" y="156" text-anchor="end" font-size="11" fill="#64748b">API 192.168.119.120</text>
+<rect x="50" y="176" width="150" height="60" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="125" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">원본 VM</text>
+<text x="125" y="220" text-anchor="middle" font-size="11" fill="#64748b">① 정지 (SHUTOFF)</text>
+<rect x="50" y="262" width="150" height="60" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="125" y="286" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">원본 볼륨</text>
+<text x="125" y="306" text-anchor="middle" font-size="11" fill="#64748b">변경 없음 (롤백용)</text>
+<rect x="50" y="344" width="150" height="56" rx="6" fill="#fff" stroke="#94a3b8" stroke-dasharray="4 3"/>
+<text x="125" y="367" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">사본 볼륨</text>
+<text x="125" y="386" text-anchor="middle" font-size="11" fill="#64748b">② 스냅샷 → 복제</text>
+<line x1="125" y1="322" x2="125" y2="342" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<rect x="240" y="262" width="150" height="138" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6"/>
+<text x="315" y="288" text-anchor="middle" font-size="12" font-weight="700" fill="#ea580c">conv_src (VM)</text>
+<text x="315" y="312" text-anchor="middle" font-size="11" fill="#0f172a">③ 사본 볼륨 attach</text>
+<text x="315" y="332" text-anchor="middle" font-size="11" fill="#0f172a">nbdkit 노출</text>
+<text x="315" y="352" text-anchor="middle" font-size="11" fill="#64748b">127.0.0.1 전용</text>
+<text x="315" y="380" text-anchor="middle" font-size="10" fill="#64748b">Rocky 8 · provider-1</text>
+<line x1="202" y1="372" x2="238" y2="372" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<!-- dest -->
+<rect x="570" y="130" width="380" height="290" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="1.8"/>
+<text x="588" y="156" font-size="14" font-weight="700" fill="#059669">대상 · Kolla-Ansible Epoxy</text>
+<text x="932" y="156" text-anchor="end" font-size="11" fill="#64748b">API 192.168.119.110</text>
+<rect x="590" y="262" width="150" height="138" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.6"/>
+<text x="665" y="288" text-anchor="middle" font-size="12" font-weight="700" fill="#ea580c">conv_dst (VM)</text>
+<text x="665" y="312" text-anchor="middle" font-size="11" fill="#0f172a">⑤ virt-sparsify</text>
+<text x="665" y="332" text-anchor="middle" font-size="11" fill="#0f172a">qemu-img convert</text>
+<text x="665" y="352" text-anchor="middle" font-size="11" fill="#64748b">→ 대상 볼륨에 쓰기</text>
+<text x="665" y="380" text-anchor="middle" font-size="10" fill="#64748b">Rocky 9 · provider-net</text>
+<rect x="780" y="262" width="150" height="60" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="855" y="286" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">대상 볼륨</text>
+<text x="855" y="306" text-anchor="middle" font-size="11" fill="#64748b">사용 블록만 기록</text>
+<rect x="780" y="176" width="150" height="60" rx="6" fill="#fff" stroke="#94a3b8"/>
+<text x="855" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">대상 VM</text>
+<text x="855" y="220" text-anchor="middle" font-size="11" fill="#64748b">⑥ 생성 · tenant-net</text>
+<line x1="742" y1="292" x2="778" y2="292" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="855" y1="262" x2="855" y2="238" stroke="#64748b" stroke-width="1.4" marker-end="url(#a)"/>
+<!-- tunnel -->
+<line x1="588" y1="331" x2="392" y2="331" stroke="#ea580c" stroke-width="2.4" marker-end="url(#b)"/>
+<text x="490" y="320" text-anchor="middle" font-size="12" font-weight="700" fill="#ea580c">④ SSH -L 터널</text>
+<text x="490" y="350" text-anchor="middle" font-size="11" fill="#ea580c">NBD 데이터 전송</text>
+<!-- control -->
+<path d="M420,84 L220,128" stroke="#64748b" stroke-width="1.4" stroke-dasharray="5 4" fill="none" marker-end="url(#a)"/>
+<path d="M560,84 L760,128" stroke="#64748b" stroke-width="1.4" stroke-dasharray="5 4" fill="none" marker-end="url(#a)"/>
+<text x="250" y="108" font-size="11" fill="#64748b">API 호출</text>
+<text x="690" y="108" font-size="11" fill="#64748b">API 호출</text>
+<path d="M470,84 L330,258" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="2 4" fill="none" marker-end="url(#a)"/>
+<path d="M510,84 L650,258" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="2 4" fill="none" marker-end="url(#a)"/>
+<text x="490" y="210" text-anchor="middle" font-size="11" fill="#64748b">SSH(22)로 conv host 제어</text>
+<text x="490" y="452" text-anchor="middle" font-size="12" fill="#475569">⑦ 완료 후 소스 사본 볼륨 · 스냅샷 삭제 — 원본 VM은 SHUTOFF로 남음</text>
+</svg>
