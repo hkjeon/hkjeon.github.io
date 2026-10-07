@@ -41,7 +41,7 @@ eras:
           - period: 2024.11 ~ 2026.07
             title: OSA 기반 IaaS 솔루션 배포 패키지 개발
             link: /projects/iaas-solution-osa-package/
-            desc: 폐쇄망 오프라인 설치, systemd-networkd 자동화, 업스트림 기여
+            desc: 폐쇄망 오프라인 설치, systemd-networkd 자동화, 신규 서비스 기술 검증, 업스트림 기여 3건
             tags: [OpenStack-Ansible, Caracal, Epoxy, Ansible]
 
   - name: 통신사 5G · Red Hat 가상화/컨테이너 (RHOSP · RHOCP)
