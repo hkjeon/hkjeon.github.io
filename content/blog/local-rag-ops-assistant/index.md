@@ -1,6 +1,6 @@
 ---
 title: "GPU 없는 VM 한 대로 만든 운영 노트 AI 비서 — Ollama · LlamaIndex · 하이브리드 검색"
-date: 2026-11-11T18:00:00+09:00
+date: 2026-11-11T15:00:00+09:00
 summary: "십수 년간 Notion에 쌓아 온 인프라 운영 노트 650개를, GPU 없이 KVM VM 한 대에서 동작하는 로컬 RAG 비서로 만들었습니다. Ollama(qwen2.5 · bge-m3), ChromaDB, LlamaIndex, Streamlit 구성과 벡터 검색에서 BM25 하이브리드 검색으로 바꾼 과정, 실제로 막혔던 문제와 배운 점을 정리했습니다."
 tags:
   - LLM
