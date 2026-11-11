@@ -20,4 +20,7 @@ sections:
       show_date: false
       show_read_time: false
       show_read_more: false
+cascade:
+  - params:
+      reading_time: false
 ---
