@@ -157,7 +157,7 @@ hugoblox:
       enable: true
     # Reading time estimates
     reading_time:
-      enable: true
+      enable: false
     # Academic citations (disabled for developer portfolio)
     citations:
       style: apa                        # apa | mla | chicago | ieee
